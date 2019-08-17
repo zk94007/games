@@ -1619,1938 +1619,1939 @@ function chess960() {
 
 }
 
+var sp_table = {
+  "000" : "BBQNNRKR",
+  "001" : "BQNBNRKR",
+  "002" : "BQNNRBKR",
+  "003" : "BQNNRKRB",
+  "004" : "QBBNNRKR",
+  "005" : "QNBBNRKR",
+  "006" : "QNBNRBKR",
+  "007" : "QNBNRKRB",
+  "008" : "QBNNBRKR",
+  "009" : "QNNBBRKR",
+  "010" : "QNNRBBKR",
+  "011" : "QNNRBKRB",
+  "012" : "QBNNRKBR",
+  "013" : "QNNBRKBR",
+  "014" : "QNNRKBBR",
+  "015" : "QNNRKRBB",
+  "016" : "BBNQNRKR",
+  "017" : "BNQBNRKR",
+  "018" : "BNQNRBKR",
+  "019" : "BNQNRKRB",
+  "020" : "NBBQNRKR",
+  "021" : "NQBBNRKR",
+  "022" : "NQBNRBKR",
+  "023" : "NQBNRKRB",
+  "024" : "NBQNBRKR",
+  "025" : "NQNBBRKR",
+  "026" : "NQNRBBKR",
+  "027" : "NQNRBKRB",
+  "028" : "NBQNRKBR",
+  "029" : "NQNBRKBR",
+  "030" : "NQNRKBBR",
+  "031" : "NQNRKRBB",
+  "032" : "BBNNQRKR",
+  "033" : "BNNBQRKR",
+  "034" : "BNNQRBKR",
+  "035" : "BNNQRKRB",
+  "036" : "NBBNQRKR",
+  "037" : "NNBBQRKR",
+  "038" : "NNBQRBKR",
+  "039" : "NNBQRKRB",
+  "040" : "NBNQBRKR",
+  "041" : "NNQBBRKR",
+  "042" : "NNQRBBKR",
+  "043" : "NNQRBKRB",
+  "044" : "NBNQRKBR",
+  "045" : "NNQBRKBR",
+  "046" : "NNQRKBBR",
+  "047" : "NNQRKRBB",
+  "048" : "BBNNRQKR",
+  "049" : "BNNBRQKR",
+  "050" : "BNNRQBKR",
+  "051" : "BNNRQKRB",
+  "052" : "NBBNRQKR",
+  "053" : "NNBBRQKR",
+  "054" : "NNBRQBKR",
+  "055" : "NNBRQKRB",
+  "056" : "NBNRBQKR",
+  "057" : "NNRBBQKR",
+  "058" : "NNRQBBKR",
+  "059" : "NNRQBKRB",
+  "060" : "NBNRQKBR",
+  "061" : "NNRBQKBR",
+  "062" : "NNRQKBBR",
+  "063" : "NNRQKRBB",
+  "064" : "BBNNRKQR",
+  "065" : "BNNBRKQR",
+  "066" : "BNNRKBQR",
+  "067" : "BNNRKQRB",
+  "068" : "NBBNRKQR",
+  "069" : "NNBBRKQR",
+  "070" : "NNBRKBQR",
+  "071" : "NNBRKQRB",
+  "072" : "NBNRBKQR",
+  "073" : "NNRBBKQR",
+  "074" : "NNRKBBQR",
+  "075" : "NNRKBQRB",
+  "076" : "NBNRKQBR",
+  "077" : "NNRBKQBR",
+  "078" : "NNRKQBBR",
+  "079" : "NNRKQRBB",
+  "080" : "BBNNRKRQ",
+  "081" : "BNNBRKRQ",
+  "082" : "BNNRKBRQ",
+  "083" : "BNNRKRQB",
+  "084" : "NBBNRKRQ",
+  "085" : "NNBBRKRQ",
+  "086" : "NNBRKBRQ",
+  "087" : "NNBRKRQB",
+  "088" : "NBNRBKRQ",
+  "089" : "NNRBBKRQ",
+  "090" : "NNRKBBRQ",
+  "091" : "NNRKBRQB",
+  "092" : "NBNRKRBQ",
+  "093" : "NNRBKRBQ",
+  "094" : "NNRKRBBQ",
+  "095" : "NNRKRQBB",
+  "096" : "BBQNRNKR",
+  "097" : "BQNBRNKR",
+  "098" : "BQNRNBKR",
+  "099" : "BQNRNKRB",
+  "100" : "QBBNRNKR",
+  "101" : "QNBBRNKR",
+  "102" : "QNBRNBKR",
+  "103" : "QNBRNKRB",
+  "104" : "QBNRBNKR",
+  "105" : "QNRBBNKR",
+  "106" : "QNRNBBKR",
+  "107" : "QNRNBKRB",
+  "108" : "QBNRNKBR",
+  "109" : "QNRBNKBR",
+  "110" : "QNRNKBBR",
+  "111" : "QNRNKRBB",
+  "112" : "BBNQRNKR",
+  "113" : "BNQBRNKR",
+  "114" : "BNQRNBKR",
+  "115" : "BNQRNKRB",
+  "116" : "NBBQRNKR",
+  "117" : "NQBBRNKR",
+  "118" : "NQBRNBKR",
+  "119" : "NQBRNKRB",
+  "120" : "NBQRBNKR",
+  "121" : "NQRBBNKR",
+  "122" : "NQRNBBKR",
+  "123" : "NQRNBKRB",
+  "124" : "NBQRNKBR",
+  "125" : "NQRBNKBR",
+  "126" : "NQRNKBBR",
+  "127" : "NQRNKRBB",
+  "128" : "BBNRQNKR",
+  "129" : "BNRBQNKR",
+  "130" : "BNRQNBKR",
+  "131" : "BNRQNKRB",
+  "132" : "NBBRQNKR",
+  "133" : "NRBBQNKR",
+  "134" : "NRBQNBKR",
+  "135" : "NRBQNKRB",
+  "136" : "NBRQBNKR",
+  "137" : "NRQBBNKR",
+  "138" : "NRQNBBKR",
+  "139" : "NRQNBKRB",
+  "140" : "NBRQNKBR",
+  "141" : "NRQBNKBR",
+  "142" : "NRQNKBBR",
+  "143" : "NRQNKRBB",
+  "144" : "BBNRNQKR",
+  "145" : "BNRBNQKR",
+  "146" : "BNRNQBKR",
+  "147" : "BNRNQKRB",
+  "148" : "NBBRNQKR",
+  "149" : "NRBBNQKR",
+  "150" : "NRBNQBKR",
+  "151" : "NRBNQKRB",
+  "152" : "NBRNBQKR",
+  "153" : "NRNBBQKR",
+  "154" : "NRNQBBKR",
+  "155" : "NRNQBKRB",
+  "156" : "NBRNQKBR",
+  "157" : "NRNBQKBR",
+  "158" : "NRNQKBBR",
+  "159" : "NRNQKRBB",
+  "160" : "BBNRNKQR",
+  "161" : "BNRBNKQR",
+  "162" : "BNRNKBQR",
+  "163" : "BNRNKQRB",
+  "164" : "NBBRNKQR",
+  "165" : "NRBBNKQR",
+  "166" : "NRBNKBQR",
+  "167" : "NRBNKQRB",
+  "168" : "NBRNBKQR",
+  "169" : "NRNBBKQR",
+  "170" : "NRNKBBQR",
+  "171" : "NRNKBQRB",
+  "172" : "NBRNKQBR",
+  "173" : "NRNBKQBR",
+  "174" : "NRNKQBBR",
+  "175" : "NRNKQRBB",
+  "176" : "BBNRNKRQ",
+  "177" : "BNRBNKRQ",
+  "178" : "BNRNKBRQ",
+  "179" : "BNRNKRQB",
+  "180" : "NBBRNKRQ",
+  "181" : "NRBBNKRQ",
+  "182" : "NRBNKBRQ",
+  "183" : "NRBNKRQB",
+  "184" : "NBRNBKRQ",
+  "185" : "NRNBBKRQ",
+  "186" : "NRNKBBRQ",
+  "187" : "NRNKBRQB",
+  "188" : "NBRNKRBQ",
+  "189" : "NRNBKRBQ",
+  "190" : "NRNKRBBQ",
+  "191" : "NRNKRQBB",
+  "192" : "BBQNRKNR",
+  "193" : "BQNBRKNR",
+  "194" : "BQNRKBNR",
+  "195" : "BQNRKNRB",
+  "196" : "QBBNRKNR",
+  "197" : "QNBBRKNR",
+  "198" : "QNBRKBNR",
+  "199" : "QNBRKNRB",
+  "200" : "QBNRBKNR",
+  "201" : "QNRBBKNR",
+  "202" : "QNRKBBNR",
+  "203" : "QNRKBNRB",
+  "204" : "QBNRKNBR",
+  "205" : "QNRBKNBR",
+  "206" : "QNRKNBBR",
+  "207" : "QNRKNRBB",
+  "208" : "BBNQRKNR",
+  "209" : "BNQBRKNR",
+  "210" : "BNQRKBNR",
+  "211" : "BNQRKNRB",
+  "212" : "NBBQRKNR",
+  "213" : "NQBBRKNR",
+  "214" : "NQBRKBNR",
+  "215" : "NQBRKNRB",
+  "216" : "NBQRBKNR",
+  "217" : "NQRBBKNR",
+  "218" : "NQRKBBNR",
+  "219" : "NQRKBNRB",
+  "220" : "NBQRKNBR",
+  "221" : "NQRBKNBR",
+  "222" : "NQRKNBBR",
+  "223" : "NQRKNRBB",
+  "224" : "BBNRQKNR",
+  "225" : "BNRBQKNR",
+  "226" : "BNRQKBNR",
+  "227" : "BNRQKNRB",
+  "228" : "NBBRQKNR",
+  "229" : "NRBBQKNR",
+  "230" : "NRBQKBNR",
+  "231" : "NRBQKNRB",
+  "232" : "NBRQBKNR",
+  "233" : "NRQBBKNR",
+  "234" : "NRQKBBNR",
+  "235" : "NRQKBNRB",
+  "236" : "NBRQKNBR",
+  "237" : "NRQBKNBR",
+  "238" : "NRQKNBBR",
+  "239" : "NRQKNRBB",
+  "240" : "BBNRKQNR",
+  "241" : "BNRBKQNR",
+  "242" : "BNRKQBNR",
+  "243" : "BNRKQNRB",
+  "244" : "NBBRKQNR",
+  "245" : "NRBBKQNR",
+  "246" : "NRBKQBNR",
+  "247" : "NRBKQNRB",
+  "248" : "NBRKBQNR",
+  "249" : "NRKBBQNR",
+  "250" : "NRKQBBNR",
+  "251" : "NRKQBNRB",
+  "252" : "NBRKQNBR",
+  "253" : "NRKBQNBR",
+  "254" : "NRKQNBBR",
+  "255" : "NRKQNRBB",
+  "256" : "BBNRKNQR",
+  "257" : "BNRBKNQR",
+  "258" : "BNRKNBQR",
+  "259" : "BNRKNQRB",
+  "260" : "NBBRKNQR",
+  "261" : "NRBBKNQR",
+  "262" : "NRBKNBQR",
+  "263" : "NRBKNQRB",
+  "264" : "NBRKBNQR",
+  "265" : "NRKBBNQR",
+  "266" : "NRKNBBQR",
+  "267" : "NRKNBQRB",
+  "268" : "NBRKNQBR",
+  "269" : "NRKBNQBR",
+  "270" : "NRKNQBBR",
+  "271" : "NRKNQRBB",
+  "272" : "BBNRKNRQ",
+  "273" : "BNRBKNRQ",
+  "274" : "BNRKNBRQ",
+  "275" : "BNRKNRQB",
+  "276" : "NBBRKNRQ",
+  "277" : "NRBBKNRQ",
+  "278" : "NRBKNBRQ",
+  "279" : "NRBKNRQB",
+  "280" : "NBRKBNRQ",
+  "281" : "NRKBBNRQ",
+  "282" : "NRKNBBRQ",
+  "283" : "NRKNBRQB",
+  "284" : "NBRKNRBQ",
+  "285" : "NRKBNRBQ",
+  "286" : "NRKNRBBQ",
+  "287" : "NRKNRQBB",
+  "288" : "BBQNRKRN",
+  "289" : "BQNBRKRN",
+  "290" : "BQNRKBRN",
+  "291" : "BQNRKRNB",
+  "292" : "QBBNRKRN",
+  "293" : "QNBBRKRN",
+  "294" : "QNBRKBRN",
+  "295" : "QNBRKRNB",
+  "296" : "QBNRBKRN",
+  "297" : "QNRBBKRN",
+  "298" : "QNRKBBRN",
+  "299" : "QNRKBRNB",
+  "300" : "QBNRKRBN",
+  "301" : "QNRBKRBN",
+  "302" : "QNRKRBBN",
+  "303" : "QNRKRNBB",
+  "304" : "BBNQRKRN",
+  "305" : "BNQBRKRN",
+  "306" : "BNQRKBRN",
+  "307" : "BNQRKRNB",
+  "308" : "NBBQRKRN",
+  "309" : "NQBBRKRN",
+  "310" : "NQBRKBRN",
+  "311" : "NQBRKRNB",
+  "312" : "NBQRBKRN",
+  "313" : "NQRBBKRN",
+  "314" : "NQRKBBRN",
+  "315" : "NQRKBRNB",
+  "316" : "NBQRKRBN",
+  "317" : "NQRBKRBN",
+  "318" : "NQRKRBBN",
+  "319" : "NQRKRNBB",
+  "320" : "BBNRQKRN",
+  "321" : "BNRBQKRN",
+  "322" : "BNRQKBRN",
+  "323" : "BNRQKRNB",
+  "324" : "NBBRQKRN",
+  "325" : "NRBBQKRN",
+  "326" : "NRBQKBRN",
+  "327" : "NRBQKRNB",
+  "328" : "NBRQBKRN",
+  "329" : "NRQBBKRN",
+  "330" : "NRQKBBRN",
+  "331" : "NRQKBRNB",
+  "332" : "NBRQKRBN",
+  "333" : "NRQBKRBN",
+  "334" : "NRQKRBBN",
+  "335" : "NRQKRNBB",
+  "336" : "BBNRKQRN",
+  "337" : "BNRBKQRN",
+  "338" : "BNRKQBRN",
+  "339" : "BNRKQRNB",
+  "340" : "NBBRKQRN",
+  "341" : "NRBBKQRN",
+  "342" : "NRBKQBRN",
+  "343" : "NRBKQRNB",
+  "344" : "NBRKBQRN",
+  "345" : "NRKBBQRN",
+  "346" : "NRKQBBRN",
+  "347" : "NRKQBRNB",
+  "348" : "NBRKQRBN",
+  "349" : "NRKBQRBN",
+  "350" : "NRKQRBBN",
+  "351" : "NRKQRNBB",
+  "352" : "BBNRKRQN",
+  "353" : "BNRBKRQN",
+  "354" : "BNRKRBQN",
+  "355" : "BNRKRQNB",
+  "356" : "NBBRKRQN",
+  "357" : "NRBBKRQN",
+  "358" : "NRBKRBQN",
+  "359" : "NRBKRQNB",
+  "360" : "NBRKBRQN",
+  "361" : "NRKBBRQN",
+  "362" : "NRKRBBQN",
+  "363" : "NRKRBQNB",
+  "364" : "NBRKRQBN",
+  "365" : "NRKBRQBN",
+  "366" : "NRKRQBBN",
+  "367" : "NRKRQNBB",
+  "368" : "BBNRKRNQ",
+  "369" : "BNRBKRNQ",
+  "370" : "BNRKRBNQ",
+  "371" : "BNRKRNQB",
+  "372" : "NBBRKRNQ",
+  "373" : "NRBBKRNQ",
+  "374" : "NRBKRBNQ",
+  "375" : "NRBKRNQB",
+  "376" : "NBRKBRNQ",
+  "377" : "NRKBBRNQ",
+  "378" : "NRKRBBNQ",
+  "379" : "NRKRBNQB",
+  "380" : "NBRKRNBQ",
+  "381" : "NRKBRNBQ",
+  "382" : "NRKRNBBQ",
+  "383" : "NRKRNQBB",
+  "384" : "BBQRNNKR",
+  "385" : "BQRBNNKR",
+  "386" : "BQRNNBKR",
+  "387" : "BQRNNKRB",
+  "388" : "QBBRNNKR",
+  "389" : "QRBBNNKR",
+  "390" : "QRBNNBKR",
+  "391" : "QRBNNKRB",
+  "392" : "QBRNBNKR",
+  "393" : "QRNBBNKR",
+  "394" : "QRNNBBKR",
+  "395" : "QRNNBKRB",
+  "396" : "QBRNNKBR",
+  "397" : "QRNBNKBR",
+  "398" : "QRNNKBBR",
+  "399" : "QRNNKRBB",
+  "400" : "BBRQNNKR",
+  "401" : "BRQBNNKR",
+  "402" : "BRQNNBKR",
+  "403" : "BRQNNKRB",
+  "404" : "RBBQNNKR",
+  "405" : "RQBBNNKR",
+  "406" : "RQBNNBKR",
+  "407" : "RQBNNKRB",
+  "408" : "RBQNBNKR",
+  "409" : "RQNBBNKR",
+  "410" : "RQNNBBKR",
+  "411" : "RQNNBKRB",
+  "412" : "RBQNNKBR",
+  "413" : "RQNBNKBR",
+  "414" : "RQNNKBBR",
+  "415" : "RQNNKRBB",
+  "416" : "BBRNQNKR",
+  "417" : "BRNBQNKR",
+  "418" : "BRNQNBKR",
+  "419" : "BRNQNKRB",
+  "420" : "RBBNQNKR",
+  "421" : "RNBBQNKR",
+  "422" : "RNBQNBKR",
+  "423" : "RNBQNKRB",
+  "424" : "RBNQBNKR",
+  "425" : "RNQBBNKR",
+  "426" : "RNQNBBKR",
+  "427" : "RNQNBKRB",
+  "428" : "RBNQNKBR",
+  "429" : "RNQBNKBR",
+  "430" : "RNQNKBBR",
+  "431" : "RNQNKRBB",
+  "432" : "BBRNNQKR",
+  "433" : "BRNBNQKR",
+  "434" : "BRNNQBKR",
+  "435" : "BRNNQKRB",
+  "436" : "RBBNNQKR",
+  "437" : "RNBBNQKR",
+  "438" : "RNBNQBKR",
+  "439" : "RNBNQKRB",
+  "440" : "RBNNBQKR",
+  "441" : "RNNBBQKR",
+  "442" : "RNNQBBKR",
+  "443" : "RNNQBKRB",
+  "444" : "RBNNQKBR",
+  "445" : "RNNBQKBR",
+  "446" : "RNNQKBBR",
+  "447" : "RNNQKRBB",
+  "448" : "BBRNNKQR",
+  "449" : "BRNBNKQR",
+  "450" : "BRNNKBQR",
+  "451" : "BRNNKQRB",
+  "452" : "RBBNNKQR",
+  "453" : "RNBBNKQR",
+  "454" : "RNBNKBQR",
+  "455" : "RNBNKQRB",
+  "456" : "RBNNBKQR",
+  "457" : "RNNBBKQR",
+  "458" : "RNNKBBQR",
+  "459" : "RNNKBQRB",
+  "460" : "RBNNKQBR",
+  "461" : "RNNBKQBR",
+  "462" : "RNNKQBBR",
+  "463" : "RNNKQRBB",
+  "464" : "BBRNNKRQ",
+  "465" : "BRNBNKRQ",
+  "466" : "BRNNKBRQ",
+  "467" : "BRNNKRQB",
+  "468" : "RBBNNKRQ",
+  "469" : "RNBBNKRQ",
+  "470" : "RNBNKBRQ",
+  "471" : "RNBNKRQB",
+  "472" : "RBNNBKRQ",
+  "473" : "RNNBBKRQ",
+  "474" : "RNNKBBRQ",
+  "475" : "RNNKBRQB",
+  "476" : "RBNNKRBQ",
+  "477" : "RNNBKRBQ",
+  "478" : "RNNKRBBQ",
+  "479" : "RNNKRQBB",
+  "480" : "BBQRNKNR",
+  "481" : "BQRBNKNR",
+  "482" : "BQRNKBNR",
+  "483" : "BQRNKNRB",
+  "484" : "QBBRNKNR",
+  "485" : "QRBBNKNR",
+  "486" : "QRBNKBNR",
+  "487" : "QRBNKNRB",
+  "488" : "QBRNBKNR",
+  "489" : "QRNBBKNR",
+  "490" : "QRNKBBNR",
+  "491" : "QRNKBNRB",
+  "492" : "QBRNKNBR",
+  "493" : "QRNBKNBR",
+  "494" : "QRNKNBBR",
+  "495" : "QRNKNRBB",
+  "496" : "BBRQNKNR",
+  "497" : "BRQBNKNR",
+  "498" : "BRQNKBNR",
+  "499" : "BRQNKNRB",
+  "500" : "RBBQNKNR",
+  "501" : "RQBBNKNR",
+  "502" : "RQBNKBNR",
+  "503" : "RQBNKNRB",
+  "504" : "RBQNBKNR",
+  "505" : "RQNBBKNR",
+  "506" : "RQNKBBNR",
+  "507" : "RQNKBNRB",
+  "508" : "RBQNKNBR",
+  "509" : "RQNBKNBR",
+  "510" : "RQNKNBBR",
+  "511" : "RQNKNRBB",
+  "512" : "BBRNQKNR",
+  "513" : "BRNBQKNR",
+  "514" : "BRNQKBNR",
+  "515" : "BRNQKNRB",
+  "516" : "RBBNQKNR",
+  "517" : "RNBBQKNR",
+  "518" : "RNBQKBNR",
+  "519" : "RNBQKNRB",
+  "520" : "RBNQBKNR",
+  "521" : "RNQBBKNR",
+  "522" : "RNQKBBNR",
+  "523" : "RNQKBNRB",
+  "524" : "RBNQKNBR",
+  "525" : "RNQBKNBR",
+  "526" : "RNQKNBBR",
+  "527" : "RNQKNRBB",
+  "528" : "BBRNKQNR",
+  "529" : "BRNBKQNR",
+  "530" : "BRNKQBNR",
+  "531" : "BRNKQNRB",
+  "532" : "RBBNKQNR",
+  "533" : "RNBBKQNR",
+  "534" : "RNBKQBNR",
+  "535" : "RNBKQNRB",
+  "536" : "RBNKBQNR",
+  "537" : "RNKBBQNR",
+  "538" : "RNKQBBNR",
+  "539" : "RNKQBNRB",
+  "540" : "RBNKQNBR",
+  "541" : "RNKBQNBR",
+  "542" : "RNKQNBBR",
+  "543" : "RNKQNRBB",
+  "544" : "BBRNKNQR",
+  "545" : "BRNBKNQR",
+  "546" : "BRNKNBQR",
+  "547" : "BRNKNQRB",
+  "548" : "RBBNKNQR",
+  "549" : "RNBBKNQR",
+  "550" : "RNBKNBQR",
+  "551" : "RNBKNQRB",
+  "552" : "RBNKBNQR",
+  "553" : "RNKBBNQR",
+  "554" : "RNKNBBQR",
+  "555" : "RNKNBQRB",
+  "556" : "RBNKNQBR",
+  "557" : "RNKBNQBR",
+  "558" : "RNKNQBBR",
+  "559" : "RNKNQRBB",
+  "560" : "BBRNKNRQ",
+  "561" : "BRNBKNRQ",
+  "562" : "BRNKNBRQ",
+  "563" : "BRNKNRQB",
+  "564" : "RBBNKNRQ",
+  "565" : "RNBBKNRQ",
+  "566" : "RNBKNBRQ",
+  "567" : "RNBKNRQB",
+  "568" : "RBNKBNRQ",
+  "569" : "RNKBBNRQ",
+  "570" : "RNKNBBRQ",
+  "571" : "RNKNBRQB",
+  "572" : "RBNKNRBQ",
+  "573" : "RNKBNRBQ",
+  "574" : "RNKNRBBQ",
+  "575" : "RNKNRQBB",
+  "576" : "BBQRNKRN",
+  "577" : "BQRBNKRN",
+  "578" : "BQRNKBRN",
+  "579" : "BQRNKRNB",
+  "580" : "QBBRNKRN",
+  "581" : "QRBBNKRN",
+  "582" : "QRBNKBRN",
+  "583" : "QRBNKRNB",
+  "584" : "QBRNBKRN",
+  "585" : "QRNBBKRN",
+  "586" : "QRNKBBRN",
+  "587" : "QRNKBRNB",
+  "588" : "QBRNKRBN",
+  "589" : "QRNBKRBN",
+  "590" : "QRNKRBBN",
+  "591" : "QRNKRNBB",
+  "592" : "BBRQNKRN",
+  "593" : "BRQBNKRN",
+  "594" : "BRQNKBRN",
+  "595" : "BRQNKRNB",
+  "596" : "RBBQNKRN",
+  "597" : "RQBBNKRN",
+  "598" : "RQBNKBRN",
+  "599" : "RQBNKRNB",
+  "600" : "RBQNBKRN",
+  "601" : "RQNBBKRN",
+  "602" : "RQNKBBRN",
+  "603" : "RQNKBRNB",
+  "604" : "RBQNKRBN",
+  "605" : "RQNBKRBN",
+  "606" : "RQNKRBBN",
+  "607" : "RQNKRNBB",
+  "608" : "BBRNQKRN",
+  "609" : "BRNBQKRN",
+  "610" : "BRNQKBRN",
+  "611" : "BRNQKRNB",
+  "612" : "RBBNQKRN",
+  "613" : "RNBBQKRN",
+  "614" : "RNBQKBRN",
+  "615" : "RNBQKRNB",
+  "616" : "RBNQBKRN",
+  "617" : "RNQBBKRN",
+  "618" : "RNQKBBRN",
+  "619" : "RNQKBRNB",
+  "620" : "RBNQKRBN",
+  "621" : "RNQBKRBN",
+  "622" : "RNQKRBBN",
+  "623" : "RNQKRNBB",
+  "624" : "BBRNKQRN",
+  "625" : "BRNBKQRN",
+  "626" : "BRNKQBRN",
+  "627" : "BRNKQRNB",
+  "628" : "RBBNKQRN",
+  "629" : "RNBBKQRN",
+  "630" : "RNBKQBRN",
+  "631" : "RNBKQRNB",
+  "632" : "RBNKBQRN",
+  "633" : "RNKBBQRN",
+  "634" : "RNKQBBRN",
+  "635" : "RNKQBRNB",
+  "636" : "RBNKQRBN",
+  "637" : "RNKBQRBN",
+  "638" : "RNKQRBBN",
+  "639" : "RNKQRNBB",
+  "640" : "BBRNKRQN",
+  "641" : "BRNBKRQN",
+  "642" : "BRNKRBQN",
+  "643" : "BRNKRQNB",
+  "644" : "RBBNKRQN",
+  "645" : "RNBBKRQN",
+  "646" : "RNBKRBQN",
+  "647" : "RNBKRQNB",
+  "648" : "RBNKBRQN",
+  "649" : "RNKBBRQN",
+  "650" : "RNKRBBQN",
+  "651" : "RNKRBQNB",
+  "652" : "RBNKRQBN",
+  "653" : "RNKBRQBN",
+  "654" : "RNKRQBBN",
+  "655" : "RNKRQNBB",
+  "656" : "BBRNKRNQ",
+  "657" : "BRNBKRNQ",
+  "658" : "BRNKRBNQ",
+  "659" : "BRNKRNQB",
+  "660" : "RBBNKRNQ",
+  "661" : "RNBBKRNQ",
+  "662" : "RNBKRBNQ",
+  "663" : "RNBKRNQB",
+  "664" : "RBNKBRNQ",
+  "665" : "RNKBBRNQ",
+  "666" : "RNKRBBNQ",
+  "667" : "RNKRBNQB",
+  "668" : "RBNKRNBQ",
+  "669" : "RNKBRNBQ",
+  "670" : "RNKRNBBQ",
+  "671" : "RNKRNQBB",
+  "672" : "BBQRKNNR",
+  "673" : "BQRBKNNR",
+  "674" : "BQRKNBNR",
+  "675" : "BQRKNNRB",
+  "676" : "QBBRKNNR",
+  "677" : "QRBBKNNR",
+  "678" : "QRBKNBNR",
+  "679" : "QRBKNNRB",
+  "680" : "QBRKBNNR",
+  "681" : "QRKBBNNR",
+  "682" : "QRKNBBNR",
+  "683" : "QRKNBNRB",
+  "684" : "QBRKNNBR",
+  "685" : "QRKBNNBR",
+  "686" : "QRKNNBBR",
+  "687" : "QRKNNRBB",
+  "688" : "BBRQKNNR",
+  "689" : "BRQBKNNR",
+  "690" : "BRQKNBNR",
+  "691" : "BRQKNNRB",
+  "692" : "RBBQKNNR",
+  "693" : "RQBBKNNR",
+  "694" : "RQBKNBNR",
+  "695" : "RQBKNNRB",
+  "696" : "RBQKBNNR",
+  "697" : "RQKBBNNR",
+  "698" : "RQKNBBNR",
+  "699" : "RQKNBNRB",
+  "700" : "RBQKNNBR",
+  "701" : "RQKBNNBR",
+  "702" : "RQKNNBBR",
+  "703" : "RQKNNRBB",
+  "704" : "BBRKQNNR",
+  "705" : "BRKBQNNR",
+  "706" : "BRKQNBNR",
+  "707" : "BRKQNNRB",
+  "708" : "RBBKQNNR",
+  "709" : "RKBBQNNR",
+  "710" : "RKBQNBNR",
+  "711" : "RKBQNNRB",
+  "712" : "RBKQBNNR",
+  "713" : "RKQBBNNR",
+  "714" : "RKQNBBNR",
+  "715" : "RKQNBNRB",
+  "716" : "RBKQNNBR",
+  "717" : "RKQBNNBR",
+  "718" : "RKQNNBBR",
+  "719" : "RKQNNRBB",
+  "720" : "BBRKNQNR",
+  "721" : "BRKBNQNR",
+  "722" : "BRKNQBNR",
+  "723" : "BRKNQNRB",
+  "724" : "RBBKNQNR",
+  "725" : "RKBBNQNR",
+  "726" : "RKBNQBNR",
+  "727" : "RKBNQNRB",
+  "728" : "RBKNBQNR",
+  "729" : "RKNBBQNR",
+  "730" : "RKNQBBNR",
+  "731" : "RKNQBNRB",
+  "732" : "RBKNQNBR",
+  "733" : "RKNBQNBR",
+  "734" : "RKNQNBBR",
+  "735" : "RKNQNRBB",
+  "736" : "BBRKNNQR",
+  "737" : "BRKBNNQR",
+  "738" : "BRKNNBQR",
+  "739" : "BRKNNQRB",
+  "740" : "RBBKNNQR",
+  "741" : "RKBBNNQR",
+  "742" : "RKBNNBQR",
+  "743" : "RKBNNQRB",
+  "744" : "RBKNBNQR",
+  "745" : "RKNBBNQR",
+  "746" : "RKNNBBQR",
+  "747" : "RKNNBQRB",
+  "748" : "RBKNNQBR",
+  "749" : "RKNBNQBR",
+  "750" : "RKNNQBBR",
+  "751" : "RKNNQRBB",
+  "752" : "BBRKNNRQ",
+  "753" : "BRKBNNRQ",
+  "754" : "BRKNNBRQ",
+  "755" : "BRKNNRQB",
+  "756" : "RBBKNNRQ",
+  "757" : "RKBBNNRQ",
+  "758" : "RKBNNBRQ",
+  "759" : "RKBNNRQB",
+  "760" : "RBKNBNRQ",
+  "761" : "RKNBBNRQ",
+  "762" : "RKNNBBRQ",
+  "763" : "RKNNBRQB",
+  "764" : "RBKNNRBQ",
+  "765" : "RKNBNRBQ",
+  "766" : "RKNNRBBQ",
+  "767" : "RKNNRQBB",
+  "768" : "BBQRKNRN",
+  "769" : "BQRBKNRN",
+  "770" : "BQRKNBRN",
+  "771" : "BQRKNRNB",
+  "772" : "QBBRKNRN",
+  "773" : "QRBBKNRN",
+  "774" : "QRBKNBRN",
+  "775" : "QRBKNRNB",
+  "776" : "QBRKBNRN",
+  "777" : "QRKBBNRN",
+  "778" : "QRKNBBRN",
+  "779" : "QRKNBRNB",
+  "780" : "QBRKNRBN",
+  "781" : "QRKBNRBN",
+  "782" : "QRKNRBBN",
+  "783" : "QRKNRNBB",
+  "784" : "BBRQKNRN",
+  "785" : "BRQBKNRN",
+  "786" : "BRQKNBRN",
+  "787" : "BRQKNRNB",
+  "788" : "RBBQKNRN",
+  "789" : "RQBBKNRN",
+  "790" : "RQBKNBRN",
+  "791" : "RQBKNRNB",
+  "792" : "RBQKBNRN",
+  "793" : "RQKBBNRN",
+  "794" : "RQKNBBRN",
+  "795" : "RQKNBRNB",
+  "796" : "RBQKNRBN",
+  "797" : "RQKBNRBN",
+  "798" : "RQKNRBBN",
+  "799" : "RQKNRNBB",
+  "800" : "BBRKQNRN",
+  "801" : "BRKBQNRN",
+  "802" : "BRKQNBRN",
+  "803" : "BRKQNRNB",
+  "804" : "RBBKQNRN",
+  "805" : "RKBBQNRN",
+  "806" : "RKBQNBRN",
+  "807" : "RKBQNRNB",
+  "808" : "RBKQBNRN",
+  "809" : "RKQBBNRN",
+  "810" : "RKQNBBRN",
+  "811" : "RKQNBRNB",
+  "812" : "RBKQNRBN",
+  "813" : "RKQBNRBN",
+  "814" : "RKQNRBBN",
+  "815" : "RKQNRNBB",
+  "816" : "BBRKNQRN",
+  "817" : "BRKBNQRN",
+  "818" : "BRKNQBRN",
+  "819" : "BRKNQRNB",
+  "820" : "RBBKNQRN",
+  "821" : "RKBBNQRN",
+  "822" : "RKBNQBRN",
+  "823" : "RKBNQRNB",
+  "824" : "RBKNBQRN",
+  "825" : "RKNBBQRN",
+  "826" : "RKNQBBRN",
+  "827" : "RKNQBRNB",
+  "828" : "RBKNQRBN",
+  "829" : "RKNBQRBN",
+  "830" : "RKNQRBBN",
+  "831" : "RKNQRNBB",
+  "832" : "BBRKNRQN",
+  "833" : "BRKBNRQN",
+  "834" : "BRKNRBQN",
+  "835" : "BRKNRQNB",
+  "836" : "RBBKNRQN",
+  "837" : "RKBBNRQN",
+  "838" : "RKBNRBQN",
+  "839" : "RKBNRQNB",
+  "840" : "RBKNBRQN",
+  "841" : "RKNBBRQN",
+  "842" : "RKNRBBQN",
+  "843" : "RKNRBQNB",
+  "844" : "RBKNRQBN",
+  "845" : "RKNBRQBN",
+  "846" : "RKNRQBBN",
+  "847" : "RKNRQNBB",
+  "848" : "BBRKNRNQ",
+  "849" : "BRKBNRNQ",
+  "850" : "BRKNRBNQ",
+  "851" : "BRKNRNQB",
+  "852" : "RBBKNRNQ",
+  "853" : "RKBBNRNQ",
+  "854" : "RKBNRBNQ",
+  "855" : "RKBNRNQB",
+  "856" : "RBKNBRNQ",
+  "857" : "RKNBBRNQ",
+  "858" : "RKNRBBNQ",
+  "859" : "RKNRBNQB",
+  "860" : "RBKNRNBQ",
+  "861" : "RKNBRNBQ",
+  "862" : "RKNRNBBQ",
+  "863" : "RKNRNQBB",
+  "864" : "BBQRKRNN",
+  "865" : "BQRBKRNN",
+  "866" : "BQRKRBNN",
+  "867" : "BQRKRNNB",
+  "868" : "QBBRKRNN",
+  "869" : "QRBBKRNN",
+  "870" : "QRBKRBNN",
+  "871" : "QRBKRNNB",
+  "872" : "QBRKBRNN",
+  "873" : "QRKBBRNN",
+  "874" : "QRKRBBNN",
+  "875" : "QRKRBNNB",
+  "876" : "QBRKRNBN",
+  "877" : "QRKBRNBN",
+  "878" : "QRKRNBBN",
+  "879" : "QRKRNNBB",
+  "880" : "BBRQKRNN",
+  "881" : "BRQBKRNN",
+  "882" : "BRQKRBNN",
+  "883" : "BRQKRNNB",
+  "884" : "RBBQKRNN",
+  "885" : "RQBBKRNN",
+  "886" : "RQBKRBNN",
+  "887" : "RQBKRNNB",
+  "888" : "RBQKBRNN",
+  "889" : "RQKBBRNN",
+  "890" : "RQKRBBNN",
+  "891" : "RQKRBNNB",
+  "892" : "RBQKRNBN",
+  "893" : "RQKBRNBN",
+  "894" : "RQKRNBBN",
+  "895" : "RQKRNNBB",
+  "896" : "BBRKQRNN",
+  "897" : "BRKBQRNN",
+  "898" : "BRKQRBNN",
+  "899" : "BRKQRNNB",
+  "900" : "RBBKQRNN",
+  "901" : "RKBBQRNN",
+  "902" : "RKBQRBNN",
+  "903" : "RKBQRNNB",
+  "904" : "RBKQBRNN",
+  "905" : "RKQBBRNN",
+  "906" : "RKQRBBNN",
+  "907" : "RKQRBNNB",
+  "908" : "RBKQRNBN",
+  "909" : "RKQBRNBN",
+  "910" : "RKQRNBBN",
+  "911" : "RKQRNNBB",
+  "912" : "BBRKRQNN",
+  "913" : "BRKBRQNN",
+  "914" : "BRKRQBNN",
+  "915" : "BRKRQNNB",
+  "916" : "RBBKRQNN",
+  "917" : "RKBBRQNN",
+  "918" : "RKBRQBNN",
+  "919" : "RKBRQNNB",
+  "920" : "RBKRBQNN",
+  "921" : "RKRBBQNN",
+  "922" : "RKRQBBNN",
+  "923" : "RKRQBNNB",
+  "924" : "RBKRQNBN",
+  "925" : "RKRBQNBN",
+  "926" : "RKRQNBBN",
+  "927" : "RKRQNNBB",
+  "928" : "BBRKRNQN",
+  "929" : "BRKBRNQN",
+  "930" : "BRKRNBQN",
+  "931" : "BRKRNQNB",
+  "932" : "RBBKRNQN",
+  "933" : "RKBBRNQN",
+  "934" : "RKBRNBQN",
+  "935" : "RKBRNQNB",
+  "936" : "RBKRBNQN",
+  "937" : "RKRBBNQN",
+  "938" : "RKRNBBQN",
+  "939" : "RKRNBQNB",
+  "940" : "RBKRNQBN",
+  "941" : "RKRBNQBN",
+  "942" : "RKRNQBBN",
+  "943" : "RKRNQNBB",
+  "944" : "BBRKRNNQ",
+  "945" : "BRKBRNNQ",
+  "946" : "BRKRNBNQ",
+  "947" : "BRKRNNQB",
+  "948" : "RBBKRNNQ",
+  "949" : "RKBBRNNQ",
+  "950" : "RKBRNBNQ",
+  "951" : "RKBRNNQB",
+  "952" : "RBKRBNNQ",
+  "953" : "RKRBBNNQ",
+  "954" : "RKRNBBNQ",
+  "955" : "RKRNBNQB",
+  "956" : "RBKRNNBQ",
+  "957" : "RKRBNNBQ",
+  "958" : "RKRNNBBQ",
+  "959" : "RKRNNQBB",
+  "BBQNNRKR" : "000",
+  "BQNBNRKR" : "001",
+  "BQNNRBKR" : "002",
+  "BQNNRKRB" : "003",
+  "QBBNNRKR" : "004",
+  "QNBBNRKR" : "005",
+  "QNBNRBKR" : "006",
+  "QNBNRKRB" : "007",
+  "QBNNBRKR" : "008",
+  "QNNBBRKR" : "009",
+  "QNNRBBKR" : "010",
+  "QNNRBKRB" : "011",
+  "QBNNRKBR" : "012",
+  "QNNBRKBR" : "013",
+  "QNNRKBBR" : "014",
+  "QNNRKRBB" : "015",
+  "BBNQNRKR" : "016",
+  "BNQBNRKR" : "017",
+  "BNQNRBKR" : "018",
+  "BNQNRKRB" : "019",
+  "NBBQNRKR" : "020",
+  "NQBBNRKR" : "021",
+  "NQBNRBKR" : "022",
+  "NQBNRKRB" : "023",
+  "NBQNBRKR" : "024",
+  "NQNBBRKR" : "025",
+  "NQNRBBKR" : "026",
+  "NQNRBKRB" : "027",
+  "NBQNRKBR" : "028",
+  "NQNBRKBR" : "029",
+  "NQNRKBBR" : "030",
+  "NQNRKRBB" : "031",
+  "BBNNQRKR" : "032",
+  "BNNBQRKR" : "033",
+  "BNNQRBKR" : "034",
+  "BNNQRKRB" : "035",
+  "NBBNQRKR" : "036",
+  "NNBBQRKR" : "037",
+  "NNBQRBKR" : "038",
+  "NNBQRKRB" : "039",
+  "NBNQBRKR" : "040",
+  "NNQBBRKR" : "041",
+  "NNQRBBKR" : "042",
+  "NNQRBKRB" : "043",
+  "NBNQRKBR" : "044",
+  "NNQBRKBR" : "045",
+  "NNQRKBBR" : "046",
+  "NNQRKRBB" : "047",
+  "BBNNRQKR" : "048",
+  "BNNBRQKR" : "049",
+  "BNNRQBKR" : "050",
+  "BNNRQKRB" : "051",
+  "NBBNRQKR" : "052",
+  "NNBBRQKR" : "053",
+  "NNBRQBKR" : "054",
+  "NNBRQKRB" : "055",
+  "NBNRBQKR" : "056",
+  "NNRBBQKR" : "057",
+  "NNRQBBKR" : "058",
+  "NNRQBKRB" : "059",
+  "NBNRQKBR" : "060",
+  "NNRBQKBR" : "061",
+  "NNRQKBBR" : "062",
+  "NNRQKRBB" : "063",
+  "BBNNRKQR" : "064",
+  "BNNBRKQR" : "065",
+  "BNNRKBQR" : "066",
+  "BNNRKQRB" : "067",
+  "NBBNRKQR" : "068",
+  "NNBBRKQR" : "069",
+  "NNBRKBQR" : "070",
+  "NNBRKQRB" : "071",
+  "NBNRBKQR" : "072",
+  "NNRBBKQR" : "073",
+  "NNRKBBQR" : "074",
+  "NNRKBQRB" : "075",
+  "NBNRKQBR" : "076",
+  "NNRBKQBR" : "077",
+  "NNRKQBBR" : "078",
+  "NNRKQRBB" : "079",
+  "BBNNRKRQ" : "080",
+  "BNNBRKRQ" : "081",
+  "BNNRKBRQ" : "082",
+  "BNNRKRQB" : "083",
+  "NBBNRKRQ" : "084",
+  "NNBBRKRQ" : "085",
+  "NNBRKBRQ" : "086",
+  "NNBRKRQB" : "087",
+  "NBNRBKRQ" : "088",
+  "NNRBBKRQ" : "089",
+  "NNRKBBRQ" : "090",
+  "NNRKBRQB" : "091",
+  "NBNRKRBQ" : "092",
+  "NNRBKRBQ" : "093",
+  "NNRKRBBQ" : "094",
+  "NNRKRQBB" : "095",
+  "BBQNRNKR" : "096",
+  "BQNBRNKR" : "097",
+  "BQNRNBKR" : "098",
+  "BQNRNKRB" : "099",
+  "QBBNRNKR" : "100",
+  "QNBBRNKR" : "101",
+  "QNBRNBKR" : "102",
+  "QNBRNKRB" : "103",
+  "QBNRBNKR" : "104",
+  "QNRBBNKR" : "105",
+  "QNRNBBKR" : "106",
+  "QNRNBKRB" : "107",
+  "QBNRNKBR" : "108",
+  "QNRBNKBR" : "109",
+  "QNRNKBBR" : "110",
+  "QNRNKRBB" : "111",
+  "BBNQRNKR" : "112",
+  "BNQBRNKR" : "113",
+  "BNQRNBKR" : "114",
+  "BNQRNKRB" : "115",
+  "NBBQRNKR" : "116",
+  "NQBBRNKR" : "117",
+  "NQBRNBKR" : "118",
+  "NQBRNKRB" : "119",
+  "NBQRBNKR" : "120",
+  "NQRBBNKR" : "121",
+  "NQRNBBKR" : "122",
+  "NQRNBKRB" : "123",
+  "NBQRNKBR" : "124",
+  "NQRBNKBR" : "125",
+  "NQRNKBBR" : "126",
+  "NQRNKRBB" : "127",
+  "BBNRQNKR" : "128",
+  "BNRBQNKR" : "129",
+  "BNRQNBKR" : "130",
+  "BNRQNKRB" : "131",
+  "NBBRQNKR" : "132",
+  "NRBBQNKR" : "133",
+  "NRBQNBKR" : "134",
+  "NRBQNKRB" : "135",
+  "NBRQBNKR" : "136",
+  "NRQBBNKR" : "137",
+  "NRQNBBKR" : "138",
+  "NRQNBKRB" : "139",
+  "NBRQNKBR" : "140",
+  "NRQBNKBR" : "141",
+  "NRQNKBBR" : "142",
+  "NRQNKRBB" : "143",
+  "BBNRNQKR" : "144",
+  "BNRBNQKR" : "145",
+  "BNRNQBKR" : "146",
+  "BNRNQKRB" : "147",
+  "NBBRNQKR" : "148",
+  "NRBBNQKR" : "149",
+  "NRBNQBKR" : "150",
+  "NRBNQKRB" : "151",
+  "NBRNBQKR" : "152",
+  "NRNBBQKR" : "153",
+  "NRNQBBKR" : "154",
+  "NRNQBKRB" : "155",
+  "NBRNQKBR" : "156",
+  "NRNBQKBR" : "157",
+  "NRNQKBBR" : "158",
+  "NRNQKRBB" : "159",
+  "BBNRNKQR" : "160",
+  "BNRBNKQR" : "161",
+  "BNRNKBQR" : "162",
+  "BNRNKQRB" : "163",
+  "NBBRNKQR" : "164",
+  "NRBBNKQR" : "165",
+  "NRBNKBQR" : "166",
+  "NRBNKQRB" : "167",
+  "NBRNBKQR" : "168",
+  "NRNBBKQR" : "169",
+  "NRNKBBQR" : "170",
+  "NRNKBQRB" : "171",
+  "NBRNKQBR" : "172",
+  "NRNBKQBR" : "173",
+  "NRNKQBBR" : "174",
+  "NRNKQRBB" : "175",
+  "BBNRNKRQ" : "176",
+  "BNRBNKRQ" : "177",
+  "BNRNKBRQ" : "178",
+  "BNRNKRQB" : "179",
+  "NBBRNKRQ" : "180",
+  "NRBBNKRQ" : "181",
+  "NRBNKBRQ" : "182",
+  "NRBNKRQB" : "183",
+  "NBRNBKRQ" : "184",
+  "NRNBBKRQ" : "185",
+  "NRNKBBRQ" : "186",
+  "NRNKBRQB" : "187",
+  "NBRNKRBQ" : "188",
+  "NRNBKRBQ" : "189",
+  "NRNKRBBQ" : "190",
+  "NRNKRQBB" : "191",
+  "BBQNRKNR" : "192",
+  "BQNBRKNR" : "193",
+  "BQNRKBNR" : "194",
+  "BQNRKNRB" : "195",
+  "QBBNRKNR" : "196",
+  "QNBBRKNR" : "197",
+  "QNBRKBNR" : "198",
+  "QNBRKNRB" : "199",
+  "QBNRBKNR" : "200",
+  "QNRBBKNR" : "201",
+  "QNRKBBNR" : "202",
+  "QNRKBNRB" : "203",
+  "QBNRKNBR" : "204",
+  "QNRBKNBR" : "205",
+  "QNRKNBBR" : "206",
+  "QNRKNRBB" : "207",
+  "BBNQRKNR" : "208",
+  "BNQBRKNR" : "209",
+  "BNQRKBNR" : "210",
+  "BNQRKNRB" : "211",
+  "NBBQRKNR" : "212",
+  "NQBBRKNR" : "213",
+  "NQBRKBNR" : "214",
+  "NQBRKNRB" : "215",
+  "NBQRBKNR" : "216",
+  "NQRBBKNR" : "217",
+  "NQRKBBNR" : "218",
+  "NQRKBNRB" : "219",
+  "NBQRKNBR" : "220",
+  "NQRBKNBR" : "221",
+  "NQRKNBBR" : "222",
+  "NQRKNRBB" : "223",
+  "BBNRQKNR" : "224",
+  "BNRBQKNR" : "225",
+  "BNRQKBNR" : "226",
+  "BNRQKNRB" : "227",
+  "NBBRQKNR" : "228",
+  "NRBBQKNR" : "229",
+  "NRBQKBNR" : "230",
+  "NRBQKNRB" : "231",
+  "NBRQBKNR" : "232",
+  "NRQBBKNR" : "233",
+  "NRQKBBNR" : "234",
+  "NRQKBNRB" : "235",
+  "NBRQKNBR" : "236",
+  "NRQBKNBR" : "237",
+  "NRQKNBBR" : "238",
+  "NRQKNRBB" : "239",
+  "BBNRKQNR" : "240",
+  "BNRBKQNR" : "241",
+  "BNRKQBNR" : "242",
+  "BNRKQNRB" : "243",
+  "NBBRKQNR" : "244",
+  "NRBBKQNR" : "245",
+  "NRBKQBNR" : "246",
+  "NRBKQNRB" : "247",
+  "NBRKBQNR" : "248",
+  "NRKBBQNR" : "249",
+  "NRKQBBNR" : "250",
+  "NRKQBNRB" : "251",
+  "NBRKQNBR" : "252",
+  "NRKBQNBR" : "253",
+  "NRKQNBBR" : "254",
+  "NRKQNRBB" : "255",
+  "BBNRKNQR" : "256",
+  "BNRBKNQR" : "257",
+  "BNRKNBQR" : "258",
+  "BNRKNQRB" : "259",
+  "NBBRKNQR" : "260",
+  "NRBBKNQR" : "261",
+  "NRBKNBQR" : "262",
+  "NRBKNQRB" : "263",
+  "NBRKBNQR" : "264",
+  "NRKBBNQR" : "265",
+  "NRKNBBQR" : "266",
+  "NRKNBQRB" : "267",
+  "NBRKNQBR" : "268",
+  "NRKBNQBR" : "269",
+  "NRKNQBBR" : "270",
+  "NRKNQRBB" : "271",
+  "BBNRKNRQ" : "272",
+  "BNRBKNRQ" : "273",
+  "BNRKNBRQ" : "274",
+  "BNRKNRQB" : "275",
+  "NBBRKNRQ" : "276",
+  "NRBBKNRQ" : "277",
+  "NRBKNBRQ" : "278",
+  "NRBKNRQB" : "279",
+  "NBRKBNRQ" : "280",
+  "NRKBBNRQ" : "281",
+  "NRKNBBRQ" : "282",
+  "NRKNBRQB" : "283",
+  "NBRKNRBQ" : "284",
+  "NRKBNRBQ" : "285",
+  "NRKNRBBQ" : "286",
+  "NRKNRQBB" : "287",
+  "BBQNRKRN" : "288",
+  "BQNBRKRN" : "289",
+  "BQNRKBRN" : "290",
+  "BQNRKRNB" : "291",
+  "QBBNRKRN" : "292",
+  "QNBBRKRN" : "293",
+  "QNBRKBRN" : "294",
+  "QNBRKRNB" : "295",
+  "QBNRBKRN" : "296",
+  "QNRBBKRN" : "297",
+  "QNRKBBRN" : "298",
+  "QNRKBRNB" : "299",
+  "QBNRKRBN" : "300",
+  "QNRBKRBN" : "301",
+  "QNRKRBBN" : "302",
+  "QNRKRNBB" : "303",
+  "BBNQRKRN" : "304",
+  "BNQBRKRN" : "305",
+  "BNQRKBRN" : "306",
+  "BNQRKRNB" : "307",
+  "NBBQRKRN" : "308",
+  "NQBBRKRN" : "309",
+  "NQBRKBRN" : "310",
+  "NQBRKRNB" : "311",
+  "NBQRBKRN" : "312",
+  "NQRBBKRN" : "313",
+  "NQRKBBRN" : "314",
+  "NQRKBRNB" : "315",
+  "NBQRKRBN" : "316",
+  "NQRBKRBN" : "317",
+  "NQRKRBBN" : "318",
+  "NQRKRNBB" : "319",
+  "BBNRQKRN" : "320",
+  "BNRBQKRN" : "321",
+  "BNRQKBRN" : "322",
+  "BNRQKRNB" : "323",
+  "NBBRQKRN" : "324",
+  "NRBBQKRN" : "325",
+  "NRBQKBRN" : "326",
+  "NRBQKRNB" : "327",
+  "NBRQBKRN" : "328",
+  "NRQBBKRN" : "329",
+  "NRQKBBRN" : "330",
+  "NRQKBRNB" : "331",
+  "NBRQKRBN" : "332",
+  "NRQBKRBN" : "333",
+  "NRQKRBBN" : "334",
+  "NRQKRNBB" : "335",
+  "BBNRKQRN" : "336",
+  "BNRBKQRN" : "337",
+  "BNRKQBRN" : "338",
+  "BNRKQRNB" : "339",
+  "NBBRKQRN" : "340",
+  "NRBBKQRN" : "341",
+  "NRBKQBRN" : "342",
+  "NRBKQRNB" : "343",
+  "NBRKBQRN" : "344",
+  "NRKBBQRN" : "345",
+  "NRKQBBRN" : "346",
+  "NRKQBRNB" : "347",
+  "NBRKQRBN" : "348",
+  "NRKBQRBN" : "349",
+  "NRKQRBBN" : "350",
+  "NRKQRNBB" : "351",
+  "BBNRKRQN" : "352",
+  "BNRBKRQN" : "353",
+  "BNRKRBQN" : "354",
+  "BNRKRQNB" : "355",
+  "NBBRKRQN" : "356",
+  "NRBBKRQN" : "357",
+  "NRBKRBQN" : "358",
+  "NRBKRQNB" : "359",
+  "NBRKBRQN" : "360",
+  "NRKBBRQN" : "361",
+  "NRKRBBQN" : "362",
+  "NRKRBQNB" : "363",
+  "NBRKRQBN" : "364",
+  "NRKBRQBN" : "365",
+  "NRKRQBBN" : "366",
+  "NRKRQNBB" : "367",
+  "BBNRKRNQ" : "368",
+  "BNRBKRNQ" : "369",
+  "BNRKRBNQ" : "370",
+  "BNRKRNQB" : "371",
+  "NBBRKRNQ" : "372",
+  "NRBBKRNQ" : "373",
+  "NRBKRBNQ" : "374",
+  "NRBKRNQB" : "375",
+  "NBRKBRNQ" : "376",
+  "NRKBBRNQ" : "377",
+  "NRKRBBNQ" : "378",
+  "NRKRBNQB" : "379",
+  "NBRKRNBQ" : "380",
+  "NRKBRNBQ" : "381",
+  "NRKRNBBQ" : "382",
+  "NRKRNQBB" : "383",
+  "BBQRNNKR" : "384",
+  "BQRBNNKR" : "385",
+  "BQRNNBKR" : "386",
+  "BQRNNKRB" : "387",
+  "QBBRNNKR" : "388",
+  "QRBBNNKR" : "389",
+  "QRBNNBKR" : "390",
+  "QRBNNKRB" : "391",
+  "QBRNBNKR" : "392",
+  "QRNBBNKR" : "393",
+  "QRNNBBKR" : "394",
+  "QRNNBKRB" : "395",
+  "QBRNNKBR" : "396",
+  "QRNBNKBR" : "397",
+  "QRNNKBBR" : "398",
+  "QRNNKRBB" : "399",
+  "BBRQNNKR" : "400",
+  "BRQBNNKR" : "401",
+  "BRQNNBKR" : "402",
+  "BRQNNKRB" : "403",
+  "RBBQNNKR" : "404",
+  "RQBBNNKR" : "405",
+  "RQBNNBKR" : "406",
+  "RQBNNKRB" : "407",
+  "RBQNBNKR" : "408",
+  "RQNBBNKR" : "409",
+  "RQNNBBKR" : "410",
+  "RQNNBKRB" : "411",
+  "RBQNNKBR" : "412",
+  "RQNBNKBR" : "413",
+  "RQNNKBBR" : "414",
+  "RQNNKRBB" : "415",
+  "BBRNQNKR" : "416",
+  "BRNBQNKR" : "417",
+  "BRNQNBKR" : "418",
+  "BRNQNKRB" : "419",
+  "RBBNQNKR" : "420",
+  "RNBBQNKR" : "421",
+  "RNBQNBKR" : "422",
+  "RNBQNKRB" : "423",
+  "RBNQBNKR" : "424",
+  "RNQBBNKR" : "425",
+  "RNQNBBKR" : "426",
+  "RNQNBKRB" : "427",
+  "RBNQNKBR" : "428",
+  "RNQBNKBR" : "429",
+  "RNQNKBBR" : "430",
+  "RNQNKRBB" : "431",
+  "BBRNNQKR" : "432",
+  "BRNBNQKR" : "433",
+  "BRNNQBKR" : "434",
+  "BRNNQKRB" : "435",
+  "RBBNNQKR" : "436",
+  "RNBBNQKR" : "437",
+  "RNBNQBKR" : "438",
+  "RNBNQKRB" : "439",
+  "RBNNBQKR" : "440",
+  "RNNBBQKR" : "441",
+  "RNNQBBKR" : "442",
+  "RNNQBKRB" : "443",
+  "RBNNQKBR" : "444",
+  "RNNBQKBR" : "445",
+  "RNNQKBBR" : "446",
+  "RNNQKRBB" : "447",
+  "BBRNNKQR" : "448",
+  "BRNBNKQR" : "449",
+  "BRNNKBQR" : "450",
+  "BRNNKQRB" : "451",
+  "RBBNNKQR" : "452",
+  "RNBBNKQR" : "453",
+  "RNBNKBQR" : "454",
+  "RNBNKQRB" : "455",
+  "RBNNBKQR" : "456",
+  "RNNBBKQR" : "457",
+  "RNNKBBQR" : "458",
+  "RNNKBQRB" : "459",
+  "RBNNKQBR" : "460",
+  "RNNBKQBR" : "461",
+  "RNNKQBBR" : "462",
+  "RNNKQRBB" : "463",
+  "BBRNNKRQ" : "464",
+  "BRNBNKRQ" : "465",
+  "BRNNKBRQ" : "466",
+  "BRNNKRQB" : "467",
+  "RBBNNKRQ" : "468",
+  "RNBBNKRQ" : "469",
+  "RNBNKBRQ" : "470",
+  "RNBNKRQB" : "471",
+  "RBNNBKRQ" : "472",
+  "RNNBBKRQ" : "473",
+  "RNNKBBRQ" : "474",
+  "RNNKBRQB" : "475",
+  "RBNNKRBQ" : "476",
+  "RNNBKRBQ" : "477",
+  "RNNKRBBQ" : "478",
+  "RNNKRQBB" : "479",
+  "BBQRNKNR" : "480",
+  "BQRBNKNR" : "481",
+  "BQRNKBNR" : "482",
+  "BQRNKNRB" : "483",
+  "QBBRNKNR" : "484",
+  "QRBBNKNR" : "485",
+  "QRBNKBNR" : "486",
+  "QRBNKNRB" : "487",
+  "QBRNBKNR" : "488",
+  "QRNBBKNR" : "489",
+  "QRNKBBNR" : "490",
+  "QRNKBNRB" : "491",
+  "QBRNKNBR" : "492",
+  "QRNBKNBR" : "493",
+  "QRNKNBBR" : "494",
+  "QRNKNRBB" : "495",
+  "BBRQNKNR" : "496",
+  "BRQBNKNR" : "497",
+  "BRQNKBNR" : "498",
+  "BRQNKNRB" : "499",
+  "RBBQNKNR" : "500",
+  "RQBBNKNR" : "501",
+  "RQBNKBNR" : "502",
+  "RQBNKNRB" : "503",
+  "RBQNBKNR" : "504",
+  "RQNBBKNR" : "505",
+  "RQNKBBNR" : "506",
+  "RQNKBNRB" : "507",
+  "RBQNKNBR" : "508",
+  "RQNBKNBR" : "509",
+  "RQNKNBBR" : "510",
+  "RQNKNRBB" : "511",
+  "BBRNQKNR" : "512",
+  "BRNBQKNR" : "513",
+  "BRNQKBNR" : "514",
+  "BRNQKNRB" : "515",
+  "RBBNQKNR" : "516",
+  "RNBBQKNR" : "517",
+  "RNBQKBNR" : "518",
+  "RNBQKNRB" : "519",
+  "RBNQBKNR" : "520",
+  "RNQBBKNR" : "521",
+  "RNQKBBNR" : "522",
+  "RNQKBNRB" : "523",
+  "RBNQKNBR" : "524",
+  "RNQBKNBR" : "525",
+  "RNQKNBBR" : "526",
+  "RNQKNRBB" : "527",
+  "BBRNKQNR" : "528",
+  "BRNBKQNR" : "529",
+  "BRNKQBNR" : "530",
+  "BRNKQNRB" : "531",
+  "RBBNKQNR" : "532",
+  "RNBBKQNR" : "533",
+  "RNBKQBNR" : "534",
+  "RNBKQNRB" : "535",
+  "RBNKBQNR" : "536",
+  "RNKBBQNR" : "537",
+  "RNKQBBNR" : "538",
+  "RNKQBNRB" : "539",
+  "RBNKQNBR" : "540",
+  "RNKBQNBR" : "541",
+  "RNKQNBBR" : "542",
+  "RNKQNRBB" : "543",
+  "BBRNKNQR" : "544",
+  "BRNBKNQR" : "545",
+  "BRNKNBQR" : "546",
+  "BRNKNQRB" : "547",
+  "RBBNKNQR" : "548",
+  "RNBBKNQR" : "549",
+  "RNBKNBQR" : "550",
+  "RNBKNQRB" : "551",
+  "RBNKBNQR" : "552",
+  "RNKBBNQR" : "553",
+  "RNKNBBQR" : "554",
+  "RNKNBQRB" : "555",
+  "RBNKNQBR" : "556",
+  "RNKBNQBR" : "557",
+  "RNKNQBBR" : "558",
+  "RNKNQRBB" : "559",
+  "BBRNKNRQ" : "560",
+  "BRNBKNRQ" : "561",
+  "BRNKNBRQ" : "562",
+  "BRNKNRQB" : "563",
+  "RBBNKNRQ" : "564",
+  "RNBBKNRQ" : "565",
+  "RNBKNBRQ" : "566",
+  "RNBKNRQB" : "567",
+  "RBNKBNRQ" : "568",
+  "RNKBBNRQ" : "569",
+  "RNKNBBRQ" : "570",
+  "RNKNBRQB" : "571",
+  "RBNKNRBQ" : "572",
+  "RNKBNRBQ" : "573",
+  "RNKNRBBQ" : "574",
+  "RNKNRQBB" : "575",
+  "BBQRNKRN" : "576",
+  "BQRBNKRN" : "577",
+  "BQRNKBRN" : "578",
+  "BQRNKRNB" : "579",
+  "QBBRNKRN" : "580",
+  "QRBBNKRN" : "581",
+  "QRBNKBRN" : "582",
+  "QRBNKRNB" : "583",
+  "QBRNBKRN" : "584",
+  "QRNBBKRN" : "585",
+  "QRNKBBRN" : "586",
+  "QRNKBRNB" : "587",
+  "QBRNKRBN" : "588",
+  "QRNBKRBN" : "589",
+  "QRNKRBBN" : "590",
+  "QRNKRNBB" : "591",
+  "BBRQNKRN" : "592",
+  "BRQBNKRN" : "593",
+  "BRQNKBRN" : "594",
+  "BRQNKRNB" : "595",
+  "RBBQNKRN" : "596",
+  "RQBBNKRN" : "597",
+  "RQBNKBRN" : "598",
+  "RQBNKRNB" : "599",
+  "RBQNBKRN" : "600",
+  "RQNBBKRN" : "601",
+  "RQNKBBRN" : "602",
+  "RQNKBRNB" : "603",
+  "RBQNKRBN" : "604",
+  "RQNBKRBN" : "605",
+  "RQNKRBBN" : "606",
+  "RQNKRNBB" : "607",
+  "BBRNQKRN" : "608",
+  "BRNBQKRN" : "609",
+  "BRNQKBRN" : "610",
+  "BRNQKRNB" : "611",
+  "RBBNQKRN" : "612",
+  "RNBBQKRN" : "613",
+  "RNBQKBRN" : "614",
+  "RNBQKRNB" : "615",
+  "RBNQBKRN" : "616",
+  "RNQBBKRN" : "617",
+  "RNQKBBRN" : "618",
+  "RNQKBRNB" : "619",
+  "RBNQKRBN" : "620",
+  "RNQBKRBN" : "621",
+  "RNQKRBBN" : "622",
+  "RNQKRNBB" : "623",
+  "BBRNKQRN" : "624",
+  "BRNBKQRN" : "625",
+  "BRNKQBRN" : "626",
+  "BRNKQRNB" : "627",
+  "RBBNKQRN" : "628",
+  "RNBBKQRN" : "629",
+  "RNBKQBRN" : "630",
+  "RNBKQRNB" : "631",
+  "RBNKBQRN" : "632",
+  "RNKBBQRN" : "633",
+  "RNKQBBRN" : "634",
+  "RNKQBRNB" : "635",
+  "RBNKQRBN" : "636",
+  "RNKBQRBN" : "637",
+  "RNKQRBBN" : "638",
+  "RNKQRNBB" : "639",
+  "BBRNKRQN" : "640",
+  "BRNBKRQN" : "641",
+  "BRNKRBQN" : "642",
+  "BRNKRQNB" : "643",
+  "RBBNKRQN" : "644",
+  "RNBBKRQN" : "645",
+  "RNBKRBQN" : "646",
+  "RNBKRQNB" : "647",
+  "RBNKBRQN" : "648",
+  "RNKBBRQN" : "649",
+  "RNKRBBQN" : "650",
+  "RNKRBQNB" : "651",
+  "RBNKRQBN" : "652",
+  "RNKBRQBN" : "653",
+  "RNKRQBBN" : "654",
+  "RNKRQNBB" : "655",
+  "BBRNKRNQ" : "656",
+  "BRNBKRNQ" : "657",
+  "BRNKRBNQ" : "658",
+  "BRNKRNQB" : "659",
+  "RBBNKRNQ" : "660",
+  "RNBBKRNQ" : "661",
+  "RNBKRBNQ" : "662",
+  "RNBKRNQB" : "663",
+  "RBNKBRNQ" : "664",
+  "RNKBBRNQ" : "665",
+  "RNKRBBNQ" : "666",
+  "RNKRBNQB" : "667",
+  "RBNKRNBQ" : "668",
+  "RNKBRNBQ" : "669",
+  "RNKRNBBQ" : "670",
+  "RNKRNQBB" : "671",
+  "BBQRKNNR" : "672",
+  "BQRBKNNR" : "673",
+  "BQRKNBNR" : "674",
+  "BQRKNNRB" : "675",
+  "QBBRKNNR" : "676",
+  "QRBBKNNR" : "677",
+  "QRBKNBNR" : "678",
+  "QRBKNNRB" : "679",
+  "QBRKBNNR" : "680",
+  "QRKBBNNR" : "681",
+  "QRKNBBNR" : "682",
+  "QRKNBNRB" : "683",
+  "QBRKNNBR" : "684",
+  "QRKBNNBR" : "685",
+  "QRKNNBBR" : "686",
+  "QRKNNRBB" : "687",
+  "BBRQKNNR" : "688",
+  "BRQBKNNR" : "689",
+  "BRQKNBNR" : "690",
+  "BRQKNNRB" : "691",
+  "RBBQKNNR" : "692",
+  "RQBBKNNR" : "693",
+  "RQBKNBNR" : "694",
+  "RQBKNNRB" : "695",
+  "RBQKBNNR" : "696",
+  "RQKBBNNR" : "697",
+  "RQKNBBNR" : "698",
+  "RQKNBNRB" : "699",
+  "RBQKNNBR" : "700",
+  "RQKBNNBR" : "701",
+  "RQKNNBBR" : "702",
+  "RQKNNRBB" : "703",
+  "BBRKQNNR" : "704",
+  "BRKBQNNR" : "705",
+  "BRKQNBNR" : "706",
+  "BRKQNNRB" : "707",
+  "RBBKQNNR" : "708",
+  "RKBBQNNR" : "709",
+  "RKBQNBNR" : "710",
+  "RKBQNNRB" : "711",
+  "RBKQBNNR" : "712",
+  "RKQBBNNR" : "713",
+  "RKQNBBNR" : "714",
+  "RKQNBNRB" : "715",
+  "RBKQNNBR" : "716",
+  "RKQBNNBR" : "717",
+  "RKQNNBBR" : "718",
+  "RKQNNRBB" : "719",
+  "BBRKNQNR" : "720",
+  "BRKBNQNR" : "721",
+  "BRKNQBNR" : "722",
+  "BRKNQNRB" : "723",
+  "RBBKNQNR" : "724",
+  "RKBBNQNR" : "725",
+  "RKBNQBNR" : "726",
+  "RKBNQNRB" : "727",
+  "RBKNBQNR" : "728",
+  "RKNBBQNR" : "729",
+  "RKNQBBNR" : "730",
+  "RKNQBNRB" : "731",
+  "RBKNQNBR" : "732",
+  "RKNBQNBR" : "733",
+  "RKNQNBBR" : "734",
+  "RKNQNRBB" : "735",
+  "BBRKNNQR" : "736",
+  "BRKBNNQR" : "737",
+  "BRKNNBQR" : "738",
+  "BRKNNQRB" : "739",
+  "RBBKNNQR" : "740",
+  "RKBBNNQR" : "741",
+  "RKBNNBQR" : "742",
+  "RKBNNQRB" : "743",
+  "RBKNBNQR" : "744",
+  "RKNBBNQR" : "745",
+  "RKNNBBQR" : "746",
+  "RKNNBQRB" : "747",
+  "RBKNNQBR" : "748",
+  "RKNBNQBR" : "749",
+  "RKNNQBBR" : "750",
+  "RKNNQRBB" : "751",
+  "BBRKNNRQ" : "752",
+  "BRKBNNRQ" : "753",
+  "BRKNNBRQ" : "754",
+  "BRKNNRQB" : "755",
+  "RBBKNNRQ" : "756",
+  "RKBBNNRQ" : "757",
+  "RKBNNBRQ" : "758",
+  "RKBNNRQB" : "759",
+  "RBKNBNRQ" : "760",
+  "RKNBBNRQ" : "761",
+  "RKNNBBRQ" : "762",
+  "RKNNBRQB" : "763",
+  "RBKNNRBQ" : "764",
+  "RKNBNRBQ" : "765",
+  "RKNNRBBQ" : "766",
+  "RKNNRQBB" : "767",
+  "BBQRKNRN" : "768",
+  "BQRBKNRN" : "769",
+  "BQRKNBRN" : "770",
+  "BQRKNRNB" : "771",
+  "QBBRKNRN" : "772",
+  "QRBBKNRN" : "773",
+  "QRBKNBRN" : "774",
+  "QRBKNRNB" : "775",
+  "QBRKBNRN" : "776",
+  "QRKBBNRN" : "777",
+  "QRKNBBRN" : "778",
+  "QRKNBRNB" : "779",
+  "QBRKNRBN" : "780",
+  "QRKBNRBN" : "781",
+  "QRKNRBBN" : "782",
+  "QRKNRNBB" : "783",
+  "BBRQKNRN" : "784",
+  "BRQBKNRN" : "785",
+  "BRQKNBRN" : "786",
+  "BRQKNRNB" : "787",
+  "RBBQKNRN" : "788",
+  "RQBBKNRN" : "789",
+  "RQBKNBRN" : "790",
+  "RQBKNRNB" : "791",
+  "RBQKBNRN" : "792",
+  "RQKBBNRN" : "793",
+  "RQKNBBRN" : "794",
+  "RQKNBRNB" : "795",
+  "RBQKNRBN" : "796",
+  "RQKBNRBN" : "797",
+  "RQKNRBBN" : "798",
+  "RQKNRNBB" : "799",
+  "BBRKQNRN" : "800",
+  "BRKBQNRN" : "801",
+  "BRKQNBRN" : "802",
+  "BRKQNRNB" : "803",
+  "RBBKQNRN" : "804",
+  "RKBBQNRN" : "805",
+  "RKBQNBRN" : "806",
+  "RKBQNRNB" : "807",
+  "RBKQBNRN" : "808",
+  "RKQBBNRN" : "809",
+  "RKQNBBRN" : "810",
+  "RKQNBRNB" : "811",
+  "RBKQNRBN" : "812",
+  "RKQBNRBN" : "813",
+  "RKQNRBBN" : "814",
+  "RKQNRNBB" : "815",
+  "BBRKNQRN" : "816",
+  "BRKBNQRN" : "817",
+  "BRKNQBRN" : "818",
+  "BRKNQRNB" : "819",
+  "RBBKNQRN" : "820",
+  "RKBBNQRN" : "821",
+  "RKBNQBRN" : "822",
+  "RKBNQRNB" : "823",
+  "RBKNBQRN" : "824",
+  "RKNBBQRN" : "825",
+  "RKNQBBRN" : "826",
+  "RKNQBRNB" : "827",
+  "RBKNQRBN" : "828",
+  "RKNBQRBN" : "829",
+  "RKNQRBBN" : "830",
+  "RKNQRNBB" : "831",
+  "BBRKNRQN" : "832",
+  "BRKBNRQN" : "833",
+  "BRKNRBQN" : "834",
+  "BRKNRQNB" : "835",
+  "RBBKNRQN" : "836",
+  "RKBBNRQN" : "837",
+  "RKBNRBQN" : "838",
+  "RKBNRQNB" : "839",
+  "RBKNBRQN" : "840",
+  "RKNBBRQN" : "841",
+  "RKNRBBQN" : "842",
+  "RKNRBQNB" : "843",
+  "RBKNRQBN" : "844",
+  "RKNBRQBN" : "845",
+  "RKNRQBBN" : "846",
+  "RKNRQNBB" : "847",
+  "BBRKNRNQ" : "848",
+  "BRKBNRNQ" : "849",
+  "BRKNRBNQ" : "850",
+  "BRKNRNQB" : "851",
+  "RBBKNRNQ" : "852",
+  "RKBBNRNQ" : "853",
+  "RKBNRBNQ" : "854",
+  "RKBNRNQB" : "855",
+  "RBKNBRNQ" : "856",
+  "RKNBBRNQ" : "857",
+  "RKNRBBNQ" : "858",
+  "RKNRBNQB" : "859",
+  "RBKNRNBQ" : "860",
+  "RKNBRNBQ" : "861",
+  "RKNRNBBQ" : "862",
+  "RKNRNQBB" : "863",
+  "BBQRKRNN" : "864",
+  "BQRBKRNN" : "865",
+  "BQRKRBNN" : "866",
+  "BQRKRNNB" : "867",
+  "QBBRKRNN" : "868",
+  "QRBBKRNN" : "869",
+  "QRBKRBNN" : "870",
+  "QRBKRNNB" : "871",
+  "QBRKBRNN" : "872",
+  "QRKBBRNN" : "873",
+  "QRKRBBNN" : "874",
+  "QRKRBNNB" : "875",
+  "QBRKRNBN" : "876",
+  "QRKBRNBN" : "877",
+  "QRKRNBBN" : "878",
+  "QRKRNNBB" : "879",
+  "BBRQKRNN" : "880",
+  "BRQBKRNN" : "881",
+  "BRQKRBNN" : "882",
+  "BRQKRNNB" : "883",
+  "RBBQKRNN" : "884",
+  "RQBBKRNN" : "885",
+  "RQBKRBNN" : "886",
+  "RQBKRNNB" : "887",
+  "RBQKBRNN" : "888",
+  "RQKBBRNN" : "889",
+  "RQKRBBNN" : "890",
+  "RQKRBNNB" : "891",
+  "RBQKRNBN" : "892",
+  "RQKBRNBN" : "893",
+  "RQKRNBBN" : "894",
+  "RQKRNNBB" : "895",
+  "BBRKQRNN" : "896",
+  "BRKBQRNN" : "897",
+  "BRKQRBNN" : "898",
+  "BRKQRNNB" : "899",
+  "RBBKQRNN" : "900",
+  "RKBBQRNN" : "901",
+  "RKBQRBNN" : "902",
+  "RKBQRNNB" : "903",
+  "RBKQBRNN" : "904",
+  "RKQBBRNN" : "905",
+  "RKQRBBNN" : "906",
+  "RKQRBNNB" : "907",
+  "RBKQRNBN" : "908",
+  "RKQBRNBN" : "909",
+  "RKQRNBBN" : "910",
+  "RKQRNNBB" : "911",
+  "BBRKRQNN" : "912",
+  "BRKBRQNN" : "913",
+  "BRKRQBNN" : "914",
+  "BRKRQNNB" : "915",
+  "RBBKRQNN" : "916",
+  "RKBBRQNN" : "917",
+  "RKBRQBNN" : "918",
+  "RKBRQNNB" : "919",
+  "RBKRBQNN" : "920",
+  "RKRBBQNN" : "921",
+  "RKRQBBNN" : "922",
+  "RKRQBNNB" : "923",
+  "RBKRQNBN" : "924",
+  "RKRBQNBN" : "925",
+  "RKRQNBBN" : "926",
+  "RKRQNNBB" : "927",
+  "BBRKRNQN" : "928",
+  "BRKBRNQN" : "929",
+  "BRKRNBQN" : "930",
+  "BRKRNQNB" : "931",
+  "RBBKRNQN" : "932",
+  "RKBBRNQN" : "933",
+  "RKBRNBQN" : "934",
+  "RKBRNQNB" : "935",
+  "RBKRBNQN" : "936",
+  "RKRBBNQN" : "937",
+  "RKRNBBQN" : "938",
+  "RKRNBQNB" : "939",
+  "RBKRNQBN" : "940",
+  "RKRBNQBN" : "941",
+  "RKRNQBBN" : "942",
+  "RKRNQNBB" : "943",
+  "BBRKRNNQ" : "944",
+  "BRKBRNNQ" : "945",
+  "BRKRNBNQ" : "946",
+  "BRKRNNQB" : "947",
+  "RBBKRNNQ" : "948",
+  "RKBBRNNQ" : "949",
+  "RKBRNBNQ" : "950",
+  "RKBRNNQB" : "951",
+  "RBKRBNNQ" : "952",
+  "RKRBBNNQ" : "953",
+  "RKRNBBNQ" : "954",
+  "RKRNBNQB" : "955",
+  "RBKRNNBQ" : "956",
+  "RKRBNNBQ" : "957",
+  "RKRNNBBQ" : "958",
+  "RKRNNQBB" : "959",
+};
+
 function chess960_switch (cvt) {
   var sp;
-
-  switch (cvt.toUpperCase()) {
-    case "000" : sp = "BBQNNRKR"; break;
-    case "001" : sp = "BQNBNRKR"; break;
-    case "002" : sp = "BQNNRBKR"; break;
-    case "003" : sp = "BQNNRKRB"; break;
-    case "004" : sp = "QBBNNRKR"; break;
-    case "005" : sp = "QNBBNRKR"; break;
-    case "006" : sp = "QNBNRBKR"; break;
-    case "007" : sp = "QNBNRKRB"; break;
-    case "008" : sp = "QBNNBRKR"; break;
-    case "009" : sp = "QNNBBRKR"; break;
-    case "010" : sp = "QNNRBBKR"; break;
-    case "011" : sp = "QNNRBKRB"; break;
-    case "012" : sp = "QBNNRKBR"; break;
-    case "013" : sp = "QNNBRKBR"; break;
-    case "014" : sp = "QNNRKBBR"; break;
-    case "015" : sp = "QNNRKRBB"; break;
-    case "016" : sp = "BBNQNRKR"; break;
-    case "017" : sp = "BNQBNRKR"; break;
-    case "018" : sp = "BNQNRBKR"; break;
-    case "019" : sp = "BNQNRKRB"; break;
-    case "020" : sp = "NBBQNRKR"; break;
-    case "021" : sp = "NQBBNRKR"; break;
-    case "022" : sp = "NQBNRBKR"; break;
-    case "023" : sp = "NQBNRKRB"; break;
-    case "024" : sp = "NBQNBRKR"; break;
-    case "025" : sp = "NQNBBRKR"; break;
-    case "026" : sp = "NQNRBBKR"; break;
-    case "027" : sp = "NQNRBKRB"; break;
-    case "028" : sp = "NBQNRKBR"; break;
-    case "029" : sp = "NQNBRKBR"; break;
-    case "030" : sp = "NQNRKBBR"; break;
-    case "031" : sp = "NQNRKRBB"; break;
-    case "032" : sp = "BBNNQRKR"; break;
-    case "033" : sp = "BNNBQRKR"; break;
-    case "034" : sp = "BNNQRBKR"; break;
-    case "035" : sp = "BNNQRKRB"; break;
-    case "036" : sp = "NBBNQRKR"; break;
-    case "037" : sp = "NNBBQRKR"; break;
-    case "038" : sp = "NNBQRBKR"; break;
-    case "039" : sp = "NNBQRKRB"; break;
-    case "040" : sp = "NBNQBRKR"; break;
-    case "041" : sp = "NNQBBRKR"; break;
-    case "042" : sp = "NNQRBBKR"; break;
-    case "043" : sp = "NNQRBKRB"; break;
-    case "044" : sp = "NBNQRKBR"; break;
-    case "045" : sp = "NNQBRKBR"; break;
-    case "046" : sp = "NNQRKBBR"; break;
-    case "047" : sp = "NNQRKRBB"; break;
-    case "048" : sp = "BBNNRQKR"; break;
-    case "049" : sp = "BNNBRQKR"; break;
-    case "050" : sp = "BNNRQBKR"; break;
-    case "051" : sp = "BNNRQKRB"; break;
-    case "052" : sp = "NBBNRQKR"; break;
-    case "053" : sp = "NNBBRQKR"; break;
-    case "054" : sp = "NNBRQBKR"; break;
-    case "055" : sp = "NNBRQKRB"; break;
-    case "056" : sp = "NBNRBQKR"; break;
-    case "057" : sp = "NNRBBQKR"; break;
-    case "058" : sp = "NNRQBBKR"; break;
-    case "059" : sp = "NNRQBKRB"; break;
-    case "060" : sp = "NBNRQKBR"; break;
-    case "061" : sp = "NNRBQKBR"; break;
-    case "062" : sp = "NNRQKBBR"; break;
-    case "063" : sp = "NNRQKRBB"; break;
-    case "064" : sp = "BBNNRKQR"; break;
-    case "065" : sp = "BNNBRKQR"; break;
-    case "066" : sp = "BNNRKBQR"; break;
-    case "067" : sp = "BNNRKQRB"; break;
-    case "068" : sp = "NBBNRKQR"; break;
-    case "069" : sp = "NNBBRKQR"; break;
-    case "070" : sp = "NNBRKBQR"; break;
-    case "071" : sp = "NNBRKQRB"; break;
-    case "072" : sp = "NBNRBKQR"; break;
-    case "073" : sp = "NNRBBKQR"; break;
-    case "074" : sp = "NNRKBBQR"; break;
-    case "075" : sp = "NNRKBQRB"; break;
-    case "076" : sp = "NBNRKQBR"; break;
-    case "077" : sp = "NNRBKQBR"; break;
-    case "078" : sp = "NNRKQBBR"; break;
-    case "079" : sp = "NNRKQRBB"; break;
-    case "080" : sp = "BBNNRKRQ"; break;
-    case "081" : sp = "BNNBRKRQ"; break;
-    case "082" : sp = "BNNRKBRQ"; break;
-    case "083" : sp = "BNNRKRQB"; break;
-    case "084" : sp = "NBBNRKRQ"; break;
-    case "085" : sp = "NNBBRKRQ"; break;
-    case "086" : sp = "NNBRKBRQ"; break;
-    case "087" : sp = "NNBRKRQB"; break;
-    case "088" : sp = "NBNRBKRQ"; break;
-    case "089" : sp = "NNRBBKRQ"; break;
-    case "090" : sp = "NNRKBBRQ"; break;
-    case "091" : sp = "NNRKBRQB"; break;
-    case "092" : sp = "NBNRKRBQ"; break;
-    case "093" : sp = "NNRBKRBQ"; break;
-    case "094" : sp = "NNRKRBBQ"; break;
-    case "095" : sp = "NNRKRQBB"; break;
-    case "096" : sp = "BBQNRNKR"; break;
-    case "097" : sp = "BQNBRNKR"; break;
-    case "098" : sp = "BQNRNBKR"; break;
-    case "099" : sp = "BQNRNKRB"; break;
-    case "100" : sp = "QBBNRNKR"; break;
-    case "101" : sp = "QNBBRNKR"; break;
-    case "102" : sp = "QNBRNBKR"; break;
-    case "103" : sp = "QNBRNKRB"; break;
-    case "104" : sp = "QBNRBNKR"; break;
-    case "105" : sp = "QNRBBNKR"; break;
-    case "106" : sp = "QNRNBBKR"; break;
-    case "107" : sp = "QNRNBKRB"; break;
-    case "108" : sp = "QBNRNKBR"; break;
-    case "109" : sp = "QNRBNKBR"; break;
-    case "110" : sp = "QNRNKBBR"; break;
-    case "111" : sp = "QNRNKRBB"; break;
-    case "112" : sp = "BBNQRNKR"; break;
-    case "113" : sp = "BNQBRNKR"; break;
-    case "114" : sp = "BNQRNBKR"; break;
-    case "115" : sp = "BNQRNKRB"; break;
-    case "116" : sp = "NBBQRNKR"; break;
-    case "117" : sp = "NQBBRNKR"; break;
-    case "118" : sp = "NQBRNBKR"; break;
-    case "119" : sp = "NQBRNKRB"; break;
-    case "120" : sp = "NBQRBNKR"; break;
-    case "121" : sp = "NQRBBNKR"; break;
-    case "122" : sp = "NQRNBBKR"; break;
-    case "123" : sp = "NQRNBKRB"; break;
-    case "124" : sp = "NBQRNKBR"; break;
-    case "125" : sp = "NQRBNKBR"; break;
-    case "126" : sp = "NQRNKBBR"; break;
-    case "127" : sp = "NQRNKRBB"; break;
-    case "128" : sp = "BBNRQNKR"; break;
-    case "129" : sp = "BNRBQNKR"; break;
-    case "130" : sp = "BNRQNBKR"; break;
-    case "131" : sp = "BNRQNKRB"; break;
-    case "132" : sp = "NBBRQNKR"; break;
-    case "133" : sp = "NRBBQNKR"; break;
-    case "134" : sp = "NRBQNBKR"; break;
-    case "135" : sp = "NRBQNKRB"; break;
-    case "136" : sp = "NBRQBNKR"; break;
-    case "137" : sp = "NRQBBNKR"; break;
-    case "138" : sp = "NRQNBBKR"; break;
-    case "139" : sp = "NRQNBKRB"; break;
-    case "140" : sp = "NBRQNKBR"; break;
-    case "141" : sp = "NRQBNKBR"; break;
-    case "142" : sp = "NRQNKBBR"; break;
-    case "143" : sp = "NRQNKRBB"; break;
-    case "144" : sp = "BBNRNQKR"; break;
-    case "145" : sp = "BNRBNQKR"; break;
-    case "146" : sp = "BNRNQBKR"; break;
-    case "147" : sp = "BNRNQKRB"; break;
-    case "148" : sp = "NBBRNQKR"; break;
-    case "149" : sp = "NRBBNQKR"; break;
-    case "150" : sp = "NRBNQBKR"; break;
-    case "151" : sp = "NRBNQKRB"; break;
-    case "152" : sp = "NBRNBQKR"; break;
-    case "153" : sp = "NRNBBQKR"; break;
-    case "154" : sp = "NRNQBBKR"; break;
-    case "155" : sp = "NRNQBKRB"; break;
-    case "156" : sp = "NBRNQKBR"; break;
-    case "157" : sp = "NRNBQKBR"; break;
-    case "158" : sp = "NRNQKBBR"; break;
-    case "159" : sp = "NRNQKRBB"; break;
-    case "160" : sp = "BBNRNKQR"; break;
-    case "161" : sp = "BNRBNKQR"; break;
-    case "162" : sp = "BNRNKBQR"; break;
-    case "163" : sp = "BNRNKQRB"; break;
-    case "164" : sp = "NBBRNKQR"; break;
-    case "165" : sp = "NRBBNKQR"; break;
-    case "166" : sp = "NRBNKBQR"; break;
-    case "167" : sp = "NRBNKQRB"; break;
-    case "168" : sp = "NBRNBKQR"; break;
-    case "169" : sp = "NRNBBKQR"; break;
-    case "170" : sp = "NRNKBBQR"; break;
-    case "171" : sp = "NRNKBQRB"; break;
-    case "172" : sp = "NBRNKQBR"; break;
-    case "173" : sp = "NRNBKQBR"; break;
-    case "174" : sp = "NRNKQBBR"; break;
-    case "175" : sp = "NRNKQRBB"; break;
-    case "176" : sp = "BBNRNKRQ"; break;
-    case "177" : sp = "BNRBNKRQ"; break;
-    case "178" : sp = "BNRNKBRQ"; break;
-    case "179" : sp = "BNRNKRQB"; break;
-    case "180" : sp = "NBBRNKRQ"; break;
-    case "181" : sp = "NRBBNKRQ"; break;
-    case "182" : sp = "NRBNKBRQ"; break;
-    case "183" : sp = "NRBNKRQB"; break;
-    case "184" : sp = "NBRNBKRQ"; break;
-    case "185" : sp = "NRNBBKRQ"; break;
-    case "186" : sp = "NRNKBBRQ"; break;
-    case "187" : sp = "NRNKBRQB"; break;
-    case "188" : sp = "NBRNKRBQ"; break;
-    case "189" : sp = "NRNBKRBQ"; break;
-    case "190" : sp = "NRNKRBBQ"; break;
-    case "191" : sp = "NRNKRQBB"; break;
-    case "192" : sp = "BBQNRKNR"; break;
-    case "193" : sp = "BQNBRKNR"; break;
-    case "194" : sp = "BQNRKBNR"; break;
-    case "195" : sp = "BQNRKNRB"; break;
-    case "196" : sp = "QBBNRKNR"; break;
-    case "197" : sp = "QNBBRKNR"; break;
-    case "198" : sp = "QNBRKBNR"; break;
-    case "199" : sp = "QNBRKNRB"; break;
-    case "200" : sp = "QBNRBKNR"; break;
-    case "201" : sp = "QNRBBKNR"; break;
-    case "202" : sp = "QNRKBBNR"; break;
-    case "203" : sp = "QNRKBNRB"; break;
-    case "204" : sp = "QBNRKNBR"; break;
-    case "205" : sp = "QNRBKNBR"; break;
-    case "206" : sp = "QNRKNBBR"; break;
-    case "207" : sp = "QNRKNRBB"; break;
-    case "208" : sp = "BBNQRKNR"; break;
-    case "209" : sp = "BNQBRKNR"; break;
-    case "210" : sp = "BNQRKBNR"; break;
-    case "211" : sp = "BNQRKNRB"; break;
-    case "212" : sp = "NBBQRKNR"; break;
-    case "213" : sp = "NQBBRKNR"; break;
-    case "214" : sp = "NQBRKBNR"; break;
-    case "215" : sp = "NQBRKNRB"; break;
-    case "216" : sp = "NBQRBKNR"; break;
-    case "217" : sp = "NQRBBKNR"; break;
-    case "218" : sp = "NQRKBBNR"; break;
-    case "219" : sp = "NQRKBNRB"; break;
-    case "220" : sp = "NBQRKNBR"; break;
-    case "221" : sp = "NQRBKNBR"; break;
-    case "222" : sp = "NQRKNBBR"; break;
-    case "223" : sp = "NQRKNRBB"; break;
-    case "224" : sp = "BBNRQKNR"; break;
-    case "225" : sp = "BNRBQKNR"; break;
-    case "226" : sp = "BNRQKBNR"; break;
-    case "227" : sp = "BNRQKNRB"; break;
-    case "228" : sp = "NBBRQKNR"; break;
-    case "229" : sp = "NRBBQKNR"; break;
-    case "230" : sp = "NRBQKBNR"; break;
-    case "231" : sp = "NRBQKNRB"; break;
-    case "232" : sp = "NBRQBKNR"; break;
-    case "233" : sp = "NRQBBKNR"; break;
-    case "234" : sp = "NRQKBBNR"; break;
-    case "235" : sp = "NRQKBNRB"; break;
-    case "236" : sp = "NBRQKNBR"; break;
-    case "237" : sp = "NRQBKNBR"; break;
-    case "238" : sp = "NRQKNBBR"; break;
-    case "239" : sp = "NRQKNRBB"; break;
-    case "240" : sp = "BBNRKQNR"; break;
-    case "241" : sp = "BNRBKQNR"; break;
-    case "242" : sp = "BNRKQBNR"; break;
-    case "243" : sp = "BNRKQNRB"; break;
-    case "244" : sp = "NBBRKQNR"; break;
-    case "245" : sp = "NRBBKQNR"; break;
-    case "246" : sp = "NRBKQBNR"; break;
-    case "247" : sp = "NRBKQNRB"; break;
-    case "248" : sp = "NBRKBQNR"; break;
-    case "249" : sp = "NRKBBQNR"; break;
-    case "250" : sp = "NRKQBBNR"; break;
-    case "251" : sp = "NRKQBNRB"; break;
-    case "252" : sp = "NBRKQNBR"; break;
-    case "253" : sp = "NRKBQNBR"; break;
-    case "254" : sp = "NRKQNBBR"; break;
-    case "255" : sp = "NRKQNRBB"; break;
-    case "256" : sp = "BBNRKNQR"; break;
-    case "257" : sp = "BNRBKNQR"; break;
-    case "258" : sp = "BNRKNBQR"; break;
-    case "259" : sp = "BNRKNQRB"; break;
-    case "260" : sp = "NBBRKNQR"; break;
-    case "261" : sp = "NRBBKNQR"; break;
-    case "262" : sp = "NRBKNBQR"; break;
-    case "263" : sp = "NRBKNQRB"; break;
-    case "264" : sp = "NBRKBNQR"; break;
-    case "265" : sp = "NRKBBNQR"; break;
-    case "266" : sp = "NRKNBBQR"; break;
-    case "267" : sp = "NRKNBQRB"; break;
-    case "268" : sp = "NBRKNQBR"; break;
-    case "269" : sp = "NRKBNQBR"; break;
-    case "270" : sp = "NRKNQBBR"; break;
-    case "271" : sp = "NRKNQRBB"; break;
-    case "272" : sp = "BBNRKNRQ"; break;
-    case "273" : sp = "BNRBKNRQ"; break;
-    case "274" : sp = "BNRKNBRQ"; break;
-    case "275" : sp = "BNRKNRQB"; break;
-    case "276" : sp = "NBBRKNRQ"; break;
-    case "277" : sp = "NRBBKNRQ"; break;
-    case "278" : sp = "NRBKNBRQ"; break;
-    case "279" : sp = "NRBKNRQB"; break;
-    case "280" : sp = "NBRKBNRQ"; break;
-    case "281" : sp = "NRKBBNRQ"; break;
-    case "282" : sp = "NRKNBBRQ"; break;
-    case "283" : sp = "NRKNBRQB"; break;
-    case "284" : sp = "NBRKNRBQ"; break;
-    case "285" : sp = "NRKBNRBQ"; break;
-    case "286" : sp = "NRKNRBBQ"; break;
-    case "287" : sp = "NRKNRQBB"; break;
-    case "288" : sp = "BBQNRKRN"; break;
-    case "289" : sp = "BQNBRKRN"; break;
-    case "290" : sp = "BQNRKBRN"; break;
-    case "291" : sp = "BQNRKRNB"; break;
-    case "292" : sp = "QBBNRKRN"; break;
-    case "293" : sp = "QNBBRKRN"; break;
-    case "294" : sp = "QNBRKBRN"; break;
-    case "295" : sp = "QNBRKRNB"; break;
-    case "296" : sp = "QBNRBKRN"; break;
-    case "297" : sp = "QNRBBKRN"; break;
-    case "298" : sp = "QNRKBBRN"; break;
-    case "299" : sp = "QNRKBRNB"; break;
-    case "300" : sp = "QBNRKRBN"; break;
-    case "301" : sp = "QNRBKRBN"; break;
-    case "302" : sp = "QNRKRBBN"; break;
-    case "303" : sp = "QNRKRNBB"; break;
-    case "304" : sp = "BBNQRKRN"; break;
-    case "305" : sp = "BNQBRKRN"; break;
-    case "306" : sp = "BNQRKBRN"; break;
-    case "307" : sp = "BNQRKRNB"; break;
-    case "308" : sp = "NBBQRKRN"; break;
-    case "309" : sp = "NQBBRKRN"; break;
-    case "310" : sp = "NQBRKBRN"; break;
-    case "311" : sp = "NQBRKRNB"; break;
-    case "312" : sp = "NBQRBKRN"; break;
-    case "313" : sp = "NQRBBKRN"; break;
-    case "314" : sp = "NQRKBBRN"; break;
-    case "315" : sp = "NQRKBRNB"; break;
-    case "316" : sp = "NBQRKRBN"; break;
-    case "317" : sp = "NQRBKRBN"; break;
-    case "318" : sp = "NQRKRBBN"; break;
-    case "319" : sp = "NQRKRNBB"; break;
-    case "320" : sp = "BBNRQKRN"; break;
-    case "321" : sp = "BNRBQKRN"; break;
-    case "322" : sp = "BNRQKBRN"; break;
-    case "323" : sp = "BNRQKRNB"; break;
-    case "324" : sp = "NBBRQKRN"; break;
-    case "325" : sp = "NRBBQKRN"; break;
-    case "326" : sp = "NRBQKBRN"; break;
-    case "327" : sp = "NRBQKRNB"; break;
-    case "328" : sp = "NBRQBKRN"; break;
-    case "329" : sp = "NRQBBKRN"; break;
-    case "330" : sp = "NRQKBBRN"; break;
-    case "331" : sp = "NRQKBRNB"; break;
-    case "332" : sp = "NBRQKRBN"; break;
-    case "333" : sp = "NRQBKRBN"; break;
-    case "334" : sp = "NRQKRBBN"; break;
-    case "335" : sp = "NRQKRNBB"; break;
-    case "336" : sp = "BBNRKQRN"; break;
-    case "337" : sp = "BNRBKQRN"; break;
-    case "338" : sp = "BNRKQBRN"; break;
-    case "339" : sp = "BNRKQRNB"; break;
-    case "340" : sp = "NBBRKQRN"; break;
-    case "341" : sp = "NRBBKQRN"; break;
-    case "342" : sp = "NRBKQBRN"; break;
-    case "343" : sp = "NRBKQRNB"; break;
-    case "344" : sp = "NBRKBQRN"; break;
-    case "345" : sp = "NRKBBQRN"; break;
-    case "346" : sp = "NRKQBBRN"; break;
-    case "347" : sp = "NRKQBRNB"; break;
-    case "348" : sp = "NBRKQRBN"; break;
-    case "349" : sp = "NRKBQRBN"; break;
-    case "350" : sp = "NRKQRBBN"; break;
-    case "351" : sp = "NRKQRNBB"; break;
-    case "352" : sp = "BBNRKRQN"; break;
-    case "353" : sp = "BNRBKRQN"; break;
-    case "354" : sp = "BNRKRBQN"; break;
-    case "355" : sp = "BNRKRQNB"; break;
-    case "356" : sp = "NBBRKRQN"; break;
-    case "357" : sp = "NRBBKRQN"; break;
-    case "358" : sp = "NRBKRBQN"; break;
-    case "359" : sp = "NRBKRQNB"; break;
-    case "360" : sp = "NBRKBRQN"; break;
-    case "361" : sp = "NRKBBRQN"; break;
-    case "362" : sp = "NRKRBBQN"; break;
-    case "363" : sp = "NRKRBQNB"; break;
-    case "364" : sp = "NBRKRQBN"; break;
-    case "365" : sp = "NRKBRQBN"; break;
-    case "366" : sp = "NRKRQBBN"; break;
-    case "367" : sp = "NRKRQNBB"; break;
-    case "368" : sp = "BBNRKRNQ"; break;
-    case "369" : sp = "BNRBKRNQ"; break;
-    case "370" : sp = "BNRKRBNQ"; break;
-    case "371" : sp = "BNRKRNQB"; break;
-    case "372" : sp = "NBBRKRNQ"; break;
-    case "373" : sp = "NRBBKRNQ"; break;
-    case "374" : sp = "NRBKRBNQ"; break;
-    case "375" : sp = "NRBKRNQB"; break;
-    case "376" : sp = "NBRKBRNQ"; break;
-    case "377" : sp = "NRKBBRNQ"; break;
-    case "378" : sp = "NRKRBBNQ"; break;
-    case "379" : sp = "NRKRBNQB"; break;
-    case "380" : sp = "NBRKRNBQ"; break;
-    case "381" : sp = "NRKBRNBQ"; break;
-    case "382" : sp = "NRKRNBBQ"; break;
-    case "383" : sp = "NRKRNQBB"; break;
-    case "384" : sp = "BBQRNNKR"; break;
-    case "385" : sp = "BQRBNNKR"; break;
-    case "386" : sp = "BQRNNBKR"; break;
-    case "387" : sp = "BQRNNKRB"; break;
-    case "388" : sp = "QBBRNNKR"; break;
-    case "389" : sp = "QRBBNNKR"; break;
-    case "390" : sp = "QRBNNBKR"; break;
-    case "391" : sp = "QRBNNKRB"; break;
-    case "392" : sp = "QBRNBNKR"; break;
-    case "393" : sp = "QRNBBNKR"; break;
-    case "394" : sp = "QRNNBBKR"; break;
-    case "395" : sp = "QRNNBKRB"; break;
-    case "396" : sp = "QBRNNKBR"; break;
-    case "397" : sp = "QRNBNKBR"; break;
-    case "398" : sp = "QRNNKBBR"; break;
-    case "399" : sp = "QRNNKRBB"; break;
-    case "400" : sp = "BBRQNNKR"; break;
-    case "401" : sp = "BRQBNNKR"; break;
-    case "402" : sp = "BRQNNBKR"; break;
-    case "403" : sp = "BRQNNKRB"; break;
-    case "404" : sp = "RBBQNNKR"; break;
-    case "405" : sp = "RQBBNNKR"; break;
-    case "406" : sp = "RQBNNBKR"; break;
-    case "407" : sp = "RQBNNKRB"; break;
-    case "408" : sp = "RBQNBNKR"; break;
-    case "409" : sp = "RQNBBNKR"; break;
-    case "410" : sp = "RQNNBBKR"; break;
-    case "411" : sp = "RQNNBKRB"; break;
-    case "412" : sp = "RBQNNKBR"; break;
-    case "413" : sp = "RQNBNKBR"; break;
-    case "414" : sp = "RQNNKBBR"; break;
-    case "415" : sp = "RQNNKRBB"; break;
-    case "416" : sp = "BBRNQNKR"; break;
-    case "417" : sp = "BRNBQNKR"; break;
-    case "418" : sp = "BRNQNBKR"; break;
-    case "419" : sp = "BRNQNKRB"; break;
-    case "420" : sp = "RBBNQNKR"; break;
-    case "421" : sp = "RNBBQNKR"; break;
-    case "422" : sp = "RNBQNBKR"; break;
-    case "423" : sp = "RNBQNKRB"; break;
-    case "424" : sp = "RBNQBNKR"; break;
-    case "425" : sp = "RNQBBNKR"; break;
-    case "426" : sp = "RNQNBBKR"; break;
-    case "427" : sp = "RNQNBKRB"; break;
-    case "428" : sp = "RBNQNKBR"; break;
-    case "429" : sp = "RNQBNKBR"; break;
-    case "430" : sp = "RNQNKBBR"; break;
-    case "431" : sp = "RNQNKRBB"; break;
-    case "432" : sp = "BBRNNQKR"; break;
-    case "433" : sp = "BRNBNQKR"; break;
-    case "434" : sp = "BRNNQBKR"; break;
-    case "435" : sp = "BRNNQKRB"; break;
-    case "436" : sp = "RBBNNQKR"; break;
-    case "437" : sp = "RNBBNQKR"; break;
-    case "438" : sp = "RNBNQBKR"; break;
-    case "439" : sp = "RNBNQKRB"; break;
-    case "440" : sp = "RBNNBQKR"; break;
-    case "441" : sp = "RNNBBQKR"; break;
-    case "442" : sp = "RNNQBBKR"; break;
-    case "443" : sp = "RNNQBKRB"; break;
-    case "444" : sp = "RBNNQKBR"; break;
-    case "445" : sp = "RNNBQKBR"; break;
-    case "446" : sp = "RNNQKBBR"; break;
-    case "447" : sp = "RNNQKRBB"; break;
-    case "448" : sp = "BBRNNKQR"; break;
-    case "449" : sp = "BRNBNKQR"; break;
-    case "450" : sp = "BRNNKBQR"; break;
-    case "451" : sp = "BRNNKQRB"; break;
-    case "452" : sp = "RBBNNKQR"; break;
-    case "453" : sp = "RNBBNKQR"; break;
-    case "454" : sp = "RNBNKBQR"; break;
-    case "455" : sp = "RNBNKQRB"; break;
-    case "456" : sp = "RBNNBKQR"; break;
-    case "457" : sp = "RNNBBKQR"; break;
-    case "458" : sp = "RNNKBBQR"; break;
-    case "459" : sp = "RNNKBQRB"; break;
-    case "460" : sp = "RBNNKQBR"; break;
-    case "461" : sp = "RNNBKQBR"; break;
-    case "462" : sp = "RNNKQBBR"; break;
-    case "463" : sp = "RNNKQRBB"; break;
-    case "464" : sp = "BBRNNKRQ"; break;
-    case "465" : sp = "BRNBNKRQ"; break;
-    case "466" : sp = "BRNNKBRQ"; break;
-    case "467" : sp = "BRNNKRQB"; break;
-    case "468" : sp = "RBBNNKRQ"; break;
-    case "469" : sp = "RNBBNKRQ"; break;
-    case "470" : sp = "RNBNKBRQ"; break;
-    case "471" : sp = "RNBNKRQB"; break;
-    case "472" : sp = "RBNNBKRQ"; break;
-    case "473" : sp = "RNNBBKRQ"; break;
-    case "474" : sp = "RNNKBBRQ"; break;
-    case "475" : sp = "RNNKBRQB"; break;
-    case "476" : sp = "RBNNKRBQ"; break;
-    case "477" : sp = "RNNBKRBQ"; break;
-    case "478" : sp = "RNNKRBBQ"; break;
-    case "479" : sp = "RNNKRQBB"; break;
-    case "480" : sp = "BBQRNKNR"; break;
-    case "481" : sp = "BQRBNKNR"; break;
-    case "482" : sp = "BQRNKBNR"; break;
-    case "483" : sp = "BQRNKNRB"; break;
-    case "484" : sp = "QBBRNKNR"; break;
-    case "485" : sp = "QRBBNKNR"; break;
-    case "486" : sp = "QRBNKBNR"; break;
-    case "487" : sp = "QRBNKNRB"; break;
-    case "488" : sp = "QBRNBKNR"; break;
-    case "489" : sp = "QRNBBKNR"; break;
-    case "490" : sp = "QRNKBBNR"; break;
-    case "491" : sp = "QRNKBNRB"; break;
-    case "492" : sp = "QBRNKNBR"; break;
-    case "493" : sp = "QRNBKNBR"; break;
-    case "494" : sp = "QRNKNBBR"; break;
-    case "495" : sp = "QRNKNRBB"; break;
-    case "496" : sp = "BBRQNKNR"; break;
-    case "497" : sp = "BRQBNKNR"; break;
-    case "498" : sp = "BRQNKBNR"; break;
-    case "499" : sp = "BRQNKNRB"; break;
-    case "500" : sp = "RBBQNKNR"; break;
-    case "501" : sp = "RQBBNKNR"; break;
-    case "502" : sp = "RQBNKBNR"; break;
-    case "503" : sp = "RQBNKNRB"; break;
-    case "504" : sp = "RBQNBKNR"; break;
-    case "505" : sp = "RQNBBKNR"; break;
-    case "506" : sp = "RQNKBBNR"; break;
-    case "507" : sp = "RQNKBNRB"; break;
-    case "508" : sp = "RBQNKNBR"; break;
-    case "509" : sp = "RQNBKNBR"; break;
-    case "510" : sp = "RQNKNBBR"; break;
-    case "511" : sp = "RQNKNRBB"; break;
-    case "512" : sp = "BBRNQKNR"; break;
-    case "513" : sp = "BRNBQKNR"; break;
-    case "514" : sp = "BRNQKBNR"; break;
-    case "515" : sp = "BRNQKNRB"; break;
-    case "516" : sp = "RBBNQKNR"; break;
-    case "517" : sp = "RNBBQKNR"; break;
-    case "518" : sp = "RNBQKBNR"; break;
-    case "519" : sp = "RNBQKNRB"; break;
-    case "520" : sp = "RBNQBKNR"; break;
-    case "521" : sp = "RNQBBKNR"; break;
-    case "522" : sp = "RNQKBBNR"; break;
-    case "523" : sp = "RNQKBNRB"; break;
-    case "524" : sp = "RBNQKNBR"; break;
-    case "525" : sp = "RNQBKNBR"; break;
-    case "526" : sp = "RNQKNBBR"; break;
-    case "527" : sp = "RNQKNRBB"; break;
-    case "528" : sp = "BBRNKQNR"; break;
-    case "529" : sp = "BRNBKQNR"; break;
-    case "530" : sp = "BRNKQBNR"; break;
-    case "531" : sp = "BRNKQNRB"; break;
-    case "532" : sp = "RBBNKQNR"; break;
-    case "533" : sp = "RNBBKQNR"; break;
-    case "534" : sp = "RNBKQBNR"; break;
-    case "535" : sp = "RNBKQNRB"; break;
-    case "536" : sp = "RBNKBQNR"; break;
-    case "537" : sp = "RNKBBQNR"; break;
-    case "538" : sp = "RNKQBBNR"; break;
-    case "539" : sp = "RNKQBNRB"; break;
-    case "540" : sp = "RBNKQNBR"; break;
-    case "541" : sp = "RNKBQNBR"; break;
-    case "542" : sp = "RNKQNBBR"; break;
-    case "543" : sp = "RNKQNRBB"; break;
-    case "544" : sp = "BBRNKNQR"; break;
-    case "545" : sp = "BRNBKNQR"; break;
-    case "546" : sp = "BRNKNBQR"; break;
-    case "547" : sp = "BRNKNQRB"; break;
-    case "548" : sp = "RBBNKNQR"; break;
-    case "549" : sp = "RNBBKNQR"; break;
-    case "550" : sp = "RNBKNBQR"; break;
-    case "551" : sp = "RNBKNQRB"; break;
-    case "552" : sp = "RBNKBNQR"; break;
-    case "553" : sp = "RNKBBNQR"; break;
-    case "554" : sp = "RNKNBBQR"; break;
-    case "555" : sp = "RNKNBQRB"; break;
-    case "556" : sp = "RBNKNQBR"; break;
-    case "557" : sp = "RNKBNQBR"; break;
-    case "558" : sp = "RNKNQBBR"; break;
-    case "559" : sp = "RNKNQRBB"; break;
-    case "560" : sp = "BBRNKNRQ"; break;
-    case "561" : sp = "BRNBKNRQ"; break;
-    case "562" : sp = "BRNKNBRQ"; break;
-    case "563" : sp = "BRNKNRQB"; break;
-    case "564" : sp = "RBBNKNRQ"; break;
-    case "565" : sp = "RNBBKNRQ"; break;
-    case "566" : sp = "RNBKNBRQ"; break;
-    case "567" : sp = "RNBKNRQB"; break;
-    case "568" : sp = "RBNKBNRQ"; break;
-    case "569" : sp = "RNKBBNRQ"; break;
-    case "570" : sp = "RNKNBBRQ"; break;
-    case "571" : sp = "RNKNBRQB"; break;
-    case "572" : sp = "RBNKNRBQ"; break;
-    case "573" : sp = "RNKBNRBQ"; break;
-    case "574" : sp = "RNKNRBBQ"; break;
-    case "575" : sp = "RNKNRQBB"; break;
-    case "576" : sp = "BBQRNKRN"; break;
-    case "577" : sp = "BQRBNKRN"; break;
-    case "578" : sp = "BQRNKBRN"; break;
-    case "579" : sp = "BQRNKRNB"; break;
-    case "580" : sp = "QBBRNKRN"; break;
-    case "581" : sp = "QRBBNKRN"; break;
-    case "582" : sp = "QRBNKBRN"; break;
-    case "583" : sp = "QRBNKRNB"; break;
-    case "584" : sp = "QBRNBKRN"; break;
-    case "585" : sp = "QRNBBKRN"; break;
-    case "586" : sp = "QRNKBBRN"; break;
-    case "587" : sp = "QRNKBRNB"; break;
-    case "588" : sp = "QBRNKRBN"; break;
-    case "589" : sp = "QRNBKRBN"; break;
-    case "590" : sp = "QRNKRBBN"; break;
-    case "591" : sp = "QRNKRNBB"; break;
-    case "592" : sp = "BBRQNKRN"; break;
-    case "593" : sp = "BRQBNKRN"; break;
-    case "594" : sp = "BRQNKBRN"; break;
-    case "595" : sp = "BRQNKRNB"; break;
-    case "596" : sp = "RBBQNKRN"; break;
-    case "597" : sp = "RQBBNKRN"; break;
-    case "598" : sp = "RQBNKBRN"; break;
-    case "599" : sp = "RQBNKRNB"; break;
-    case "600" : sp = "RBQNBKRN"; break;
-    case "601" : sp = "RQNBBKRN"; break;
-    case "602" : sp = "RQNKBBRN"; break;
-    case "603" : sp = "RQNKBRNB"; break;
-    case "604" : sp = "RBQNKRBN"; break;
-    case "605" : sp = "RQNBKRBN"; break;
-    case "606" : sp = "RQNKRBBN"; break;
-    case "607" : sp = "RQNKRNBB"; break;
-    case "608" : sp = "BBRNQKRN"; break;
-    case "609" : sp = "BRNBQKRN"; break;
-    case "610" : sp = "BRNQKBRN"; break;
-    case "611" : sp = "BRNQKRNB"; break;
-    case "612" : sp = "RBBNQKRN"; break;
-    case "613" : sp = "RNBBQKRN"; break;
-    case "614" : sp = "RNBQKBRN"; break;
-    case "615" : sp = "RNBQKRNB"; break;
-    case "616" : sp = "RBNQBKRN"; break;
-    case "617" : sp = "RNQBBKRN"; break;
-    case "618" : sp = "RNQKBBRN"; break;
-    case "619" : sp = "RNQKBRNB"; break;
-    case "620" : sp = "RBNQKRBN"; break;
-    case "621" : sp = "RNQBKRBN"; break;
-    case "622" : sp = "RNQKRBBN"; break;
-    case "623" : sp = "RNQKRNBB"; break;
-    case "624" : sp = "BBRNKQRN"; break;
-    case "625" : sp = "BRNBKQRN"; break;
-    case "626" : sp = "BRNKQBRN"; break;
-    case "627" : sp = "BRNKQRNB"; break;
-    case "628" : sp = "RBBNKQRN"; break;
-    case "629" : sp = "RNBBKQRN"; break;
-    case "630" : sp = "RNBKQBRN"; break;
-    case "631" : sp = "RNBKQRNB"; break;
-    case "632" : sp = "RBNKBQRN"; break;
-    case "633" : sp = "RNKBBQRN"; break;
-    case "634" : sp = "RNKQBBRN"; break;
-    case "635" : sp = "RNKQBRNB"; break;
-    case "636" : sp = "RBNKQRBN"; break;
-    case "637" : sp = "RNKBQRBN"; break;
-    case "638" : sp = "RNKQRBBN"; break;
-    case "639" : sp = "RNKQRNBB"; break;
-    case "640" : sp = "BBRNKRQN"; break;
-    case "641" : sp = "BRNBKRQN"; break;
-    case "642" : sp = "BRNKRBQN"; break;
-    case "643" : sp = "BRNKRQNB"; break;
-    case "644" : sp = "RBBNKRQN"; break;
-    case "645" : sp = "RNBBKRQN"; break;
-    case "646" : sp = "RNBKRBQN"; break;
-    case "647" : sp = "RNBKRQNB"; break;
-    case "648" : sp = "RBNKBRQN"; break;
-    case "649" : sp = "RNKBBRQN"; break;
-    case "650" : sp = "RNKRBBQN"; break;
-    case "651" : sp = "RNKRBQNB"; break;
-    case "652" : sp = "RBNKRQBN"; break;
-    case "653" : sp = "RNKBRQBN"; break;
-    case "654" : sp = "RNKRQBBN"; break;
-    case "655" : sp = "RNKRQNBB"; break;
-    case "656" : sp = "BBRNKRNQ"; break;
-    case "657" : sp = "BRNBKRNQ"; break;
-    case "658" : sp = "BRNKRBNQ"; break;
-    case "659" : sp = "BRNKRNQB"; break;
-    case "660" : sp = "RBBNKRNQ"; break;
-    case "661" : sp = "RNBBKRNQ"; break;
-    case "662" : sp = "RNBKRBNQ"; break;
-    case "663" : sp = "RNBKRNQB"; break;
-    case "664" : sp = "RBNKBRNQ"; break;
-    case "665" : sp = "RNKBBRNQ"; break;
-    case "666" : sp = "RNKRBBNQ"; break;
-    case "667" : sp = "RNKRBNQB"; break;
-    case "668" : sp = "RBNKRNBQ"; break;
-    case "669" : sp = "RNKBRNBQ"; break;
-    case "670" : sp = "RNKRNBBQ"; break;
-    case "671" : sp = "RNKRNQBB"; break;
-    case "672" : sp = "BBQRKNNR"; break;
-    case "673" : sp = "BQRBKNNR"; break;
-    case "674" : sp = "BQRKNBNR"; break;
-    case "675" : sp = "BQRKNNRB"; break;
-    case "676" : sp = "QBBRKNNR"; break;
-    case "677" : sp = "QRBBKNNR"; break;
-    case "678" : sp = "QRBKNBNR"; break;
-    case "679" : sp = "QRBKNNRB"; break;
-    case "680" : sp = "QBRKBNNR"; break;
-    case "681" : sp = "QRKBBNNR"; break;
-    case "682" : sp = "QRKNBBNR"; break;
-    case "683" : sp = "QRKNBNRB"; break;
-    case "684" : sp = "QBRKNNBR"; break;
-    case "685" : sp = "QRKBNNBR"; break;
-    case "686" : sp = "QRKNNBBR"; break;
-    case "687" : sp = "QRKNNRBB"; break;
-    case "688" : sp = "BBRQKNNR"; break;
-    case "689" : sp = "BRQBKNNR"; break;
-    case "690" : sp = "BRQKNBNR"; break;
-    case "691" : sp = "BRQKNNRB"; break;
-    case "692" : sp = "RBBQKNNR"; break;
-    case "693" : sp = "RQBBKNNR"; break;
-    case "694" : sp = "RQBKNBNR"; break;
-    case "695" : sp = "RQBKNNRB"; break;
-    case "696" : sp = "RBQKBNNR"; break;
-    case "697" : sp = "RQKBBNNR"; break;
-    case "698" : sp = "RQKNBBNR"; break;
-    case "699" : sp = "RQKNBNRB"; break;
-    case "700" : sp = "RBQKNNBR"; break;
-    case "701" : sp = "RQKBNNBR"; break;
-    case "702" : sp = "RQKNNBBR"; break;
-    case "703" : sp = "RQKNNRBB"; break;
-    case "704" : sp = "BBRKQNNR"; break;
-    case "705" : sp = "BRKBQNNR"; break;
-    case "706" : sp = "BRKQNBNR"; break;
-    case "707" : sp = "BRKQNNRB"; break;
-    case "708" : sp = "RBBKQNNR"; break;
-    case "709" : sp = "RKBBQNNR"; break;
-    case "710" : sp = "RKBQNBNR"; break;
-    case "711" : sp = "RKBQNNRB"; break;
-    case "712" : sp = "RBKQBNNR"; break;
-    case "713" : sp = "RKQBBNNR"; break;
-    case "714" : sp = "RKQNBBNR"; break;
-    case "715" : sp = "RKQNBNRB"; break;
-    case "716" : sp = "RBKQNNBR"; break;
-    case "717" : sp = "RKQBNNBR"; break;
-    case "718" : sp = "RKQNNBBR"; break;
-    case "719" : sp = "RKQNNRBB"; break;
-    case "720" : sp = "BBRKNQNR"; break;
-    case "721" : sp = "BRKBNQNR"; break;
-    case "722" : sp = "BRKNQBNR"; break;
-    case "723" : sp = "BRKNQNRB"; break;
-    case "724" : sp = "RBBKNQNR"; break;
-    case "725" : sp = "RKBBNQNR"; break;
-    case "726" : sp = "RKBNQBNR"; break;
-    case "727" : sp = "RKBNQNRB"; break;
-    case "728" : sp = "RBKNBQNR"; break;
-    case "729" : sp = "RKNBBQNR"; break;
-    case "730" : sp = "RKNQBBNR"; break;
-    case "731" : sp = "RKNQBNRB"; break;
-    case "732" : sp = "RBKNQNBR"; break;
-    case "733" : sp = "RKNBQNBR"; break;
-    case "734" : sp = "RKNQNBBR"; break;
-    case "735" : sp = "RKNQNRBB"; break;
-    case "736" : sp = "BBRKNNQR"; break;
-    case "737" : sp = "BRKBNNQR"; break;
-    case "738" : sp = "BRKNNBQR"; break;
-    case "739" : sp = "BRKNNQRB"; break;
-    case "740" : sp = "RBBKNNQR"; break;
-    case "741" : sp = "RKBBNNQR"; break;
-    case "742" : sp = "RKBNNBQR"; break;
-    case "743" : sp = "RKBNNQRB"; break;
-    case "744" : sp = "RBKNBNQR"; break;
-    case "745" : sp = "RKNBBNQR"; break;
-    case "746" : sp = "RKNNBBQR"; break;
-    case "747" : sp = "RKNNBQRB"; break;
-    case "748" : sp = "RBKNNQBR"; break;
-    case "749" : sp = "RKNBNQBR"; break;
-    case "750" : sp = "RKNNQBBR"; break;
-    case "751" : sp = "RKNNQRBB"; break;
-    case "752" : sp = "BBRKNNRQ"; break;
-    case "753" : sp = "BRKBNNRQ"; break;
-    case "754" : sp = "BRKNNBRQ"; break;
-    case "755" : sp = "BRKNNRQB"; break;
-    case "756" : sp = "RBBKNNRQ"; break;
-    case "757" : sp = "RKBBNNRQ"; break;
-    case "758" : sp = "RKBNNBRQ"; break;
-    case "759" : sp = "RKBNNRQB"; break;
-    case "760" : sp = "RBKNBNRQ"; break;
-    case "761" : sp = "RKNBBNRQ"; break;
-    case "762" : sp = "RKNNBBRQ"; break;
-    case "763" : sp = "RKNNBRQB"; break;
-    case "764" : sp = "RBKNNRBQ"; break;
-    case "765" : sp = "RKNBNRBQ"; break;
-    case "766" : sp = "RKNNRBBQ"; break;
-    case "767" : sp = "RKNNRQBB"; break;
-    case "768" : sp = "BBQRKNRN"; break;
-    case "769" : sp = "BQRBKNRN"; break;
-    case "770" : sp = "BQRKNBRN"; break;
-    case "771" : sp = "BQRKNRNB"; break;
-    case "772" : sp = "QBBRKNRN"; break;
-    case "773" : sp = "QRBBKNRN"; break;
-    case "774" : sp = "QRBKNBRN"; break;
-    case "775" : sp = "QRBKNRNB"; break;
-    case "776" : sp = "QBRKBNRN"; break;
-    case "777" : sp = "QRKBBNRN"; break;
-    case "778" : sp = "QRKNBBRN"; break;
-    case "779" : sp = "QRKNBRNB"; break;
-    case "780" : sp = "QBRKNRBN"; break;
-    case "781" : sp = "QRKBNRBN"; break;
-    case "782" : sp = "QRKNRBBN"; break;
-    case "783" : sp = "QRKNRNBB"; break;
-    case "784" : sp = "BBRQKNRN"; break;
-    case "785" : sp = "BRQBKNRN"; break;
-    case "786" : sp = "BRQKNBRN"; break;
-    case "787" : sp = "BRQKNRNB"; break;
-    case "788" : sp = "RBBQKNRN"; break;
-    case "789" : sp = "RQBBKNRN"; break;
-    case "790" : sp = "RQBKNBRN"; break;
-    case "791" : sp = "RQBKNRNB"; break;
-    case "792" : sp = "RBQKBNRN"; break;
-    case "793" : sp = "RQKBBNRN"; break;
-    case "794" : sp = "RQKNBBRN"; break;
-    case "795" : sp = "RQKNBRNB"; break;
-    case "796" : sp = "RBQKNRBN"; break;
-    case "797" : sp = "RQKBNRBN"; break;
-    case "798" : sp = "RQKNRBBN"; break;
-    case "799" : sp = "RQKNRNBB"; break;
-    case "800" : sp = "BBRKQNRN"; break;
-    case "801" : sp = "BRKBQNRN"; break;
-    case "802" : sp = "BRKQNBRN"; break;
-    case "803" : sp = "BRKQNRNB"; break;
-    case "804" : sp = "RBBKQNRN"; break;
-    case "805" : sp = "RKBBQNRN"; break;
-    case "806" : sp = "RKBQNBRN"; break;
-    case "807" : sp = "RKBQNRNB"; break;
-    case "808" : sp = "RBKQBNRN"; break;
-    case "809" : sp = "RKQBBNRN"; break;
-    case "810" : sp = "RKQNBBRN"; break;
-    case "811" : sp = "RKQNBRNB"; break;
-    case "812" : sp = "RBKQNRBN"; break;
-    case "813" : sp = "RKQBNRBN"; break;
-    case "814" : sp = "RKQNRBBN"; break;
-    case "815" : sp = "RKQNRNBB"; break;
-    case "816" : sp = "BBRKNQRN"; break;
-    case "817" : sp = "BRKBNQRN"; break;
-    case "818" : sp = "BRKNQBRN"; break;
-    case "819" : sp = "BRKNQRNB"; break;
-    case "820" : sp = "RBBKNQRN"; break;
-    case "821" : sp = "RKBBNQRN"; break;
-    case "822" : sp = "RKBNQBRN"; break;
-    case "823" : sp = "RKBNQRNB"; break;
-    case "824" : sp = "RBKNBQRN"; break;
-    case "825" : sp = "RKNBBQRN"; break;
-    case "826" : sp = "RKNQBBRN"; break;
-    case "827" : sp = "RKNQBRNB"; break;
-    case "828" : sp = "RBKNQRBN"; break;
-    case "829" : sp = "RKNBQRBN"; break;
-    case "830" : sp = "RKNQRBBN"; break;
-    case "831" : sp = "RKNQRNBB"; break;
-    case "832" : sp = "BBRKNRQN"; break;
-    case "833" : sp = "BRKBNRQN"; break;
-    case "834" : sp = "BRKNRBQN"; break;
-    case "835" : sp = "BRKNRQNB"; break;
-    case "836" : sp = "RBBKNRQN"; break;
-    case "837" : sp = "RKBBNRQN"; break;
-    case "838" : sp = "RKBNRBQN"; break;
-    case "839" : sp = "RKBNRQNB"; break;
-    case "840" : sp = "RBKNBRQN"; break;
-    case "841" : sp = "RKNBBRQN"; break;
-    case "842" : sp = "RKNRBBQN"; break;
-    case "843" : sp = "RKNRBQNB"; break;
-    case "844" : sp = "RBKNRQBN"; break;
-    case "845" : sp = "RKNBRQBN"; break;
-    case "846" : sp = "RKNRQBBN"; break;
-    case "847" : sp = "RKNRQNBB"; break;
-    case "848" : sp = "BBRKNRNQ"; break;
-    case "849" : sp = "BRKBNRNQ"; break;
-    case "850" : sp = "BRKNRBNQ"; break;
-    case "851" : sp = "BRKNRNQB"; break;
-    case "852" : sp = "RBBKNRNQ"; break;
-    case "853" : sp = "RKBBNRNQ"; break;
-    case "854" : sp = "RKBNRBNQ"; break;
-    case "855" : sp = "RKBNRNQB"; break;
-    case "856" : sp = "RBKNBRNQ"; break;
-    case "857" : sp = "RKNBBRNQ"; break;
-    case "858" : sp = "RKNRBBNQ"; break;
-    case "859" : sp = "RKNRBNQB"; break;
-    case "860" : sp = "RBKNRNBQ"; break;
-    case "861" : sp = "RKNBRNBQ"; break;
-    case "862" : sp = "RKNRNBBQ"; break;
-    case "863" : sp = "RKNRNQBB"; break;
-    case "864" : sp = "BBQRKRNN"; break;
-    case "865" : sp = "BQRBKRNN"; break;
-    case "866" : sp = "BQRKRBNN"; break;
-    case "867" : sp = "BQRKRNNB"; break;
-    case "868" : sp = "QBBRKRNN"; break;
-    case "869" : sp = "QRBBKRNN"; break;
-    case "870" : sp = "QRBKRBNN"; break;
-    case "871" : sp = "QRBKRNNB"; break;
-    case "872" : sp = "QBRKBRNN"; break;
-    case "873" : sp = "QRKBBRNN"; break;
-    case "874" : sp = "QRKRBBNN"; break;
-    case "875" : sp = "QRKRBNNB"; break;
-    case "876" : sp = "QBRKRNBN"; break;
-    case "877" : sp = "QRKBRNBN"; break;
-    case "878" : sp = "QRKRNBBN"; break;
-    case "879" : sp = "QRKRNNBB"; break;
-    case "880" : sp = "BBRQKRNN"; break;
-    case "881" : sp = "BRQBKRNN"; break;
-    case "882" : sp = "BRQKRBNN"; break;
-    case "883" : sp = "BRQKRNNB"; break;
-    case "884" : sp = "RBBQKRNN"; break;
-    case "885" : sp = "RQBBKRNN"; break;
-    case "886" : sp = "RQBKRBNN"; break;
-    case "887" : sp = "RQBKRNNB"; break;
-    case "888" : sp = "RBQKBRNN"; break;
-    case "889" : sp = "RQKBBRNN"; break;
-    case "890" : sp = "RQKRBBNN"; break;
-    case "891" : sp = "RQKRBNNB"; break;
-    case "892" : sp = "RBQKRNBN"; break;
-    case "893" : sp = "RQKBRNBN"; break;
-    case "894" : sp = "RQKRNBBN"; break;
-    case "895" : sp = "RQKRNNBB"; break;
-    case "896" : sp = "BBRKQRNN"; break;
-    case "897" : sp = "BRKBQRNN"; break;
-    case "898" : sp = "BRKQRBNN"; break;
-    case "899" : sp = "BRKQRNNB"; break;
-    case "900" : sp = "RBBKQRNN"; break;
-    case "901" : sp = "RKBBQRNN"; break;
-    case "902" : sp = "RKBQRBNN"; break;
-    case "903" : sp = "RKBQRNNB"; break;
-    case "904" : sp = "RBKQBRNN"; break;
-    case "905" : sp = "RKQBBRNN"; break;
-    case "906" : sp = "RKQRBBNN"; break;
-    case "907" : sp = "RKQRBNNB"; break;
-    case "908" : sp = "RBKQRNBN"; break;
-    case "909" : sp = "RKQBRNBN"; break;
-    case "910" : sp = "RKQRNBBN"; break;
-    case "911" : sp = "RKQRNNBB"; break;
-    case "912" : sp = "BBRKRQNN"; break;
-    case "913" : sp = "BRKBRQNN"; break;
-    case "914" : sp = "BRKRQBNN"; break;
-    case "915" : sp = "BRKRQNNB"; break;
-    case "916" : sp = "RBBKRQNN"; break;
-    case "917" : sp = "RKBBRQNN"; break;
-    case "918" : sp = "RKBRQBNN"; break;
-    case "919" : sp = "RKBRQNNB"; break;
-    case "920" : sp = "RBKRBQNN"; break;
-    case "921" : sp = "RKRBBQNN"; break;
-    case "922" : sp = "RKRQBBNN"; break;
-    case "923" : sp = "RKRQBNNB"; break;
-    case "924" : sp = "RBKRQNBN"; break;
-    case "925" : sp = "RKRBQNBN"; break;
-    case "926" : sp = "RKRQNBBN"; break;
-    case "927" : sp = "RKRQNNBB"; break;
-    case "928" : sp = "BBRKRNQN"; break;
-    case "929" : sp = "BRKBRNQN"; break;
-    case "930" : sp = "BRKRNBQN"; break;
-    case "931" : sp = "BRKRNQNB"; break;
-    case "932" : sp = "RBBKRNQN"; break;
-    case "933" : sp = "RKBBRNQN"; break;
-    case "934" : sp = "RKBRNBQN"; break;
-    case "935" : sp = "RKBRNQNB"; break;
-    case "936" : sp = "RBKRBNQN"; break;
-    case "937" : sp = "RKRBBNQN"; break;
-    case "938" : sp = "RKRNBBQN"; break;
-    case "939" : sp = "RKRNBQNB"; break;
-    case "940" : sp = "RBKRNQBN"; break;
-    case "941" : sp = "RKRBNQBN"; break;
-    case "942" : sp = "RKRNQBBN"; break;
-    case "943" : sp = "RKRNQNBB"; break;
-    case "944" : sp = "BBRKRNNQ"; break;
-    case "945" : sp = "BRKBRNNQ"; break;
-    case "946" : sp = "BRKRNBNQ"; break;
-    case "947" : sp = "BRKRNNQB"; break;
-    case "948" : sp = "RBBKRNNQ"; break;
-    case "949" : sp = "RKBBRNNQ"; break;
-    case "950" : sp = "RKBRNBNQ"; break;
-    case "951" : sp = "RKBRNNQB"; break;
-    case "952" : sp = "RBKRBNNQ"; break;
-    case "953" : sp = "RKRBBNNQ"; break;
-    case "954" : sp = "RKRNBBNQ"; break;
-    case "955" : sp = "RKRNBNQB"; break;
-    case "956" : sp = "RBKRNNBQ"; break;
-    case "957" : sp = "RKRBNNBQ"; break;
-    case "958" : sp = "RKRNNBBQ"; break;
-    case "959" : sp = "RKRNNQBB"; break;
-
-  //
-
-    case "BBQNNRKR" : sp = "000"; break;
-    case "BQNBNRKR" : sp = "001"; break;
-    case "BQNNRBKR" : sp = "002"; break;
-    case "BQNNRKRB" : sp = "003"; break;
-    case "QBBNNRKR" : sp = "004"; break;
-    case "QNBBNRKR" : sp = "005"; break;
-    case "QNBNRBKR" : sp = "006"; break;
-    case "QNBNRKRB" : sp = "007"; break;
-    case "QBNNBRKR" : sp = "008"; break;
-    case "QNNBBRKR" : sp = "009"; break;
-    case "QNNRBBKR" : sp = "010"; break;
-    case "QNNRBKRB" : sp = "011"; break;
-    case "QBNNRKBR" : sp = "012"; break;
-    case "QNNBRKBR" : sp = "013"; break;
-    case "QNNRKBBR" : sp = "014"; break;
-    case "QNNRKRBB" : sp = "015"; break;
-    case "BBNQNRKR" : sp = "016"; break;
-    case "BNQBNRKR" : sp = "017"; break;
-    case "BNQNRBKR" : sp = "018"; break;
-    case "BNQNRKRB" : sp = "019"; break;
-    case "NBBQNRKR" : sp = "020"; break;
-    case "NQBBNRKR" : sp = "021"; break;
-    case "NQBNRBKR" : sp = "022"; break;
-    case "NQBNRKRB" : sp = "023"; break;
-    case "NBQNBRKR" : sp = "024"; break;
-    case "NQNBBRKR" : sp = "025"; break;
-    case "NQNRBBKR" : sp = "026"; break;
-    case "NQNRBKRB" : sp = "027"; break;
-    case "NBQNRKBR" : sp = "028"; break;
-    case "NQNBRKBR" : sp = "029"; break;
-    case "NQNRKBBR" : sp = "030"; break;
-    case "NQNRKRBB" : sp = "031"; break;
-    case "BBNNQRKR" : sp = "032"; break;
-    case "BNNBQRKR" : sp = "033"; break;
-    case "BNNQRBKR" : sp = "034"; break;
-    case "BNNQRKRB" : sp = "035"; break;
-    case "NBBNQRKR" : sp = "036"; break;
-    case "NNBBQRKR" : sp = "037"; break;
-    case "NNBQRBKR" : sp = "038"; break;
-    case "NNBQRKRB" : sp = "039"; break;
-    case "NBNQBRKR" : sp = "040"; break;
-    case "NNQBBRKR" : sp = "041"; break;
-    case "NNQRBBKR" : sp = "042"; break;
-    case "NNQRBKRB" : sp = "043"; break;
-    case "NBNQRKBR" : sp = "044"; break;
-    case "NNQBRKBR" : sp = "045"; break;
-    case "NNQRKBBR" : sp = "046"; break;
-    case "NNQRKRBB" : sp = "047"; break;
-    case "BBNNRQKR" : sp = "048"; break;
-    case "BNNBRQKR" : sp = "049"; break;
-    case "BNNRQBKR" : sp = "050"; break;
-    case "BNNRQKRB" : sp = "051"; break;
-    case "NBBNRQKR" : sp = "052"; break;
-    case "NNBBRQKR" : sp = "053"; break;
-    case "NNBRQBKR" : sp = "054"; break;
-    case "NNBRQKRB" : sp = "055"; break;
-    case "NBNRBQKR" : sp = "056"; break;
-    case "NNRBBQKR" : sp = "057"; break;
-    case "NNRQBBKR" : sp = "058"; break;
-    case "NNRQBKRB" : sp = "059"; break;
-    case "NBNRQKBR" : sp = "060"; break;
-    case "NNRBQKBR" : sp = "061"; break;
-    case "NNRQKBBR" : sp = "062"; break;
-    case "NNRQKRBB" : sp = "063"; break;
-    case "BBNNRKQR" : sp = "064"; break;
-    case "BNNBRKQR" : sp = "065"; break;
-    case "BNNRKBQR" : sp = "066"; break;
-    case "BNNRKQRB" : sp = "067"; break;
-    case "NBBNRKQR" : sp = "068"; break;
-    case "NNBBRKQR" : sp = "069"; break;
-    case "NNBRKBQR" : sp = "070"; break;
-    case "NNBRKQRB" : sp = "071"; break;
-    case "NBNRBKQR" : sp = "072"; break;
-    case "NNRBBKQR" : sp = "073"; break;
-    case "NNRKBBQR" : sp = "074"; break;
-    case "NNRKBQRB" : sp = "075"; break;
-    case "NBNRKQBR" : sp = "076"; break;
-    case "NNRBKQBR" : sp = "077"; break;
-    case "NNRKQBBR" : sp = "078"; break;
-    case "NNRKQRBB" : sp = "079"; break;
-    case "BBNNRKRQ" : sp = "080"; break;
-    case "BNNBRKRQ" : sp = "081"; break;
-    case "BNNRKBRQ" : sp = "082"; break;
-    case "BNNRKRQB" : sp = "083"; break;
-    case "NBBNRKRQ" : sp = "084"; break;
-    case "NNBBRKRQ" : sp = "085"; break;
-    case "NNBRKBRQ" : sp = "086"; break;
-    case "NNBRKRQB" : sp = "087"; break;
-    case "NBNRBKRQ" : sp = "088"; break;
-    case "NNRBBKRQ" : sp = "089"; break;
-    case "NNRKBBRQ" : sp = "090"; break;
-    case "NNRKBRQB" : sp = "091"; break;
-    case "NBNRKRBQ" : sp = "092"; break;
-    case "NNRBKRBQ" : sp = "093"; break;
-    case "NNRKRBBQ" : sp = "094"; break;
-    case "NNRKRQBB" : sp = "095"; break;
-    case "BBQNRNKR" : sp = "096"; break;
-    case "BQNBRNKR" : sp = "097"; break;
-    case "BQNRNBKR" : sp = "098"; break;
-    case "BQNRNKRB" : sp = "099"; break;
-    case "QBBNRNKR" : sp = "100"; break;
-    case "QNBBRNKR" : sp = "101"; break;
-    case "QNBRNBKR" : sp = "102"; break;
-    case "QNBRNKRB" : sp = "103"; break;
-    case "QBNRBNKR" : sp = "104"; break;
-    case "QNRBBNKR" : sp = "105"; break;
-    case "QNRNBBKR" : sp = "106"; break;
-    case "QNRNBKRB" : sp = "107"; break;
-    case "QBNRNKBR" : sp = "108"; break;
-    case "QNRBNKBR" : sp = "109"; break;
-    case "QNRNKBBR" : sp = "110"; break;
-    case "QNRNKRBB" : sp = "111"; break;
-    case "BBNQRNKR" : sp = "112"; break;
-    case "BNQBRNKR" : sp = "113"; break;
-    case "BNQRNBKR" : sp = "114"; break;
-    case "BNQRNKRB" : sp = "115"; break;
-    case "NBBQRNKR" : sp = "116"; break;
-    case "NQBBRNKR" : sp = "117"; break;
-    case "NQBRNBKR" : sp = "118"; break;
-    case "NQBRNKRB" : sp = "119"; break;
-    case "NBQRBNKR" : sp = "120"; break;
-    case "NQRBBNKR" : sp = "121"; break;
-    case "NQRNBBKR" : sp = "122"; break;
-    case "NQRNBKRB" : sp = "123"; break;
-    case "NBQRNKBR" : sp = "124"; break;
-    case "NQRBNKBR" : sp = "125"; break;
-    case "NQRNKBBR" : sp = "126"; break;
-    case "NQRNKRBB" : sp = "127"; break;
-    case "BBNRQNKR" : sp = "128"; break;
-    case "BNRBQNKR" : sp = "129"; break;
-    case "BNRQNBKR" : sp = "130"; break;
-    case "BNRQNKRB" : sp = "131"; break;
-    case "NBBRQNKR" : sp = "132"; break;
-    case "NRBBQNKR" : sp = "133"; break;
-    case "NRBQNBKR" : sp = "134"; break;
-    case "NRBQNKRB" : sp = "135"; break;
-    case "NBRQBNKR" : sp = "136"; break;
-    case "NRQBBNKR" : sp = "137"; break;
-    case "NRQNBBKR" : sp = "138"; break;
-    case "NRQNBKRB" : sp = "139"; break;
-    case "NBRQNKBR" : sp = "140"; break;
-    case "NRQBNKBR" : sp = "141"; break;
-    case "NRQNKBBR" : sp = "142"; break;
-    case "NRQNKRBB" : sp = "143"; break;
-    case "BBNRNQKR" : sp = "144"; break;
-    case "BNRBNQKR" : sp = "145"; break;
-    case "BNRNQBKR" : sp = "146"; break;
-    case "BNRNQKRB" : sp = "147"; break;
-    case "NBBRNQKR" : sp = "148"; break;
-    case "NRBBNQKR" : sp = "149"; break;
-    case "NRBNQBKR" : sp = "150"; break;
-    case "NRBNQKRB" : sp = "151"; break;
-    case "NBRNBQKR" : sp = "152"; break;
-    case "NRNBBQKR" : sp = "153"; break;
-    case "NRNQBBKR" : sp = "154"; break;
-    case "NRNQBKRB" : sp = "155"; break;
-    case "NBRNQKBR" : sp = "156"; break;
-    case "NRNBQKBR" : sp = "157"; break;
-    case "NRNQKBBR" : sp = "158"; break;
-    case "NRNQKRBB" : sp = "159"; break;
-    case "BBNRNKQR" : sp = "160"; break;
-    case "BNRBNKQR" : sp = "161"; break;
-    case "BNRNKBQR" : sp = "162"; break;
-    case "BNRNKQRB" : sp = "163"; break;
-    case "NBBRNKQR" : sp = "164"; break;
-    case "NRBBNKQR" : sp = "165"; break;
-    case "NRBNKBQR" : sp = "166"; break;
-    case "NRBNKQRB" : sp = "167"; break;
-    case "NBRNBKQR" : sp = "168"; break;
-    case "NRNBBKQR" : sp = "169"; break;
-    case "NRNKBBQR" : sp = "170"; break;
-    case "NRNKBQRB" : sp = "171"; break;
-    case "NBRNKQBR" : sp = "172"; break;
-    case "NRNBKQBR" : sp = "173"; break;
-    case "NRNKQBBR" : sp = "174"; break;
-    case "NRNKQRBB" : sp = "175"; break;
-    case "BBNRNKRQ" : sp = "176"; break;
-    case "BNRBNKRQ" : sp = "177"; break;
-    case "BNRNKBRQ" : sp = "178"; break;
-    case "BNRNKRQB" : sp = "179"; break;
-    case "NBBRNKRQ" : sp = "180"; break;
-    case "NRBBNKRQ" : sp = "181"; break;
-    case "NRBNKBRQ" : sp = "182"; break;
-    case "NRBNKRQB" : sp = "183"; break;
-    case "NBRNBKRQ" : sp = "184"; break;
-    case "NRNBBKRQ" : sp = "185"; break;
-    case "NRNKBBRQ" : sp = "186"; break;
-    case "NRNKBRQB" : sp = "187"; break;
-    case "NBRNKRBQ" : sp = "188"; break;
-    case "NRNBKRBQ" : sp = "189"; break;
-    case "NRNKRBBQ" : sp = "190"; break;
-    case "NRNKRQBB" : sp = "191"; break;
-    case "BBQNRKNR" : sp = "192"; break;
-    case "BQNBRKNR" : sp = "193"; break;
-    case "BQNRKBNR" : sp = "194"; break;
-    case "BQNRKNRB" : sp = "195"; break;
-    case "QBBNRKNR" : sp = "196"; break;
-    case "QNBBRKNR" : sp = "197"; break;
-    case "QNBRKBNR" : sp = "198"; break;
-    case "QNBRKNRB" : sp = "199"; break;
-    case "QBNRBKNR" : sp = "200"; break;
-    case "QNRBBKNR" : sp = "201"; break;
-    case "QNRKBBNR" : sp = "202"; break;
-    case "QNRKBNRB" : sp = "203"; break;
-    case "QBNRKNBR" : sp = "204"; break;
-    case "QNRBKNBR" : sp = "205"; break;
-    case "QNRKNBBR" : sp = "206"; break;
-    case "QNRKNRBB" : sp = "207"; break;
-    case "BBNQRKNR" : sp = "208"; break;
-    case "BNQBRKNR" : sp = "209"; break;
-    case "BNQRKBNR" : sp = "210"; break;
-    case "BNQRKNRB" : sp = "211"; break;
-    case "NBBQRKNR" : sp = "212"; break;
-    case "NQBBRKNR" : sp = "213"; break;
-    case "NQBRKBNR" : sp = "214"; break;
-    case "NQBRKNRB" : sp = "215"; break;
-    case "NBQRBKNR" : sp = "216"; break;
-    case "NQRBBKNR" : sp = "217"; break;
-    case "NQRKBBNR" : sp = "218"; break;
-    case "NQRKBNRB" : sp = "219"; break;
-    case "NBQRKNBR" : sp = "220"; break;
-    case "NQRBKNBR" : sp = "221"; break;
-    case "NQRKNBBR" : sp = "222"; break;
-    case "NQRKNRBB" : sp = "223"; break;
-    case "BBNRQKNR" : sp = "224"; break;
-    case "BNRBQKNR" : sp = "225"; break;
-    case "BNRQKBNR" : sp = "226"; break;
-    case "BNRQKNRB" : sp = "227"; break;
-    case "NBBRQKNR" : sp = "228"; break;
-    case "NRBBQKNR" : sp = "229"; break;
-    case "NRBQKBNR" : sp = "230"; break;
-    case "NRBQKNRB" : sp = "231"; break;
-    case "NBRQBKNR" : sp = "232"; break;
-    case "NRQBBKNR" : sp = "233"; break;
-    case "NRQKBBNR" : sp = "234"; break;
-    case "NRQKBNRB" : sp = "235"; break;
-    case "NBRQKNBR" : sp = "236"; break;
-    case "NRQBKNBR" : sp = "237"; break;
-    case "NRQKNBBR" : sp = "238"; break;
-    case "NRQKNRBB" : sp = "239"; break;
-    case "BBNRKQNR" : sp = "240"; break;
-    case "BNRBKQNR" : sp = "241"; break;
-    case "BNRKQBNR" : sp = "242"; break;
-    case "BNRKQNRB" : sp = "243"; break;
-    case "NBBRKQNR" : sp = "244"; break;
-    case "NRBBKQNR" : sp = "245"; break;
-    case "NRBKQBNR" : sp = "246"; break;
-    case "NRBKQNRB" : sp = "247"; break;
-    case "NBRKBQNR" : sp = "248"; break;
-    case "NRKBBQNR" : sp = "249"; break;
-    case "NRKQBBNR" : sp = "250"; break;
-    case "NRKQBNRB" : sp = "251"; break;
-    case "NBRKQNBR" : sp = "252"; break;
-    case "NRKBQNBR" : sp = "253"; break;
-    case "NRKQNBBR" : sp = "254"; break;
-    case "NRKQNRBB" : sp = "255"; break;
-    case "BBNRKNQR" : sp = "256"; break;
-    case "BNRBKNQR" : sp = "257"; break;
-    case "BNRKNBQR" : sp = "258"; break;
-    case "BNRKNQRB" : sp = "259"; break;
-    case "NBBRKNQR" : sp = "260"; break;
-    case "NRBBKNQR" : sp = "261"; break;
-    case "NRBKNBQR" : sp = "262"; break;
-    case "NRBKNQRB" : sp = "263"; break;
-    case "NBRKBNQR" : sp = "264"; break;
-    case "NRKBBNQR" : sp = "265"; break;
-    case "NRKNBBQR" : sp = "266"; break;
-    case "NRKNBQRB" : sp = "267"; break;
-    case "NBRKNQBR" : sp = "268"; break;
-    case "NRKBNQBR" : sp = "269"; break;
-    case "NRKNQBBR" : sp = "270"; break;
-    case "NRKNQRBB" : sp = "271"; break;
-    case "BBNRKNRQ" : sp = "272"; break;
-    case "BNRBKNRQ" : sp = "273"; break;
-    case "BNRKNBRQ" : sp = "274"; break;
-    case "BNRKNRQB" : sp = "275"; break;
-    case "NBBRKNRQ" : sp = "276"; break;
-    case "NRBBKNRQ" : sp = "277"; break;
-    case "NRBKNBRQ" : sp = "278"; break;
-    case "NRBKNRQB" : sp = "279"; break;
-    case "NBRKBNRQ" : sp = "280"; break;
-    case "NRKBBNRQ" : sp = "281"; break;
-    case "NRKNBBRQ" : sp = "282"; break;
-    case "NRKNBRQB" : sp = "283"; break;
-    case "NBRKNRBQ" : sp = "284"; break;
-    case "NRKBNRBQ" : sp = "285"; break;
-    case "NRKNRBBQ" : sp = "286"; break;
-    case "NRKNRQBB" : sp = "287"; break;
-    case "BBQNRKRN" : sp = "288"; break;
-    case "BQNBRKRN" : sp = "289"; break;
-    case "BQNRKBRN" : sp = "290"; break;
-    case "BQNRKRNB" : sp = "291"; break;
-    case "QBBNRKRN" : sp = "292"; break;
-    case "QNBBRKRN" : sp = "293"; break;
-    case "QNBRKBRN" : sp = "294"; break;
-    case "QNBRKRNB" : sp = "295"; break;
-    case "QBNRBKRN" : sp = "296"; break;
-    case "QNRBBKRN" : sp = "297"; break;
-    case "QNRKBBRN" : sp = "298"; break;
-    case "QNRKBRNB" : sp = "299"; break;
-    case "QBNRKRBN" : sp = "300"; break;
-    case "QNRBKRBN" : sp = "301"; break;
-    case "QNRKRBBN" : sp = "302"; break;
-    case "QNRKRNBB" : sp = "303"; break;
-    case "BBNQRKRN" : sp = "304"; break;
-    case "BNQBRKRN" : sp = "305"; break;
-    case "BNQRKBRN" : sp = "306"; break;
-    case "BNQRKRNB" : sp = "307"; break;
-    case "NBBQRKRN" : sp = "308"; break;
-    case "NQBBRKRN" : sp = "309"; break;
-    case "NQBRKBRN" : sp = "310"; break;
-    case "NQBRKRNB" : sp = "311"; break;
-    case "NBQRBKRN" : sp = "312"; break;
-    case "NQRBBKRN" : sp = "313"; break;
-    case "NQRKBBRN" : sp = "314"; break;
-    case "NQRKBRNB" : sp = "315"; break;
-    case "NBQRKRBN" : sp = "316"; break;
-    case "NQRBKRBN" : sp = "317"; break;
-    case "NQRKRBBN" : sp = "318"; break;
-    case "NQRKRNBB" : sp = "319"; break;
-    case "BBNRQKRN" : sp = "320"; break;
-    case "BNRBQKRN" : sp = "321"; break;
-    case "BNRQKBRN" : sp = "322"; break;
-    case "BNRQKRNB" : sp = "323"; break;
-    case "NBBRQKRN" : sp = "324"; break;
-    case "NRBBQKRN" : sp = "325"; break;
-    case "NRBQKBRN" : sp = "326"; break;
-    case "NRBQKRNB" : sp = "327"; break;
-    case "NBRQBKRN" : sp = "328"; break;
-    case "NRQBBKRN" : sp = "329"; break;
-    case "NRQKBBRN" : sp = "330"; break;
-    case "NRQKBRNB" : sp = "331"; break;
-    case "NBRQKRBN" : sp = "332"; break;
-    case "NRQBKRBN" : sp = "333"; break;
-    case "NRQKRBBN" : sp = "334"; break;
-    case "NRQKRNBB" : sp = "335"; break;
-    case "BBNRKQRN" : sp = "336"; break;
-    case "BNRBKQRN" : sp = "337"; break;
-    case "BNRKQBRN" : sp = "338"; break;
-    case "BNRKQRNB" : sp = "339"; break;
-    case "NBBRKQRN" : sp = "340"; break;
-    case "NRBBKQRN" : sp = "341"; break;
-    case "NRBKQBRN" : sp = "342"; break;
-    case "NRBKQRNB" : sp = "343"; break;
-    case "NBRKBQRN" : sp = "344"; break;
-    case "NRKBBQRN" : sp = "345"; break;
-    case "NRKQBBRN" : sp = "346"; break;
-    case "NRKQBRNB" : sp = "347"; break;
-    case "NBRKQRBN" : sp = "348"; break;
-    case "NRKBQRBN" : sp = "349"; break;
-    case "NRKQRBBN" : sp = "350"; break;
-    case "NRKQRNBB" : sp = "351"; break;
-    case "BBNRKRQN" : sp = "352"; break;
-    case "BNRBKRQN" : sp = "353"; break;
-    case "BNRKRBQN" : sp = "354"; break;
-    case "BNRKRQNB" : sp = "355"; break;
-    case "NBBRKRQN" : sp = "356"; break;
-    case "NRBBKRQN" : sp = "357"; break;
-    case "NRBKRBQN" : sp = "358"; break;
-    case "NRBKRQNB" : sp = "359"; break;
-    case "NBRKBRQN" : sp = "360"; break;
-    case "NRKBBRQN" : sp = "361"; break;
-    case "NRKRBBQN" : sp = "362"; break;
-    case "NRKRBQNB" : sp = "363"; break;
-    case "NBRKRQBN" : sp = "364"; break;
-    case "NRKBRQBN" : sp = "365"; break;
-    case "NRKRQBBN" : sp = "366"; break;
-    case "NRKRQNBB" : sp = "367"; break;
-    case "BBNRKRNQ" : sp = "368"; break;
-    case "BNRBKRNQ" : sp = "369"; break;
-    case "BNRKRBNQ" : sp = "370"; break;
-    case "BNRKRNQB" : sp = "371"; break;
-    case "NBBRKRNQ" : sp = "372"; break;
-    case "NRBBKRNQ" : sp = "373"; break;
-    case "NRBKRBNQ" : sp = "374"; break;
-    case "NRBKRNQB" : sp = "375"; break;
-    case "NBRKBRNQ" : sp = "376"; break;
-    case "NRKBBRNQ" : sp = "377"; break;
-    case "NRKRBBNQ" : sp = "378"; break;
-    case "NRKRBNQB" : sp = "379"; break;
-    case "NBRKRNBQ" : sp = "380"; break;
-    case "NRKBRNBQ" : sp = "381"; break;
-    case "NRKRNBBQ" : sp = "382"; break;
-    case "NRKRNQBB" : sp = "383"; break;
-    case "BBQRNNKR" : sp = "384"; break;
-    case "BQRBNNKR" : sp = "385"; break;
-    case "BQRNNBKR" : sp = "386"; break;
-    case "BQRNNKRB" : sp = "387"; break;
-    case "QBBRNNKR" : sp = "388"; break;
-    case "QRBBNNKR" : sp = "389"; break;
-    case "QRBNNBKR" : sp = "390"; break;
-    case "QRBNNKRB" : sp = "391"; break;
-    case "QBRNBNKR" : sp = "392"; break;
-    case "QRNBBNKR" : sp = "393"; break;
-    case "QRNNBBKR" : sp = "394"; break;
-    case "QRNNBKRB" : sp = "395"; break;
-    case "QBRNNKBR" : sp = "396"; break;
-    case "QRNBNKBR" : sp = "397"; break;
-    case "QRNNKBBR" : sp = "398"; break;
-    case "QRNNKRBB" : sp = "399"; break;
-    case "BBRQNNKR" : sp = "400"; break;
-    case "BRQBNNKR" : sp = "401"; break;
-    case "BRQNNBKR" : sp = "402"; break;
-    case "BRQNNKRB" : sp = "403"; break;
-    case "RBBQNNKR" : sp = "404"; break;
-    case "RQBBNNKR" : sp = "405"; break;
-    case "RQBNNBKR" : sp = "406"; break;
-    case "RQBNNKRB" : sp = "407"; break;
-    case "RBQNBNKR" : sp = "408"; break;
-    case "RQNBBNKR" : sp = "409"; break;
-    case "RQNNBBKR" : sp = "410"; break;
-    case "RQNNBKRB" : sp = "411"; break;
-    case "RBQNNKBR" : sp = "412"; break;
-    case "RQNBNKBR" : sp = "413"; break;
-    case "RQNNKBBR" : sp = "414"; break;
-    case "RQNNKRBB" : sp = "415"; break;
-    case "BBRNQNKR" : sp = "416"; break;
-    case "BRNBQNKR" : sp = "417"; break;
-    case "BRNQNBKR" : sp = "418"; break;
-    case "BRNQNKRB" : sp = "419"; break;
-    case "RBBNQNKR" : sp = "420"; break;
-    case "RNBBQNKR" : sp = "421"; break;
-    case "RNBQNBKR" : sp = "422"; break;
-    case "RNBQNKRB" : sp = "423"; break;
-    case "RBNQBNKR" : sp = "424"; break;
-    case "RNQBBNKR" : sp = "425"; break;
-    case "RNQNBBKR" : sp = "426"; break;
-    case "RNQNBKRB" : sp = "427"; break;
-    case "RBNQNKBR" : sp = "428"; break;
-    case "RNQBNKBR" : sp = "429"; break;
-    case "RNQNKBBR" : sp = "430"; break;
-    case "RNQNKRBB" : sp = "431"; break;
-    case "BBRNNQKR" : sp = "432"; break;
-    case "BRNBNQKR" : sp = "433"; break;
-    case "BRNNQBKR" : sp = "434"; break;
-    case "BRNNQKRB" : sp = "435"; break;
-    case "RBBNNQKR" : sp = "436"; break;
-    case "RNBBNQKR" : sp = "437"; break;
-    case "RNBNQBKR" : sp = "438"; break;
-    case "RNBNQKRB" : sp = "439"; break;
-    case "RBNNBQKR" : sp = "440"; break;
-    case "RNNBBQKR" : sp = "441"; break;
-    case "RNNQBBKR" : sp = "442"; break;
-    case "RNNQBKRB" : sp = "443"; break;
-    case "RBNNQKBR" : sp = "444"; break;
-    case "RNNBQKBR" : sp = "445"; break;
-    case "RNNQKBBR" : sp = "446"; break;
-    case "RNNQKRBB" : sp = "447"; break;
-    case "BBRNNKQR" : sp = "448"; break;
-    case "BRNBNKQR" : sp = "449"; break;
-    case "BRNNKBQR" : sp = "450"; break;
-    case "BRNNKQRB" : sp = "451"; break;
-    case "RBBNNKQR" : sp = "452"; break;
-    case "RNBBNKQR" : sp = "453"; break;
-    case "RNBNKBQR" : sp = "454"; break;
-    case "RNBNKQRB" : sp = "455"; break;
-    case "RBNNBKQR" : sp = "456"; break;
-    case "RNNBBKQR" : sp = "457"; break;
-    case "RNNKBBQR" : sp = "458"; break;
-    case "RNNKBQRB" : sp = "459"; break;
-    case "RBNNKQBR" : sp = "460"; break;
-    case "RNNBKQBR" : sp = "461"; break;
-    case "RNNKQBBR" : sp = "462"; break;
-    case "RNNKQRBB" : sp = "463"; break;
-    case "BBRNNKRQ" : sp = "464"; break;
-    case "BRNBNKRQ" : sp = "465"; break;
-    case "BRNNKBRQ" : sp = "466"; break;
-    case "BRNNKRQB" : sp = "467"; break;
-    case "RBBNNKRQ" : sp = "468"; break;
-    case "RNBBNKRQ" : sp = "469"; break;
-    case "RNBNKBRQ" : sp = "470"; break;
-    case "RNBNKRQB" : sp = "471"; break;
-    case "RBNNBKRQ" : sp = "472"; break;
-    case "RNNBBKRQ" : sp = "473"; break;
-    case "RNNKBBRQ" : sp = "474"; break;
-    case "RNNKBRQB" : sp = "475"; break;
-    case "RBNNKRBQ" : sp = "476"; break;
-    case "RNNBKRBQ" : sp = "477"; break;
-    case "RNNKRBBQ" : sp = "478"; break;
-    case "RNNKRQBB" : sp = "479"; break;
-    case "BBQRNKNR" : sp = "480"; break;
-    case "BQRBNKNR" : sp = "481"; break;
-    case "BQRNKBNR" : sp = "482"; break;
-    case "BQRNKNRB" : sp = "483"; break;
-    case "QBBRNKNR" : sp = "484"; break;
-    case "QRBBNKNR" : sp = "485"; break;
-    case "QRBNKBNR" : sp = "486"; break;
-    case "QRBNKNRB" : sp = "487"; break;
-    case "QBRNBKNR" : sp = "488"; break;
-    case "QRNBBKNR" : sp = "489"; break;
-    case "QRNKBBNR" : sp = "490"; break;
-    case "QRNKBNRB" : sp = "491"; break;
-    case "QBRNKNBR" : sp = "492"; break;
-    case "QRNBKNBR" : sp = "493"; break;
-    case "QRNKNBBR" : sp = "494"; break;
-    case "QRNKNRBB" : sp = "495"; break;
-    case "BBRQNKNR" : sp = "496"; break;
-    case "BRQBNKNR" : sp = "497"; break;
-    case "BRQNKBNR" : sp = "498"; break;
-    case "BRQNKNRB" : sp = "499"; break;
-    case "RBBQNKNR" : sp = "500"; break;
-    case "RQBBNKNR" : sp = "501"; break;
-    case "RQBNKBNR" : sp = "502"; break;
-    case "RQBNKNRB" : sp = "503"; break;
-    case "RBQNBKNR" : sp = "504"; break;
-    case "RQNBBKNR" : sp = "505"; break;
-    case "RQNKBBNR" : sp = "506"; break;
-    case "RQNKBNRB" : sp = "507"; break;
-    case "RBQNKNBR" : sp = "508"; break;
-    case "RQNBKNBR" : sp = "509"; break;
-    case "RQNKNBBR" : sp = "510"; break;
-    case "RQNKNRBB" : sp = "511"; break;
-    case "BBRNQKNR" : sp = "512"; break;
-    case "BRNBQKNR" : sp = "513"; break;
-    case "BRNQKBNR" : sp = "514"; break;
-    case "BRNQKNRB" : sp = "515"; break;
-    case "RBBNQKNR" : sp = "516"; break;
-    case "RNBBQKNR" : sp = "517"; break;
-    case "RNBQKBNR" : sp = "518"; break;
-    case "RNBQKNRB" : sp = "519"; break;
-    case "RBNQBKNR" : sp = "520"; break;
-    case "RNQBBKNR" : sp = "521"; break;
-    case "RNQKBBNR" : sp = "522"; break;
-    case "RNQKBNRB" : sp = "523"; break;
-    case "RBNQKNBR" : sp = "524"; break;
-    case "RNQBKNBR" : sp = "525"; break;
-    case "RNQKNBBR" : sp = "526"; break;
-    case "RNQKNRBB" : sp = "527"; break;
-    case "BBRNKQNR" : sp = "528"; break;
-    case "BRNBKQNR" : sp = "529"; break;
-    case "BRNKQBNR" : sp = "530"; break;
-    case "BRNKQNRB" : sp = "531"; break;
-    case "RBBNKQNR" : sp = "532"; break;
-    case "RNBBKQNR" : sp = "533"; break;
-    case "RNBKQBNR" : sp = "534"; break;
-    case "RNBKQNRB" : sp = "535"; break;
-    case "RBNKBQNR" : sp = "536"; break;
-    case "RNKBBQNR" : sp = "537"; break;
-    case "RNKQBBNR" : sp = "538"; break;
-    case "RNKQBNRB" : sp = "539"; break;
-    case "RBNKQNBR" : sp = "540"; break;
-    case "RNKBQNBR" : sp = "541"; break;
-    case "RNKQNBBR" : sp = "542"; break;
-    case "RNKQNRBB" : sp = "543"; break;
-    case "BBRNKNQR" : sp = "544"; break;
-    case "BRNBKNQR" : sp = "545"; break;
-    case "BRNKNBQR" : sp = "546"; break;
-    case "BRNKNQRB" : sp = "547"; break;
-    case "RBBNKNQR" : sp = "548"; break;
-    case "RNBBKNQR" : sp = "549"; break;
-    case "RNBKNBQR" : sp = "550"; break;
-    case "RNBKNQRB" : sp = "551"; break;
-    case "RBNKBNQR" : sp = "552"; break;
-    case "RNKBBNQR" : sp = "553"; break;
-    case "RNKNBBQR" : sp = "554"; break;
-    case "RNKNBQRB" : sp = "555"; break;
-    case "RBNKNQBR" : sp = "556"; break;
-    case "RNKBNQBR" : sp = "557"; break;
-    case "RNKNQBBR" : sp = "558"; break;
-    case "RNKNQRBB" : sp = "559"; break;
-    case "BBRNKNRQ" : sp = "560"; break;
-    case "BRNBKNRQ" : sp = "561"; break;
-    case "BRNKNBRQ" : sp = "562"; break;
-    case "BRNKNRQB" : sp = "563"; break;
-    case "RBBNKNRQ" : sp = "564"; break;
-    case "RNBBKNRQ" : sp = "565"; break;
-    case "RNBKNBRQ" : sp = "566"; break;
-    case "RNBKNRQB" : sp = "567"; break;
-    case "RBNKBNRQ" : sp = "568"; break;
-    case "RNKBBNRQ" : sp = "569"; break;
-    case "RNKNBBRQ" : sp = "570"; break;
-    case "RNKNBRQB" : sp = "571"; break;
-    case "RBNKNRBQ" : sp = "572"; break;
-    case "RNKBNRBQ" : sp = "573"; break;
-    case "RNKNRBBQ" : sp = "574"; break;
-    case "RNKNRQBB" : sp = "575"; break;
-    case "BBQRNKRN" : sp = "576"; break;
-    case "BQRBNKRN" : sp = "577"; break;
-    case "BQRNKBRN" : sp = "578"; break;
-    case "BQRNKRNB" : sp = "579"; break;
-    case "QBBRNKRN" : sp = "580"; break;
-    case "QRBBNKRN" : sp = "581"; break;
-    case "QRBNKBRN" : sp = "582"; break;
-    case "QRBNKRNB" : sp = "583"; break;
-    case "QBRNBKRN" : sp = "584"; break;
-    case "QRNBBKRN" : sp = "585"; break;
-    case "QRNKBBRN" : sp = "586"; break;
-    case "QRNKBRNB" : sp = "587"; break;
-    case "QBRNKRBN" : sp = "588"; break;
-    case "QRNBKRBN" : sp = "589"; break;
-    case "QRNKRBBN" : sp = "590"; break;
-    case "QRNKRNBB" : sp = "591"; break;
-    case "BBRQNKRN" : sp = "592"; break;
-    case "BRQBNKRN" : sp = "593"; break;
-    case "BRQNKBRN" : sp = "594"; break;
-    case "BRQNKRNB" : sp = "595"; break;
-    case "RBBQNKRN" : sp = "596"; break;
-    case "RQBBNKRN" : sp = "597"; break;
-    case "RQBNKBRN" : sp = "598"; break;
-    case "RQBNKRNB" : sp = "599"; break;
-    case "RBQNBKRN" : sp = "600"; break;
-    case "RQNBBKRN" : sp = "601"; break;
-    case "RQNKBBRN" : sp = "602"; break;
-    case "RQNKBRNB" : sp = "603"; break;
-    case "RBQNKRBN" : sp = "604"; break;
-    case "RQNBKRBN" : sp = "605"; break;
-    case "RQNKRBBN" : sp = "606"; break;
-    case "RQNKRNBB" : sp = "607"; break;
-    case "BBRNQKRN" : sp = "608"; break;
-    case "BRNBQKRN" : sp = "609"; break;
-    case "BRNQKBRN" : sp = "610"; break;
-    case "BRNQKRNB" : sp = "611"; break;
-    case "RBBNQKRN" : sp = "612"; break;
-    case "RNBBQKRN" : sp = "613"; break;
-    case "RNBQKBRN" : sp = "614"; break;
-    case "RNBQKRNB" : sp = "615"; break;
-    case "RBNQBKRN" : sp = "616"; break;
-    case "RNQBBKRN" : sp = "617"; break;
-    case "RNQKBBRN" : sp = "618"; break;
-    case "RNQKBRNB" : sp = "619"; break;
-    case "RBNQKRBN" : sp = "620"; break;
-    case "RNQBKRBN" : sp = "621"; break;
-    case "RNQKRBBN" : sp = "622"; break;
-    case "RNQKRNBB" : sp = "623"; break;
-    case "BBRNKQRN" : sp = "624"; break;
-    case "BRNBKQRN" : sp = "625"; break;
-    case "BRNKQBRN" : sp = "626"; break;
-    case "BRNKQRNB" : sp = "627"; break;
-    case "RBBNKQRN" : sp = "628"; break;
-    case "RNBBKQRN" : sp = "629"; break;
-    case "RNBKQBRN" : sp = "630"; break;
-    case "RNBKQRNB" : sp = "631"; break;
-    case "RBNKBQRN" : sp = "632"; break;
-    case "RNKBBQRN" : sp = "633"; break;
-    case "RNKQBBRN" : sp = "634"; break;
-    case "RNKQBRNB" : sp = "635"; break;
-    case "RBNKQRBN" : sp = "636"; break;
-    case "RNKBQRBN" : sp = "637"; break;
-    case "RNKQRBBN" : sp = "638"; break;
-    case "RNKQRNBB" : sp = "639"; break;
-    case "BBRNKRQN" : sp = "640"; break;
-    case "BRNBKRQN" : sp = "641"; break;
-    case "BRNKRBQN" : sp = "642"; break;
-    case "BRNKRQNB" : sp = "643"; break;
-    case "RBBNKRQN" : sp = "644"; break;
-    case "RNBBKRQN" : sp = "645"; break;
-    case "RNBKRBQN" : sp = "646"; break;
-    case "RNBKRQNB" : sp = "647"; break;
-    case "RBNKBRQN" : sp = "648"; break;
-    case "RNKBBRQN" : sp = "649"; break;
-    case "RNKRBBQN" : sp = "650"; break;
-    case "RNKRBQNB" : sp = "651"; break;
-    case "RBNKRQBN" : sp = "652"; break;
-    case "RNKBRQBN" : sp = "653"; break;
-    case "RNKRQBBN" : sp = "654"; break;
-    case "RNKRQNBB" : sp = "655"; break;
-    case "BBRNKRNQ" : sp = "656"; break;
-    case "BRNBKRNQ" : sp = "657"; break;
-    case "BRNKRBNQ" : sp = "658"; break;
-    case "BRNKRNQB" : sp = "659"; break;
-    case "RBBNKRNQ" : sp = "660"; break;
-    case "RNBBKRNQ" : sp = "661"; break;
-    case "RNBKRBNQ" : sp = "662"; break;
-    case "RNBKRNQB" : sp = "663"; break;
-    case "RBNKBRNQ" : sp = "664"; break;
-    case "RNKBBRNQ" : sp = "665"; break;
-    case "RNKRBBNQ" : sp = "666"; break;
-    case "RNKRBNQB" : sp = "667"; break;
-    case "RBNKRNBQ" : sp = "668"; break;
-    case "RNKBRNBQ" : sp = "669"; break;
-    case "RNKRNBBQ" : sp = "670"; break;
-    case "RNKRNQBB" : sp = "671"; break;
-    case "BBQRKNNR" : sp = "672"; break;
-    case "BQRBKNNR" : sp = "673"; break;
-    case "BQRKNBNR" : sp = "674"; break;
-    case "BQRKNNRB" : sp = "675"; break;
-    case "QBBRKNNR" : sp = "676"; break;
-    case "QRBBKNNR" : sp = "677"; break;
-    case "QRBKNBNR" : sp = "678"; break;
-    case "QRBKNNRB" : sp = "679"; break;
-    case "QBRKBNNR" : sp = "680"; break;
-    case "QRKBBNNR" : sp = "681"; break;
-    case "QRKNBBNR" : sp = "682"; break;
-    case "QRKNBNRB" : sp = "683"; break;
-    case "QBRKNNBR" : sp = "684"; break;
-    case "QRKBNNBR" : sp = "685"; break;
-    case "QRKNNBBR" : sp = "686"; break;
-    case "QRKNNRBB" : sp = "687"; break;
-    case "BBRQKNNR" : sp = "688"; break;
-    case "BRQBKNNR" : sp = "689"; break;
-    case "BRQKNBNR" : sp = "690"; break;
-    case "BRQKNNRB" : sp = "691"; break;
-    case "RBBQKNNR" : sp = "692"; break;
-    case "RQBBKNNR" : sp = "693"; break;
-    case "RQBKNBNR" : sp = "694"; break;
-    case "RQBKNNRB" : sp = "695"; break;
-    case "RBQKBNNR" : sp = "696"; break;
-    case "RQKBBNNR" : sp = "697"; break;
-    case "RQKNBBNR" : sp = "698"; break;
-    case "RQKNBNRB" : sp = "699"; break;
-    case "RBQKNNBR" : sp = "700"; break;
-    case "RQKBNNBR" : sp = "701"; break;
-    case "RQKNNBBR" : sp = "702"; break;
-    case "RQKNNRBB" : sp = "703"; break;
-    case "BBRKQNNR" : sp = "704"; break;
-    case "BRKBQNNR" : sp = "705"; break;
-    case "BRKQNBNR" : sp = "706"; break;
-    case "BRKQNNRB" : sp = "707"; break;
-    case "RBBKQNNR" : sp = "708"; break;
-    case "RKBBQNNR" : sp = "709"; break;
-    case "RKBQNBNR" : sp = "710"; break;
-    case "RKBQNNRB" : sp = "711"; break;
-    case "RBKQBNNR" : sp = "712"; break;
-    case "RKQBBNNR" : sp = "713"; break;
-    case "RKQNBBNR" : sp = "714"; break;
-    case "RKQNBNRB" : sp = "715"; break;
-    case "RBKQNNBR" : sp = "716"; break;
-    case "RKQBNNBR" : sp = "717"; break;
-    case "RKQNNBBR" : sp = "718"; break;
-    case "RKQNNRBB" : sp = "719"; break;
-    case "BBRKNQNR" : sp = "720"; break;
-    case "BRKBNQNR" : sp = "721"; break;
-    case "BRKNQBNR" : sp = "722"; break;
-    case "BRKNQNRB" : sp = "723"; break;
-    case "RBBKNQNR" : sp = "724"; break;
-    case "RKBBNQNR" : sp = "725"; break;
-    case "RKBNQBNR" : sp = "726"; break;
-    case "RKBNQNRB" : sp = "727"; break;
-    case "RBKNBQNR" : sp = "728"; break;
-    case "RKNBBQNR" : sp = "729"; break;
-    case "RKNQBBNR" : sp = "730"; break;
-    case "RKNQBNRB" : sp = "731"; break;
-    case "RBKNQNBR" : sp = "732"; break;
-    case "RKNBQNBR" : sp = "733"; break;
-    case "RKNQNBBR" : sp = "734"; break;
-    case "RKNQNRBB" : sp = "735"; break;
-    case "BBRKNNQR" : sp = "736"; break;
-    case "BRKBNNQR" : sp = "737"; break;
-    case "BRKNNBQR" : sp = "738"; break;
-    case "BRKNNQRB" : sp = "739"; break;
-    case "RBBKNNQR" : sp = "740"; break;
-    case "RKBBNNQR" : sp = "741"; break;
-    case "RKBNNBQR" : sp = "742"; break;
-    case "RKBNNQRB" : sp = "743"; break;
-    case "RBKNBNQR" : sp = "744"; break;
-    case "RKNBBNQR" : sp = "745"; break;
-    case "RKNNBBQR" : sp = "746"; break;
-    case "RKNNBQRB" : sp = "747"; break;
-    case "RBKNNQBR" : sp = "748"; break;
-    case "RKNBNQBR" : sp = "749"; break;
-    case "RKNNQBBR" : sp = "750"; break;
-    case "RKNNQRBB" : sp = "751"; break;
-    case "BBRKNNRQ" : sp = "752"; break;
-    case "BRKBNNRQ" : sp = "753"; break;
-    case "BRKNNBRQ" : sp = "754"; break;
-    case "BRKNNRQB" : sp = "755"; break;
-    case "RBBKNNRQ" : sp = "756"; break;
-    case "RKBBNNRQ" : sp = "757"; break;
-    case "RKBNNBRQ" : sp = "758"; break;
-    case "RKBNNRQB" : sp = "759"; break;
-    case "RBKNBNRQ" : sp = "760"; break;
-    case "RKNBBNRQ" : sp = "761"; break;
-    case "RKNNBBRQ" : sp = "762"; break;
-    case "RKNNBRQB" : sp = "763"; break;
-    case "RBKNNRBQ" : sp = "764"; break;
-    case "RKNBNRBQ" : sp = "765"; break;
-    case "RKNNRBBQ" : sp = "766"; break;
-    case "RKNNRQBB" : sp = "767"; break;
-    case "BBQRKNRN" : sp = "768"; break;
-    case "BQRBKNRN" : sp = "769"; break;
-    case "BQRKNBRN" : sp = "770"; break;
-    case "BQRKNRNB" : sp = "771"; break;
-    case "QBBRKNRN" : sp = "772"; break;
-    case "QRBBKNRN" : sp = "773"; break;
-    case "QRBKNBRN" : sp = "774"; break;
-    case "QRBKNRNB" : sp = "775"; break;
-    case "QBRKBNRN" : sp = "776"; break;
-    case "QRKBBNRN" : sp = "777"; break;
-    case "QRKNBBRN" : sp = "778"; break;
-    case "QRKNBRNB" : sp = "779"; break;
-    case "QBRKNRBN" : sp = "780"; break;
-    case "QRKBNRBN" : sp = "781"; break;
-    case "QRKNRBBN" : sp = "782"; break;
-    case "QRKNRNBB" : sp = "783"; break;
-    case "BBRQKNRN" : sp = "784"; break;
-    case "BRQBKNRN" : sp = "785"; break;
-    case "BRQKNBRN" : sp = "786"; break;
-    case "BRQKNRNB" : sp = "787"; break;
-    case "RBBQKNRN" : sp = "788"; break;
-    case "RQBBKNRN" : sp = "789"; break;
-    case "RQBKNBRN" : sp = "790"; break;
-    case "RQBKNRNB" : sp = "791"; break;
-    case "RBQKBNRN" : sp = "792"; break;
-    case "RQKBBNRN" : sp = "793"; break;
-    case "RQKNBBRN" : sp = "794"; break;
-    case "RQKNBRNB" : sp = "795"; break;
-    case "RBQKNRBN" : sp = "796"; break;
-    case "RQKBNRBN" : sp = "797"; break;
-    case "RQKNRBBN" : sp = "798"; break;
-    case "RQKNRNBB" : sp = "799"; break;
-    case "BBRKQNRN" : sp = "800"; break;
-    case "BRKBQNRN" : sp = "801"; break;
-    case "BRKQNBRN" : sp = "802"; break;
-    case "BRKQNRNB" : sp = "803"; break;
-    case "RBBKQNRN" : sp = "804"; break;
-    case "RKBBQNRN" : sp = "805"; break;
-    case "RKBQNBRN" : sp = "806"; break;
-    case "RKBQNRNB" : sp = "807"; break;
-    case "RBKQBNRN" : sp = "808"; break;
-    case "RKQBBNRN" : sp = "809"; break;
-    case "RKQNBBRN" : sp = "810"; break;
-    case "RKQNBRNB" : sp = "811"; break;
-    case "RBKQNRBN" : sp = "812"; break;
-    case "RKQBNRBN" : sp = "813"; break;
-    case "RKQNRBBN" : sp = "814"; break;
-    case "RKQNRNBB" : sp = "815"; break;
-    case "BBRKNQRN" : sp = "816"; break;
-    case "BRKBNQRN" : sp = "817"; break;
-    case "BRKNQBRN" : sp = "818"; break;
-    case "BRKNQRNB" : sp = "819"; break;
-    case "RBBKNQRN" : sp = "820"; break;
-    case "RKBBNQRN" : sp = "821"; break;
-    case "RKBNQBRN" : sp = "822"; break;
-    case "RKBNQRNB" : sp = "823"; break;
-    case "RBKNBQRN" : sp = "824"; break;
-    case "RKNBBQRN" : sp = "825"; break;
-    case "RKNQBBRN" : sp = "826"; break;
-    case "RKNQBRNB" : sp = "827"; break;
-    case "RBKNQRBN" : sp = "828"; break;
-    case "RKNBQRBN" : sp = "829"; break;
-    case "RKNQRBBN" : sp = "830"; break;
-    case "RKNQRNBB" : sp = "831"; break;
-    case "BBRKNRQN" : sp = "832"; break;
-    case "BRKBNRQN" : sp = "833"; break;
-    case "BRKNRBQN" : sp = "834"; break;
-    case "BRKNRQNB" : sp = "835"; break;
-    case "RBBKNRQN" : sp = "836"; break;
-    case "RKBBNRQN" : sp = "837"; break;
-    case "RKBNRBQN" : sp = "838"; break;
-    case "RKBNRQNB" : sp = "839"; break;
-    case "RBKNBRQN" : sp = "840"; break;
-    case "RKNBBRQN" : sp = "841"; break;
-    case "RKNRBBQN" : sp = "842"; break;
-    case "RKNRBQNB" : sp = "843"; break;
-    case "RBKNRQBN" : sp = "844"; break;
-    case "RKNBRQBN" : sp = "845"; break;
-    case "RKNRQBBN" : sp = "846"; break;
-    case "RKNRQNBB" : sp = "847"; break;
-    case "BBRKNRNQ" : sp = "848"; break;
-    case "BRKBNRNQ" : sp = "849"; break;
-    case "BRKNRBNQ" : sp = "850"; break;
-    case "BRKNRNQB" : sp = "851"; break;
-    case "RBBKNRNQ" : sp = "852"; break;
-    case "RKBBNRNQ" : sp = "853"; break;
-    case "RKBNRBNQ" : sp = "854"; break;
-    case "RKBNRNQB" : sp = "855"; break;
-    case "RBKNBRNQ" : sp = "856"; break;
-    case "RKNBBRNQ" : sp = "857"; break;
-    case "RKNRBBNQ" : sp = "858"; break;
-    case "RKNRBNQB" : sp = "859"; break;
-    case "RBKNRNBQ" : sp = "860"; break;
-    case "RKNBRNBQ" : sp = "861"; break;
-    case "RKNRNBBQ" : sp = "862"; break;
-    case "RKNRNQBB" : sp = "863"; break;
-    case "BBQRKRNN" : sp = "864"; break;
-    case "BQRBKRNN" : sp = "865"; break;
-    case "BQRKRBNN" : sp = "866"; break;
-    case "BQRKRNNB" : sp = "867"; break;
-    case "QBBRKRNN" : sp = "868"; break;
-    case "QRBBKRNN" : sp = "869"; break;
-    case "QRBKRBNN" : sp = "870"; break;
-    case "QRBKRNNB" : sp = "871"; break;
-    case "QBRKBRNN" : sp = "872"; break;
-    case "QRKBBRNN" : sp = "873"; break;
-    case "QRKRBBNN" : sp = "874"; break;
-    case "QRKRBNNB" : sp = "875"; break;
-    case "QBRKRNBN" : sp = "876"; break;
-    case "QRKBRNBN" : sp = "877"; break;
-    case "QRKRNBBN" : sp = "878"; break;
-    case "QRKRNNBB" : sp = "879"; break;
-    case "BBRQKRNN" : sp = "880"; break;
-    case "BRQBKRNN" : sp = "881"; break;
-    case "BRQKRBNN" : sp = "882"; break;
-    case "BRQKRNNB" : sp = "883"; break;
-    case "RBBQKRNN" : sp = "884"; break;
-    case "RQBBKRNN" : sp = "885"; break;
-    case "RQBKRBNN" : sp = "886"; break;
-    case "RQBKRNNB" : sp = "887"; break;
-    case "RBQKBRNN" : sp = "888"; break;
-    case "RQKBBRNN" : sp = "889"; break;
-    case "RQKRBBNN" : sp = "890"; break;
-    case "RQKRBNNB" : sp = "891"; break;
-    case "RBQKRNBN" : sp = "892"; break;
-    case "RQKBRNBN" : sp = "893"; break;
-    case "RQKRNBBN" : sp = "894"; break;
-    case "RQKRNNBB" : sp = "895"; break;
-    case "BBRKQRNN" : sp = "896"; break;
-    case "BRKBQRNN" : sp = "897"; break;
-    case "BRKQRBNN" : sp = "898"; break;
-    case "BRKQRNNB" : sp = "899"; break;
-    case "RBBKQRNN" : sp = "900"; break;
-    case "RKBBQRNN" : sp = "901"; break;
-    case "RKBQRBNN" : sp = "902"; break;
-    case "RKBQRNNB" : sp = "903"; break;
-    case "RBKQBRNN" : sp = "904"; break;
-    case "RKQBBRNN" : sp = "905"; break;
-    case "RKQRBBNN" : sp = "906"; break;
-    case "RKQRBNNB" : sp = "907"; break;
-    case "RBKQRNBN" : sp = "908"; break;
-    case "RKQBRNBN" : sp = "909"; break;
-    case "RKQRNBBN" : sp = "910"; break;
-    case "RKQRNNBB" : sp = "911"; break;
-    case "BBRKRQNN" : sp = "912"; break;
-    case "BRKBRQNN" : sp = "913"; break;
-    case "BRKRQBNN" : sp = "914"; break;
-    case "BRKRQNNB" : sp = "915"; break;
-    case "RBBKRQNN" : sp = "916"; break;
-    case "RKBBRQNN" : sp = "917"; break;
-    case "RKBRQBNN" : sp = "918"; break;
-    case "RKBRQNNB" : sp = "919"; break;
-    case "RBKRBQNN" : sp = "920"; break;
-    case "RKRBBQNN" : sp = "921"; break;
-    case "RKRQBBNN" : sp = "922"; break;
-    case "RKRQBNNB" : sp = "923"; break;
-    case "RBKRQNBN" : sp = "924"; break;
-    case "RKRBQNBN" : sp = "925"; break;
-    case "RKRQNBBN" : sp = "926"; break;
-    case "RKRQNNBB" : sp = "927"; break;
-    case "BBRKRNQN" : sp = "928"; break;
-    case "BRKBRNQN" : sp = "929"; break;
-    case "BRKRNBQN" : sp = "930"; break;
-    case "BRKRNQNB" : sp = "931"; break;
-    case "RBBKRNQN" : sp = "932"; break;
-    case "RKBBRNQN" : sp = "933"; break;
-    case "RKBRNBQN" : sp = "934"; break;
-    case "RKBRNQNB" : sp = "935"; break;
-    case "RBKRBNQN" : sp = "936"; break;
-    case "RKRBBNQN" : sp = "937"; break;
-    case "RKRNBBQN" : sp = "938"; break;
-    case "RKRNBQNB" : sp = "939"; break;
-    case "RBKRNQBN" : sp = "940"; break;
-    case "RKRBNQBN" : sp = "941"; break;
-    case "RKRNQBBN" : sp = "942"; break;
-    case "RKRNQNBB" : sp = "943"; break;
-    case "BBRKRNNQ" : sp = "944"; break;
-    case "BRKBRNNQ" : sp = "945"; break;
-    case "BRKRNBNQ" : sp = "946"; break;
-    case "BRKRNNQB" : sp = "947"; break;
-    case "RBBKRNNQ" : sp = "948"; break;
-    case "RKBBRNNQ" : sp = "949"; break;
-    case "RKBRNBNQ" : sp = "950"; break;
-    case "RKBRNNQB" : sp = "951"; break;
-    case "RBKRBNNQ" : sp = "952"; break;
-    case "RKRBBNNQ" : sp = "953"; break;
-    case "RKRNBBNQ" : sp = "954"; break;
-    case "RKRNBNQB" : sp = "955"; break;
-    case "RBKRNNBQ" : sp = "956"; break;
-    case "RKRBNNBQ" : sp = "957"; break;
-    case "RKRNNBBQ" : sp = "958"; break;
-    case "RKRNNQBB" : sp = "959"; break;
-
-    default:
-      sp = '???'; break;
+  const cvt_upper = cvt.toUpperCase();
+  
+  if (sp_table.hasOwnProperty(cvt_upper)) {
+    sp = sp_table[cvt_upper];
+  }
+  else {
+    sp = '???';
   }
 
   return sp;
-
 }

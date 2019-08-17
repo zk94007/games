@@ -591,6 +591,57 @@ Match.prototype.to_save = function () {
   };
 }
 
+Match.prototype.json_build = function() {
+  let json = {};
+  this.to_save();
+
+  for (let prop in this) {
+    if (
+      ['date', 'engine', 'timer', '_events', '_eventsCount', '_maxListeners', 'users'].indexOf(prop) === -1 &&
+      this.hasOwnProperty(prop)
+    ) {
+      json[prop] = this[prop];
+    }
+  }
+
+  json['date'] = this.date.toJSON();
+  json['users'] = users_to_json;
+  return json;
+}
+
+Match.prototype.json_new = function() {
+  let json = {
+    id: this.id,
+    sid: this.sid,
+    decision: this.decision ? this.decision.text : '',
+    players: users_to_json,
+    settings: this.settings,
+    status: to_save ? 'SAVED' : this.status,
+    prev_status: this.prev_status
+  };
+
+  if (user_name !== false) {
+    json.moves = this.moves;
+    json.illmoves = this.illmoves;
+    json.rematch = this.rematch;
+    json.state = this.state;
+    json.timers = this.timers;
+    json.timersi = this.timersi;
+    json.timersb = this.timersb;
+    json.timersbp = this.timersbp;
+
+    let hands = this.hands;
+    if (hands) {
+      let i = this.players().findIndex(function (user) {
+        return user.name === user_name;
+      });
+      json.state.hand = i >= 0 ? hands[i] : undefined;
+    }
+  }
+
+  return json;
+}
+
 Match.prototype.to_json = function (user_name, to_save = false) {
   let json = {};
   to_save = (!user_name && to_save);
@@ -605,49 +656,10 @@ Match.prototype.to_json = function (user_name, to_save = false) {
   });
 
   if (to_save) {
-    this.to_save();
-
-    for (let prop in this) {
-      if (
-        ['date', 'engine', 'timer', '_events', '_eventsCount', '_maxListeners', 'users'].indexOf(prop) === -1 &&
-        this.hasOwnProperty(prop)
-      ) {
-        json[prop] = this[prop];
-      }
-    }
-
-    json['date'] = this.date.toJSON();
-    json['users'] = users_to_json;
+    json = this.json_build();
   }
   else {
-    json = {
-      id: this.id,
-      sid: this.sid,
-      decision: this.decision ? this.decision.text : '',
-      players: users_to_json,
-      settings: this.settings,
-      status: to_save ? 'SAVED' : this.status,
-      prev_status: this.prev_status
-    };
-
-    if (user_name !== false) {
-      json.moves = this.moves;
-      json.illmoves = this.illmoves;
-      json.rematch = this.rematch;
-      json.state = this.state;
-      json.timers = this.timers;
-      json.timersi = this.timersi;
-      json.timersb = this.timersb;
-      json.timersbp = this.timersbp;
-
-      let hands = this.hands;
-      if (hands) {
-        let i = this.players().findIndex(function (user) {
-          return user.name === user_name;
-        });
-        json.state.hand = i >= 0 ? hands[i] : undefined;
-      }
-    }
+    json = this.json_new();
   }
 
   return json;
