@@ -7,6 +7,8 @@ if (!global.R5) {
   require(`${__dirname}/../../config.js`);
 }
 
+require(`${__dirname}/common.js`);
+
 var PAUSE_TIME = 5;
 
 // Constructor
@@ -334,12 +336,8 @@ Match.prototype.get_alive = function (one = false) {
   let state = this.state;
 
   if (one !== false) { return (state.alive[one]); }
-  let nbr = 0;
-  for (let i = 0; i < state.alive.length; i++) {
-    nbr += (state.alive[i] === true);
-  }
-
-  return nbr;
+  
+  return get_alive(state);
 };
 
 Match.prototype.set_alive = function (pos, set) {
@@ -509,44 +507,46 @@ Match.prototype.add_user_sub_on_started = function(user, callback) {
     if (this.add_user_sub_find_user(user)) {
       return callback(R5.game.statuses.PLAY);
     }
-    else {
-      this.viewers_add(user.name, function () {
-        return callback(R5.game.statuses.WATCH);
-      });
-      return;
-    }
-  }
-  else {
     this.viewers_add(user.name, function () {
-      return callback(R5.game.statuses.REVIEW);
+      return callback(R5.game.statuses.WATCH);
     });
     return;
   }
+  this.viewers_add(user.name, function () {
+    return callback(R5.game.statuses.REVIEW);
+  });
 };
 
-Match.prototype.add_user_sub_on_wait_waiters = function(user, callback, waiters) {
-  for (let i = 0; i < waiters.length; i++) {
-    if (waiters[i]) {
-      continue;
+Match.prototype.add_user_sub_on_wait_waiters = function(user, waiters) {
+  let i;
+  for (i = 0; i < waiters.length; i++) {
+    if (!waiters[i]) {
+      waiters[i] = user;
+      break;
     }
-    waiters[i] = user;
-    return callback(R5.game.statuses.WAIT);
   }
+  return i;
 };
 
-Match.prototype.add_user_sub_on_wait = function(user, callback) {
+Match.prototype.add_user_sub_on_wait = function(user) {
   let waiters = this.waiters();
   if (!waiters.some(function (u) { return u && u.name === user.name; })) {
-    this.add_user_sub_on_wait_waiters(user, callback, waiters);
+    const index = this.add_user_sub_on_wait_waiters(user, waiters);
+    if (index !== waiters.length) {
+      return true;
+    }
   }
+  return false;
 };
 
 Match.prototype.add_user = function (user, status, callback) {
   if (this.has_started()) {
-    this.add_user_sub_on_started(user, callback);
+    return this.add_user_sub_on_started(user, callback);
   }
   else if (status === R5.game.statuses.WAIT) {
-    this.add_user_sub_on_wait(user, callback);
+    if (this.add_user_sub_on_wait(user)) {
+      return callback(R5.game.statuses.WAIT);
+    }
   }
   else {
     console.log(`Invalid add_user status: ${status}`);
