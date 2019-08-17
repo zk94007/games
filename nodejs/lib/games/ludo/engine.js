@@ -30,13 +30,7 @@ exports.new_game = function (players) {
   });
 };
 
-function get_alive (state) {
-  var nbr = 0;
-  for (var i = 0; i < state.alive.length; i++) {
-    if (state.alive[i] === true) { nbr++; }
-  }
-  return nbr;
-}
+require(`${__dirname}/../common.js`);
 
 // Game
 
