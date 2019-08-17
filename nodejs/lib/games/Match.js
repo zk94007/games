@@ -563,11 +563,11 @@ Match.prototype.remove_user_sub_call_viewer = function (user, save_only) {
   });
 };
 
-Match.prototype.remove_user_sub_on_i = function(user, i) {
+Match.prototype.remove_user_sub_on_i = function(user, i, save_only) {
   for (let j = 0; j < this.users.length; j++) {
     // TODO: why are there undefined values??
-    const bSame = this.users[i][j] && user.name === this.users[i][j].name;
-    if (!bSame) {
+    const bContinue = !(this.users[i][j] && user.name === this.users[i][j].name);
+    if (bContinue) {
       continue;
     }
     
@@ -583,6 +583,7 @@ Match.prototype.remove_user_sub_on_i = function(user, i) {
       console.log(`Unknown status ${i}`);
     }
   }
+  return save_only;
 }
 
 Match.prototype.remove_user = function (user) {
@@ -594,7 +595,7 @@ Match.prototype.remove_user = function (user) {
       continue;
     }
 
-    this.remove_user_sub_on_i(i);
+    save_only = this.remove_user_sub_on_i(user, i, save_only);
   }
 
   this.remove_user_sub_call_viewer(user, save_only);
