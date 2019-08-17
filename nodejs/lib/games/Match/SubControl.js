@@ -3,15 +3,18 @@ var Match = require(`${__dirname}/../Match.js`);
   Match.prototype.review_move_sub_on_rematch = function(user, move) {
     let pos = this.rematch.agreed.indexOf(user.name);
     
-    if (move.rematch && pos === -1) {
+    const isRematch = move.rematch && pos === -1;
+    if (isRematch) {
       this.rematch.agreed.push(user.name);
       if (this.rematch.agreed.length === this.rematch.players.length) {
         this.rematch = false;
         this.emit('rematch', this);
         return false;
       }
+      return true;
     }
-    else if (move.rematch === false && pos >= 0) {
+
+    if (move.rematch === false && pos >= 0) {
       this.rematch.agreed.splice(pos, 1);
       return false;
     }
