@@ -11,27 +11,11 @@ var PAUSE_TIME = 5;
 
 // Constructor
 
-function Match (game, set, match = false) {
-  R5.event_emitter.call(this);
+function Match_sub_on_match() {
 
-  if (!match) { this.id = R5.short_id.generate(); }
+}
 
-  this.game = game;
-  this.date = new Date();
-  this.moves = [];
-  this.state = {};
-  this.users = [[], [], [], [], [], []];
-
-  if (!match) {
-    this.settings = set;
-    this.waiters(this.settings.waiters);
-    this.settings.waiters = null;
-  
-    this.status = R5.game.statuses.WAIT;
-  
-    return true;    
-  }
-
+function Match_sub_on_match(match) {
   for (let prop in match) {
     if (
       ['date', 'saved', 'settings'].indexOf(prop) === -1 &&
@@ -54,6 +38,29 @@ function Match (game, set, match = false) {
   this.saved = null;
   return false;
 }
+function Match (game, set, match = false) {
+  R5.event_emitter.call(this);
+
+  if (!match) { this.id = R5.short_id.generate(); }
+
+  this.game = game;
+  this.date = new Date();
+  this.moves = [];
+  this.state = {};
+  this.users = [[], [], [], [], [], []];
+
+  if (match) {
+    return Match_sub_on_match(match);
+  }
+
+  this.settings = set;
+  this.waiters(this.settings.waiters);
+  this.settings.waiters = null;
+
+  this.status = R5.game.statuses.WAIT;
+
+  return true;
+}
 
 Match.prototype.__proto__ = R5.event_emitter.prototype;
 
@@ -74,6 +81,11 @@ Match.prototype.start_sub_set_timer_details = function (i) {
   else { this.timersi[i] = this.settings.timersi; }
 }
 
+Match.prototype.start_sub_set_timer_get_value = function(i) {
+  return ((this.settings.timers === -1) ? (60 * 60 * 24) : this.settings.timers)
+        + (i === 0 ? PAUSE_TIME : 0);
+}
+
 Match.prototype.start_sub_set_timers = function () {
   this.timers = new Array(nbr_players);
   if (this.settings.timer_type === 'Byo-yomi') {
@@ -86,8 +98,7 @@ Match.prototype.start_sub_set_timers = function () {
 
   for (let i = 0; i < nbr_players; i++) {
     this.decision.ratings[i] = 0;
-    this.timers[i] = ((this.settings.timers === -1) ? (60 * 60 * 24) : this.settings.timers);
-    this.timers[i] += (i === 0 ? PAUSE_TIME : 0);
+    this.timers[i] = this.start_sub_set_timer_get_value(i);
     this.start_sub_set_timer_details(i);
   }
 }
@@ -224,6 +235,18 @@ Match.prototype.finished_sub_call_viewer = function () {
   });
 };
 
+Match.prototype.finished_sub_on_player_i = function(players, i, reviewers) {
+  if (players[i].is_ai()) {
+    return;
+  }
+  this.viewers_add(players[i].name);
+  reviewers.push(players[i].name);
+
+  if (this.rematch) {
+    this.rematch.players.push(players[i].name);
+  }
+}
+
 Match.prototype.finished = function (decision = {}) {
   let players = this.players();
   let i;
@@ -246,15 +269,7 @@ Match.prototype.finished = function (decision = {}) {
 
   let reviewers = [];
   for (i = 0; i < players.length; i++) {
-    if (players[i].is_ai()) {
-      continue;
-    }
-    this.viewers_add(players[i].name);
-    reviewers.push(players[i].name);
-
-    if (this.rematch) {
-      this.rematch.players.push(players[i].name);
-    }
+    this.finished_sub_on_player_i(players, i, reviewers);
   }
 
   this.finished_sub_call_viewer();
@@ -563,25 +578,30 @@ Match.prototype.remove_user_sub_call_viewer = function (user, save_only) {
   });
 };
 
+Match.prototype.remove_user_sub_on_i_j = function(user, i, j, save_only) {
+  const bContinue = !(this.users[i][j] && user.name === this.users[i][j].name);
+  if (bContinue) {
+    return save_only;
+  }
+  
+  this.users[i][j].leave_match();
+
+  if (i === R5.game.statuses.WAIT) {
+    this.users[i][j] = null;
+  }
+  else if (i === R5.game.statuses.PLAY) {
+    save_only = true;
+  }
+  else {
+    console.log(`Unknown status ${i}`);
+  }
+  return save_only;
+}
+
 Match.prototype.remove_user_sub_on_i = function(user, i, save_only) {
   for (let j = 0; j < this.users.length; j++) {
     // TODO: why are there undefined values??
-    const bContinue = !(this.users[i][j] && user.name === this.users[i][j].name);
-    if (bContinue) {
-      continue;
-    }
-    
-    this.users[i][j].leave_match();
-
-    if (i === R5.game.statuses.WAIT) {
-      this.users[i][j] = null;
-    }
-    else if (i === R5.game.statuses.PLAY) {
-      save_only = true;
-    }
-    else {
-      console.log(`Unknown status ${i}`);
-    }
+    save_only = this.remove_user_sub_on_i_j(user, i, j, save_only);
   }
   return save_only;
 }
