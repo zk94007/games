@@ -509,18 +509,22 @@ Match.prototype.add_user_sub_on_started = function(user, callback) {
   }
 };
 
+Match.prototype.add_user_sub_on_wait_waiters = function(user, callback, waiters) {
+  for (let i = 0; i < waiters.length; i++) {
+    if (waiters[i]) {
+      continue;
+    }
+    waiters[i] = user;
+    return callback(R5.game.statuses.WAIT);
+  }
+};
+
 Match.prototype.add_user_sub_on_wait = function(user, callback) {
   let waiters = this.waiters();
   if (!waiters.some(function (u) { return u && u.name === user.name; })) {
-    for (let i = 0; i < waiters.length; i++) {
-      if (waiters[i]) {
-        continue;
-      }
-      waiters[i] = user;
-      return callback(R5.game.statuses.WAIT);
-    }
+    this.add_user_sub_on_wait_waiters(user, callback, waiters);
   }
-}
+};
 
 Match.prototype.add_user = function (user, status, callback) {
   if (this.has_started()) {
