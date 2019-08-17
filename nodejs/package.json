@@ -1,0 +1,41 @@
+{
+  "name": "games",
+  "description": "",
+  "author": "admin@funnode.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FunNode/games.git",
+    "private": true
+  },
+  "dependencies": {
+    "@funnode/mailgun": "^1.2.1",
+    "@funnode/mysql": "^1.2.1",
+    "@funnode/rabbitmq": "^1.6.0",
+    "@funnode/redis": "^1.5.0",
+    "@funnode/slack": "^1.2.0",
+    "@google-cloud/storage": "0.7.0",
+    "chai": "4.1.2",
+    "dotenv": "4.0.0",
+    "mocha": "3.5.3",
+    "redis": "^2.8.0",
+    "redlock": "3.1.2",
+    "rewire": "^4.0.1",
+    "shortid": "2.2.6",
+    "striptags": "2.1.1"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "10.2.1",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-node": "4.2.2",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-standard": "3.0.1",
+    "standard": "10.0.3",
+    "nyc": "13.3.0"
+  },
+  "engine": "nodejs 8.9.4",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "standard --verbose && nyc --reporter=lcov mocha \"test/*.js\""
+  }
+}

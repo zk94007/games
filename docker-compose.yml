@@ -1,0 +1,47 @@
+version: '2'
+services:
+  mysql:
+    container_name: mysql
+    image: 'mysql:5.7'
+    env_file: ./.env
+    environment:
+      MYSQL_DATABASE: ${DB_IN_NAME}
+      MYSQL_USER: ${DB_IN_USER}
+      MYSQL_PASS: ${DB_IN_PASS}
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+  rabbitmq:
+    container_name: rabbitmq
+    image: 'rabbitmq:3.7'
+    env_file: ./.env
+    environment:
+      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
+      RABBITMQ_DEFAULT_VHOST: ${NODE_ENV}
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    volumes:
+      - ./data/rabbitmq:/var/lib/rabbitmq
+  redis:
+    container_name: redis
+    image: 'redis:3.2'
+    env_file: ./.env
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./data/redis:/var/lib/redis
+  app:
+    container_name: app
+    build: .
+    command: 'npm start'
+    env_file: ./.env
+    volumes:
+      - ./nodejs:/usr/src/app
+    depends_on:
+      - mysql
+      - rabbitmq
+      - redis
