@@ -667,7 +667,7 @@ Match.prototype.to_save = function () {
   };
 }
 
-Match.prototype.json_build = function() {
+Match.prototype.json_build = function(users_to_json) {
   let json = {};
   this.to_save();
 
@@ -685,7 +685,7 @@ Match.prototype.json_build = function() {
   return json;
 }
 
-Match.prototype.json_new_sub_handle_hands = function(user, json) {
+Match.prototype.json_new_sub_handle_hands = function(user_name, json) {
   let hands = this.hands;
   if (hands) {
     let i = this.players().findIndex(function (user) {
@@ -697,7 +697,7 @@ Match.prototype.json_new_sub_handle_hands = function(user, json) {
   return json;
 }
 
-Match.prototype.json_new = function() {
+Match.prototype.json_new = function(users_to_json, to_save, user_name) {
   let json = {
     id: this.id,
     sid: this.sid,
@@ -718,7 +718,7 @@ Match.prototype.json_new = function() {
     json.timersb = this.timersb;
     json.timersbp = this.timersbp;
 
-    json = this.json_new_sub_handle_hands(user, json);
+    json = this.json_new_sub_handle_hands(user_name, json);
   }
 
   return json;
@@ -731,18 +731,20 @@ Match.prototype.to_json = function (user_name, to_save = false) {
   let users_to_json = this.users.map(function (item) {
     if (item.length <= 0) { return item; }
 
-    return item.map(function (playerObject) {
-      if (!playerObject) { return playerObject; }
-      return playerObject.to_json();
-    });
+    return item.map(onitemmap);
   });
 
   if (to_save) {
-    json = this.json_build();
+    json = this.json_build(users_to_json);
   }
   else {
-    json = this.json_new();
+    json = this.json_new(users_to_json, to_save, user_name);
   }
 
   return json;
 };
+
+function onitemmap(playerObject) {
+  if (!playerObject) { return playerObject; }
+  return playerObject.to_json();
+}
