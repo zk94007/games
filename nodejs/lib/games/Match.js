@@ -11,8 +11,16 @@ var PAUSE_TIME = 5;
 
 // Constructor
 
-function Match_sub_on_match() {
-
+function Match_sub_on_match_on_saved(match) {
+  if (match.saved) {
+    this.date = new Date(match.date);
+    this.settings = new R5.games[this.game].match_settings(match.settings, {
+      privileged: true,
+      reloaded: true
+    });
+    this.status = match.saved.status;
+    if (match.saved.engine) { this.engine = match.saved.engine; }
+  }
 }
 
 function Match_sub_on_match(match) {
@@ -25,15 +33,7 @@ function Match_sub_on_match(match) {
     }
   }
 
-  if (match.saved) {
-    this.date = new Date(match.date);
-    this.settings = new R5.games[this.game].match_settings(match.settings, {
-      privileged: true,
-      reloaded: true
-    });
-    this.status = match.saved.status;
-    if (match.saved.engine) { this.engine = match.saved.engine; }
-  }
+  Match_sub_on_match_on_saved(match);
 
   this.saved = null;
   return false;
