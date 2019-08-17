@@ -1,17 +1,21 @@
 var Match = require(`${__dirname}/../Match.js`);
 
+  Match.prototype.review_move_sub_on_rematch_true = function(user) {
+    this.rematch.agreed.push(user.name);
+    if (this.rematch.agreed.length === this.rematch.players.length) {
+      this.rematch = false;
+      this.emit('rematch', this);
+      return false;
+    }
+    return true;
+  };
+
   Match.prototype.review_move_sub_on_rematch = function(user, move) {
     let pos = this.rematch.agreed.indexOf(user.name);
     
     const isRematch = move.rematch && pos === -1;
     if (isRematch) {
-      this.rematch.agreed.push(user.name);
-      if (this.rematch.agreed.length === this.rematch.players.length) {
-        this.rematch = false;
-        this.emit('rematch', this);
-        return false;
-      }
-      return true;
+      return this.review_move_sub_on_rematch_true(user);
     }
 
     if (move.rematch === false && pos >= 0) {
