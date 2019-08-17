@@ -336,7 +336,7 @@ Match.prototype.get_alive = function (one = false) {
   if (one !== false) { return (state.alive[one]); }
   let nbr = 0;
   for (let i = 0; i < state.alive.length; i++) {
-    if (state.alive[i] === true) { nbr++; }
+    nbr += (state.alive[i] === true);
   }
 
   return nbr;
