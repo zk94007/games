@@ -155,6 +155,19 @@ Match.prototype.finish = function (turn, decision) {
   }
 };
 
+Match.prototype.finished_sub_check_ladder = function (players) {
+  if (this.is_ladder()) {
+    this.rematch = false;
+  }
+  else {
+    if (this.moves.length <= players.length) {
+      this.decision.text = '(Cancelled) ' + this.decision.text;
+      this.decision.result = 'CANCELLED';
+    }
+    this.rematch = { players: [], agreed: [] };
+  }
+}
+
 Match.prototype.finished = function (decision = {}) {
   let players = this.players();
   let i;
@@ -167,16 +180,7 @@ Match.prototype.finished = function (decision = {}) {
     result: decision.result || 'COMPLETE',
     text: decision.text };
 
-  if (this.is_ladder()) {
-    this.rematch = false;
-  }
-  else {
-    if (this.moves.length <= players.length) {
-      this.decision.text = '(Cancelled) ' + this.decision.text;
-      this.decision.result = 'CANCELLED';
-    }
-    this.rematch = { players: [], agreed: [] };
-  }
+  this.finished_sub_check_ladder(players);
 
   let today = new Date();
   let dd = today.getDate();
@@ -323,45 +327,59 @@ Match.prototype.played_ai = function () {
   this.playing_ai = false;
 };
 
+Match.prototype.finish_on_turn = function () {
+  if (R5.games[this.game].settings.players.max === 2) {
+    let opp_turn = ((turn + 1) % 2);
+    this.finish(turn, (opp_turn * 3) + 3);
+  }
+  else {
+    this.finish(turn, -1);
+  }
+}
+
+Match.prototype.on_type_byo_yomi = function() {
+  while (this.timers[turn] < 0 && this.timersbp[turn] > 0) {
+    this.timers[turn] += this.timersb[turn];
+    this.timersbp[turn]--;
+  }
+  if (this.timers[turn] > 0) {
+    this.timers[turn] = Math.max(this.timers[turn], this.timersb[turn]);
+  }
+}
+
+Math.prototype.on_type_not_byo_yomi_inc_true = function() {
+  if (this.settings.timers === -1) {
+    this.timers[turn] = (60 * 60 * 24);
+  }
+  else {
+    this.timers[turn] += this.timersi[turn];
+  }
+}
+
 Match.prototype.update_timer = function (turn = this.state.to_play, inc = false) {
   let date = new Date();
 
-  if (this.timers[turn] >= 0) {
-    let subt = date.getTime() - this.date.getTime();
-    this.timers[turn] = Math.max(0, (this.timers[turn] - Math.floor(subt / 1000)));
+  if (this.timers[turn] < 0) {
+    return;
+  }
 
-    this.date = date;
+  let subt = date.getTime() - this.date.getTime();
+  this.timers[turn] = Math.max(0, (this.timers[turn] - Math.floor(subt / 1000)));
 
-    if (this.timers[turn] === 0) {
-      if (R5.games[this.game].settings.players.max === 2) {
-        let opp_turn = ((turn + 1) % 2);
-        this.finish(turn, (opp_turn * 3) + 3);
-      }
-      else {
-        this.finish(turn, -1);
-      }
-      return;
-    }
+  this.date = date;
 
-    if (this.is_paused()) { this.timers[turn] += PAUSE_TIME; }
-    if (this.settings.timer_type === 'Byo-yomi') {
-      while (this.timers[turn] < 0 && this.timersbp[turn] > 0) {
-        this.timers[turn] += this.timersb[turn];
-        this.timersbp[turn]--;
-      }
-      if (this.timers[turn] > 0) {
-        this.timers[turn] = Math.max(this.timers[turn], this.timersb[turn]);
-      }
-    }
-    else if (inc === true) {
-      if (this.settings.timers === -1) {
-        this.timers[turn] = (60 * 60 * 24);
-      }
-      else {
-        this.timers[turn] += this.timersi[turn];
-      }
-      this.timers[turn] = Math.min(this.timers[turn], this.settings.timers);
-    }
+  if (this.timers[turn] === 0) {
+    this.finish_on_turn();
+    return;
+  }
+
+  if (this.is_paused()) { this.timers[turn] += PAUSE_TIME; }
+  if (this.settings.timer_type === 'Byo-yomi') {
+    this.on_type_byo_yomi();
+  }
+  else if (inc === true) {
+    this.on_type_not_byo_yomi_inc_true();
+    this.timers[turn] = Math.min(this.timers[turn], this.settings.timers);
   }
 };
 
