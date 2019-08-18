@@ -70,7 +70,7 @@ var Match = require(`${__dirname}/../Match.js`);
     let users_to_json = this.users.map(function (item) {
       if (item.length <= 0) { return item; }
   
-      return item.map(onitemmap);
+      return item.map(on_item_map);
     });
   
     if (to_save) {
@@ -83,7 +83,8 @@ var Match = require(`${__dirname}/../Match.js`);
     return json;
   };
   
-  function onitemmap(playerObject) {
-    if (!playerObject) { return playerObject; }
-    return playerObject.to_json();
+  function on_item_map(player_object) {
+    if (!player_object) { return player_object; }
+    return player_object.to_json();
   }
+  
