@@ -21,7 +21,7 @@
     "redlock": "3.1.2",
     "rewire": "^4.0.1",
     "shortid": "2.2.6",
-    "striptags": "2.1.1"
+    "striptags": "3.2.0"
   },
   "devDependencies": {
     "eslint-config-standard": "10.2.1",
